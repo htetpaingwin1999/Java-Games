@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\Users\MAT-User\Desktop\Java\StudentManagementSystemByHPW"/>
+		<item value="C:\Users\MAT-User\Desktop\Java\Student Management System"/>
+		<item value="C:\Users\MAT-User\Desktop\Java\StudentManagement"/>
+		<item value="C:\Users\MAT-User\Desktop\Java Student Management System Project\Student Management System"/>
+		<item value="C:\Users\MAT-User\Desktop\Java\BBB"/>
+		<item value="D:\JavaFx Programs\Test\src\Testing"/>
+		<item value="D:\Management System Project\Student_Management_System_Source Code"/>
+		<item value="C:\Users\MAT-User\Desktop\Java\StudentManagementSystem"/>
+		<item value="C:\Users\MAT-User\Desktop\Java\LibraryManagementSystem"/>
+	</list>
+	<section name="NewWizardAction">
+		<item value="org.eclipse.jdt.ui.wizards.JavaProjectWizard" key="NewWizardSelectionPage.STORE_SELECTED_ID"/>
+		<list key="NewWizardSelectionPage.STORE_EXPANDED_CATEGORIES_ID">
+			<item value="org.eclipse.emf.codegen.ecore.ui.wizardCategory"/>
+			<item value="org.eclipse.jdt.ui.java"/>
+			<item value="org.eclipse.jst.j2ee.internal"/>
+			<item value="org.eclipse.fx.ide"/>
+			<item value="org.eclipse.wst.jsdt.ui.java"/>
+			<item value="org.eclipse.xtend.ide.wizards"/>
+			<item value="org.eclipse.ui.Examples"/>
+			<item value="org.eclipse.ui.Examples/org.eclipse.xtend.ui.Examples"/>
+		</list>
+	</section>
+</section>

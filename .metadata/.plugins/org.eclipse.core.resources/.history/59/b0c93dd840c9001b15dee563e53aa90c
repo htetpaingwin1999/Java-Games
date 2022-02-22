@@ -1,0 +1,129 @@
+package Table;
+
+import java.util.Date;
+
+import List.DepartmentLists;
+import View.AUDAdminView;
+import View.AUDDepartmentView;
+import View.MainView;
+import View.AdminDataView;
+import View.DepartmentDataView;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
+
+public class DepartmentTable {
+
+	private static TableColumn departmentID,departmentName,adminID,adminName,addDate;
+	private static TableView tvDepartment;
+	public static TableView tvDepartmentLists()
+	{
+		tvDepartment	= new TableView<DepartmentLists>();
+		tvDepartment.setMaxWidth(Region.USE_PREF_SIZE);
+		tvDepartment.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
+		departmentID = new TableColumn("Department ID");
+		departmentID.setCellValueFactory(new PropertyValueFactory<>("DepartmentID"));
+		departmentID.setPrefWidth(20);
+		departmentID.getStyleClass().add("Times New Roman,20");
+
+		departmentName=new TableColumn("Department Name");
+		departmentName.setCellValueFactory(new PropertyValueFactory<>("DepartmentName"));
+		departmentName.setPrefWidth(50);
+        departmentName.getStyleClass().add("Times New Roman,20");
+        
+        adminID=new TableColumn("Admin ID");
+		adminID.setCellValueFactory(new PropertyValueFactory<>("AdminID"));
+		adminID.setPrefWidth(70);
+		adminID.getStyleClass().add("Times New Roman,20");
+		
+
+		adminName=new TableColumn("Admin Name");
+		adminName.setCellValueFactory(new PropertyValueFactory<>("AdminName"));
+		adminName.setPrefWidth(70);
+        adminName.getStyleClass().add("Times New Roman,20");
+
+        addDate=new TableColumn("Add Date");
+		addDate.setCellValueFactory(new PropertyValueFactory<>("AddDate"));
+        addDate.setPrefWidth(50);
+        addDate.getStyleClass().add("Times New Roman,20");
+
+		TableColumn<DepartmentLists, Void> colActionBtn = new TableColumn("Action");
+
+        Callback<TableColumn<DepartmentLists, Void>, TableCell<DepartmentLists, Void>> cellHB = new Callback<TableColumn<DepartmentLists, Void>, TableCell<DepartmentLists, Void>>() {
+            @Override
+            public TableCell<DepartmentLists, Void> call(final TableColumn<DepartmentLists, Void> param) {
+                final TableCell<DepartmentLists, Void> cell = new TableCell<DepartmentLists, Void>() {
+
+                    private final Button btnUpdate = new Button("",new ImageView(new Image("Icon/Edit.png")));
+                    private final Button btnDelete = new Button("",new ImageView(new Image("Icon/Delete.png")));
+                    private final Button btnView = new Button("",new ImageView(new Image("Icon/eye.png")));
+                    private final HBox hbBtnCon = new HBox();
+                    {
+                    	btnUpdate.setStyle("-fx-background-color:white");
+                    	btnDelete.setStyle("-fx-background-color:white");
+                    	btnView.setStyle("-fx-background-color:white");
+
+                    	btnUpdate.setOnAction((ActionEvent event) -> {
+                            DepartmentLists data = getTableView().getItems().get(getIndex());
+                            
+            				MainView.vbWorkSpaceCon.getChildren().remove(MainView.vbWorkSpace);
+                            MainView.vbWorkSpace = AUDDepartmentView.vbAddDepartmentView(data.getDepartmentID(),data.getDepartmentName(),2);
+            				MainView.vbWorkSpaceCon.getChildren().add(MainView.vbWorkSpace);
+            				MainView.lHome.setTextFill(Color.GREY);
+            				MainView.lIndex.setText("Department Lists");
+            				MainView.lIndex.setTextFill(Color.GREY);
+            				MainView.lIndex1.setTextFill(Color.BLACK);
+            				MainView.lIndex1.setText("Update Department");  
+                        });
+                    	btnDelete.setOnAction((ActionEvent event) -> {
+                            DepartmentLists data = getTableView().getItems().get(getIndex());
+                        });
+                    	btnView.setOnAction((ActionEvent event) -> {
+                            DepartmentLists data = getTableView().getItems().get(getIndex());
+                            MainView.vbWorkSpaceCon.getChildren().remove(MainView.vbWorkSpace);
+            				MainView.vbWorkSpace = DepartmentDataView.vbDepartmentDataView(data.getDepartmentID(),data.getDepartmentName(),data.getAdminID(),data.getAdminName(),data.getAddDate()+"");
+            				MainView.vbWorkSpaceCon.getChildren().add(MainView.vbWorkSpace);
+            				MainView.lHome.setTextFill(Color.GREY);
+            				MainView.lIndex1.setText("Department View");
+            				MainView.lIndex.setText("Department Lists");
+            				MainView.lIndex.setTextFill(Color.GREY);
+                            
+                        });
+                    	hbBtnCon.getChildren().addAll(btnView,btnUpdate,btnDelete);
+                    	hbBtnCon.setSpacing(5);
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(hbBtnCon);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        colActionBtn.setCellFactory(cellHB);
+        
+        
+      
+        
+		tvDepartment.getColumns().addAll(departmentID,departmentName,adminID,adminName,addDate,colActionBtn);
+		tvDepartment.setPrefSize(1200,558);
+		return tvDepartment;
+	}
+}

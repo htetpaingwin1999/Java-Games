@@ -1,0 +1,128 @@
+package View;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.control.Accordion;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+public class AdminView{
+	private static VBox vbAdminView;
+	private static Scene scAdminView;
+	private static HBox hbAllContainer;
+	private static VBox vbLeft,vbRight;
+	private static Button btnDashBoard,btnCourse,btnStudent,btnStaff;
+	private static Button btnSection,btnAdmin,btnSetting;
+	private static Accordion accordion;
+	private static TitledPane tDashBoard,tCourse,tStudent,tStaff,tSection,tAdmin,tSetting;
+	
+	public static Scene vbAdminView()
+	{
+		hbAllContainer = new HBox();
+		hbAllContainer.setPrefWidth(1350);
+		
+		vbLeft = new VBox();
+		vbLeft.setPrefWidth(500);
+		vbLeft.setStyle("-fx-background-color:black");
+		
+		vbRight = new VBox();
+		vbRight.setPrefWidth(850);
+		vbRight.setStyle("-fx-background-color:green");
+		
+		btnDashBoard = new Button("Dash Board");
+		btnDashBoard.setTextFill(Color.WHITE);
+		btnDashBoard.setStyle("-fx-background-color:black");
+		btnDashBoard.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		
+		btnCourse = new Button("Dash Board");
+		btnCourse.setTextFill(Color.WHITE);
+		btnCourse.setStyle("-fx-background-color:black");
+		btnCourse.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		
+		btnStudent = new Button("Dash Board");
+		btnStudent.setTextFill(Color.WHITE);
+		btnStudent.setStyle("-fx-background-color:black");
+		btnStudent.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		
+		btnStaff = new Button("Dash Board");
+		btnStaff.setTextFill(Color.WHITE);
+		btnStaff.setStyle("-fx-background-color:black");
+		btnStaff.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		
+		//btnSection,btnAdmin,btnSetting;
+		btnSection = new Button("Dash Board");
+		btnSection.setTextFill(Color.WHITE);
+		btnSection.setStyle("-fx-background-color:black");
+		btnSection.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		
+		btnAdmin = new Button("Dash Board");
+		btnAdmin.setTextFill(Color.WHITE);
+		btnAdmin.setStyle("-fx-background-color:black");
+		btnAdmin.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		
+		btnSetting = new Button("Dash Board");
+		btnSetting.setTextFill(Color.WHITE);
+		btnSetting.setStyle("-fx-background-color:black");
+		btnSetting.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+				
+    	Accordion accordion = new Accordion();
+    	
+    	tDashBoard = new TitledPane("DashBoard",btnDashBoard);
+    	tStudent = new TitledPane("Student", btnStudent);
+    	tCourse = new TitledPane("Course",btnCourse);
+    	tStaff = new TitledPane("Staff",btnStaff);
+    	tAdmin = new TitledPane("Admin",btnAdmin);
+    	tSetting = new TitledPane("Setting",btnSetting);
+
+
+        accordion.getPanes().add(tDashBoard);
+        accordion.getPanes().add(tStudent);
+        accordion.getPanes().add(tCourse);
+        accordion.getPanes().add(tSection); 
+        accordion.getPanes().add(tStaff);
+        accordion.getPanes().add(tAdmin);  
+        accordion.getPanes().add(tSetting);
+
+        vbButtonContainer = new VBox(accordion);
+        scAdminView = new Scene(vbButtonContainer,1350,700);
+
+		return scAdminView;
+	}
+}

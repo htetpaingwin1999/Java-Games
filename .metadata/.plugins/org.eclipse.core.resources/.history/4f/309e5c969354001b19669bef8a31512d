@@ -1,0 +1,163 @@
+package View;
+import java.awt.Desktop;
+
+import Handler.FineHandler;
+import List.FineLists;
+import Table.FineTable;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.layout.BorderPane;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
+public class FineListsView {
+	private static VBox vbFineListsView;
+	public static Label lTitle;
+	private static HBox hbTitleCon;
+	private static TableView tvFine;
+	private static BorderPane bp;
+	private static TextField tFineIDSearch;
+	private static TextField tFineSearch;
+	private static Button btnRefresh;
+	private static HBox hbFilterCon;
+	private static Button btnAdd;
+	private static VBox vbFineListsCon;
+	private static ObservableList<FineLists> data;
+	private static FineLists adl;
+	
+	private static Button btnSave;
+	private static Button btnCancel;
+	public static HBox hbBtnCon;
+	public static VBox vbWorkSpace;
+	private static String gender;
+	
+	public static VBox vbFineListsView(String staffID,String staffName,String adminID,String adminName)
+	{
+		vbFineListsView = new VBox();
+		
+		/**/
+		btnSave = new Button("Save");
+		btnSave.setTextFill(Color.WHITE);
+		btnSave.setPadding(new Insets(10,10,10,10));
+		btnSave.setStyle("-fx-background-color:green");
+		btnSave.setPrefSize(100,30);
+		btnSave.setFont(Font.font("Times New Roman", 15));
+
+		btnCancel = new Button("Clear");
+		btnCancel.setTextFill(Color.GREY);
+		btnCancel.setPadding(new Insets(10,10,10,10));
+		btnCancel.setStyle("-fx-background-color:#f2f2f2");
+		btnCancel.setPrefSize(100,30);
+		btnCancel.setFont(Font.font("Times New Roman", 15));
+		
+		hbBtnCon = new HBox();
+		hbBtnCon.getChildren().addAll(btnSave,btnCancel);
+		hbBtnCon.setSpacing(10);
+		
+		
+		lTitle = new Label("Fine Lists");
+		lTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,20));
+		
+		hbTitleCon = new HBox();
+		hbTitleCon.setPadding(new Insets(15,50,15,50));
+		hbTitleCon.setPrefSize(1080,50);
+		hbTitleCon.setStyle("-fx-background-color:white");
+		hbTitleCon.getChildren().add(lTitle);
+		
+		bp = new BorderPane();
+		
+		tFineIDSearch = new TextField();
+		tFineIDSearch.setPromptText("Fine ID");
+		tFineIDSearch.setPrefHeight(50);
+
+		tFineSearch = new TextField();
+		tFineSearch.setPromptText("Fine Name");
+		tFineSearch.setPrefHeight(50);
+
+		tFineIDSearch.setOnKeyTyped(e->{
+			tvFine.setItems(data);
+			data = FXCollections.observableArrayList(FineHandler.FilterFine(tFineIDSearch.getText(), tFineSearch.getText()));
+			tvFine.getItems().clear();
+		});
+		
+		tFineSearch.setOnKeyTyped(e->{
+			tvFine.getItems().clear();
+			data = FXCollections.observableArrayList(FineHandler.FilterFine(tFineIDSearch.getText(), tFineSearch.getText()));
+			tvFine.setItems(data);
+		});
+		
+		btnRefresh = new Button("",new ImageView(new Image("Icon/Refresh.png")));
+		btnRefresh.setStyle("-fx-background-color:white");
+		btnRefresh.setOnAction(e->{
+			tvFine.getItems().clear();
+			data = FXCollections.observableArrayList(FineHandler.GetAllFine());
+			tvFine.setItems(data);
+			tFineIDSearch.setText(null);
+			tFineSearch.setText(null);
+		});
+
+		btnAdd = new Button("Add New Fine", new ImageView (new Image("Icon/Plus16.png")));
+		btnAdd.setFont(Font.font("Times New Roman", 18));
+		btnAdd.setPrefHeight(50);
+		btnAdd.setStyle("-fx-background-color:green");
+		btnAdd.setTextFill(Color.WHITE);
+		
+		hbFilterCon = new HBox();
+		hbFilterCon.getChildren().addAll(tFineIDSearch,tFineSearch,btnRefresh,btnAdd);
+		hbFilterCon.setSpacing(10);
+		
+		bp.setRight(hbFilterCon);
+		bp.setStyle("-fx-background-color:white");
+//		bp.setPadding(new Insets(10,10,10,0));
+		
+		FineTable.tvFineLists();
+		tvFine = FineTable.tvFineLists();
+		data = FXCollections.observableArrayList(FineHandler.GetAllFine());
+		tvFine.setItems(data);
+		
+		vbFineListsCon = new VBox();
+		vbFineListsCon.getChildren().addAll(bp,tvFine);
+		vbFineListsCon.setStyle("-fx-background-color:white");
+		vbFineListsCon.setPadding(new Insets(10,10,10,10));
+		vbFineListsCon.setSpacing(10);
+		
+		btnAdd.setOnAction(e->{
+			MainView.vbWorkSpaceCon.getChildren().remove(MainView.vbWorkSpace);
+			MainView.vbWorkSpace = AUDFineView.vbAddFineView("", "", "", staffID, staffName,adminID, adminName, 0);
+			MainView.vbWorkSpaceCon.getChildren().add(MainView.vbWorkSpace);
+			MainView.lHome.setTextFill(Color.GREY);
+			MainView.lIndex.setText("Add New Fine");
+			MainView.lIndex.setTextFill(Color.BLACK);
+			System.out.println("Hey");
+		});
+
+		vbFineListsView.getChildren().addAll(hbTitleCon,vbFineListsCon);
+		vbFineListsView.setSpacing(5);
+		vbFineListsView.setStyle("-fx-background-color:#f2f2f2");
+		vbFineListsView.setPadding(new Insets(10,0,10,0));
+		
+		
+		return vbFineListsView;
+	}
+}

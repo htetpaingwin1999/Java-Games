@@ -1,0 +1,100 @@
+package Tables;
+
+import Lists.FineLists;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
+
+public class FindTable {
+
+	public static TableView tvFineTable()
+	{
+		TableView tvFineTable = new TableView<FineLists>();
+		tvFineTable.setMaxHeight(480);
+		tvFineTable.setMaxWidth(Region.USE_PREF_SIZE);
+		tvFineTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+		
+		TableColumn memberID=new TableColumn("Member ID");
+		memberID.setCellValueFactory(new PropertyValueFactory<>("MemberId"));
+		memberID.setMinWidth(80);
+		
+		TableColumn memberName=new TableColumn("Member Name");
+		memberName.setCellValueFactory(new PropertyValueFactory<>("MemberName"));
+		memberName.setMinWidth(80);
+		
+		TableColumn bookCode=new TableColumn("Book Code");
+		bookCode.setCellValueFactory(new PropertyValueFactory<>("BookCode"));
+		bookCode.setMinWidth(80);
+		
+		TableColumn bookName=new TableColumn("Book Name");
+		bookName.setCellValueFactory(new PropertyValueFactory<>("BookName"));
+		bookName.setMinWidth(80);
+		
+		TableColumn dayPassed=new TableColumn("Day Passed");
+		dayPassed.setCellValueFactory(new PropertyValueFactory<>("DayPassed"));
+		dayPassed.setMinWidth(80);
+		
+		TableColumn money=new TableColumn("Money");
+		money.setCellValueFactory(new PropertyValueFactory<>("Money"));
+		money.setMinWidth(80);
+		
+		tvFineTable.getColumns().addAll(memberID,memberName,bookCode,bookName,dayPassed,money);
+		
+		return null;
+	}
+}
+
+/*
+ * TableView tv = new TableView<StudentList>();
+		tv.setMaxHeight(650);
+		tv.setMaxWidth(Region.USE_PREF_SIZE);
+		tv.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+    
+		TableColumn course=new TableColumn("Course Name");
+		course.setCellValueFactory(new PropertyValueFactory<>("CourseName"));
+		course.setMinWidth(80);
+		
+		TableColumn name=new TableColumn("Name");
+		name.setCellValueFactory(new PropertyValueFactory<>("Name"));
+		name.setMinWidth(80);
+		
+		TableColumn stdid =new TableColumn("Student Id");
+		stdid.setCellValueFactory(new PropertyValueFactory<>("Id"));
+		stdid.setMinWidth(80);
+		
+		
+		TableColumn fee=new TableColumn("Fee");
+		fee.setCellValueFactory(new PropertyValueFactory<>("Fee"));
+		fee.setMinWidth(80);
+		
+		TableColumn secid =new TableColumn("Section Id");
+		secid.setCellValueFactory(new PropertyValueFactory<>("SecId"));
+		secid.setMinWidth(80);
+		
+		TableColumn pay=new TableColumn("Pay");
+		pay.setCellValueFactory(new PropertyValueFactory<>("Pay"));
+		pay.setMinWidth(80);
+		
+		TableColumn studentaddtime=new TableColumn("Add Time");
+		studentaddtime.setCellValueFactory(new PropertyValueFactory<>("SAddTime"));
+		studentaddtime.setMinWidth(80);
+		
+		TableColumn complete=new TableColumn("Complete");
+		complete.setCellValueFactory(new PropertyValueFactory<>("Complete"));
+		complete.setMinWidth(80);
+    	
+		TableColumn phone=new TableColumn("Phone");
+		phone.setCellValueFactory(new PropertyValueFactory<>("PhoneNumber"));
+		phone.setMinWidth(80);
+    	
+		TableColumn address=new TableColumn("Address");
+		address.setCellValueFactory(new PropertyValueFactory<>("Address"));
+		address.setMinWidth(80);
+		
+		TableColumn receiver=new TableColumn("Reciever");
+		receiver.setCellValueFactory(new PropertyValueFactory<>("Receiver"));
+		receiver.setMinWidth(80);
+		
+		tv.getColumns().addAll(name,stdid,course,fee,secid,pay,studentaddtime,phone,address,receiver);
+		tv.setMaxWidth(810);*/

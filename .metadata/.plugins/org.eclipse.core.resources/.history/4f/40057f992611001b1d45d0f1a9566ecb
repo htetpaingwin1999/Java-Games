@@ -1,0 +1,25 @@
+package view;
+
+import javafx.application.Application;
+import javafx.scene.layout.*;
+import javafx.stage.Stage;
+import javafx.*;
+public class loginPage extends Application {
+	
+	public static Stage myStage;
+	private static BorderPane bp;
+	public static void main(String args[])
+	{
+		Application.launch(args);
+	}
+
+	public static BorderPane getSiginForm()
+	{
+	
+	}
+	@Override
+	public void start(Stage primaryStage) 
+	{
+		myStage = new Stage();
+	}
+}

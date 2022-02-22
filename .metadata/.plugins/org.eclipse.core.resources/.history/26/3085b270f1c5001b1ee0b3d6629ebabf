@@ -1,0 +1,141 @@
+package View;
+import javafx.scene.layout.VBox;
+
+import java.util.ArrayList;
+
+import List.CourseLists;
+import List.IncomeReportLists;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.layout.BorderPane;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.chart.AreaChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+public class IncomeReportView {
+	private static VBox vbReportView;
+	private static TableView tvReport;
+	private static ComboBox cbChoose;
+	private static Label lChoose;
+	private static HBox hbChooseContainer;
+	private static Label lTotalTitle;
+	private static Label lTotal;
+	private static HBox hbTotalContainer;
+	private static VBox vbFirstPart;
+	private static VBox vbSecondPart;
+	private static BorderPane bp;
+	private static ArrayList<String> cl;
+	private static ObservableList <IncomeReportLists> data;
+	private static String date;
+
+	public static VBox vbReportView(String category,int choose,String day,String month,String year)
+	{
+		String [] tabName = {"Income","Expense","Profit","Fine"};
+		vbReportView = new VBox();
+		
+		
+		if(!year.equals("") && !month.equals("") && !day.equals(""))
+		{
+			date = year+"-"+month+"-"+day+" ";
+		}
+		else if(!year.equals("") && !month.equals("") && day.equals(""))
+		{
+			date = year+"-"+month+" ";
+		}
+		else if(!year.equals("") && month.equals("") && day.equals(""))
+		{
+			date = year +" ";
+		}
+		else
+		{
+			date = "Invalid date";
+		}
+		lChoose = new Label(category+"");
+		lChoose.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
+		lChoose.setTextFill(Color.WHITE);
+		
+		cbChoose = new ComboBox();
+		
+		hbChooseContainer = new HBox();
+		hbChooseContainer.getChildren().addAll(lChoose,cbChoose);
+		hbChooseContainer.setSpacing(20);
+		hbChooseContainer.setPrefSize(200,50);
+		
+		lTotal = new Label("Income");
+		lTotal.setTextFill(Color.WHITE);
+		
+		lTotalTitle = new Label(date+"Income");
+		lTotalTitle.setTextFill(Color.WHITE);
+		
+		hbTotalContainer = new HBox();
+		
+		hbTotalContainer.getChildren().addAll(lTotalTitle,lTotal);
+		hbTotalContainer.setSpacing(20);
+
+		if(choose == 0) // subject for income
+		{
+			tvReport = Table.IncomeReportTable.tvReportLists();
+			cl = Handler.CourseHandler.GetAllCourseName();
+			
+			for(String s:cl)
+			{
+				cbChoose.getItems().addAll(s);
+			}
+			if(cl.size() == 0)
+			{
+				cbChoose.getItems().add("No Data");
+			}
+			cbChoose.getSelectionModel().select(0);
+			lTotal.setText(tabName[choose]);
+		}
+		if(choose ==1)
+		{
+			
+		}
+		
+		cbChoose.setOnMouseExited(e->{			
+			vbFirstPart.getChildren().clear();
+			data = FXCollections.observableArrayList(Handler.IncomeReportHandler.GetIncome(cbChoose.getValue().toString(),day, month, year));
+			tvReport.setItems(data);
+			vbFirstPart.getChildren().addAll(hbChooseCOntainer,tvReport);
+			System.out.println(cbChoose.getValue().toString());
+		});
+		
+		vbFirstPart = new VBox();
+		vbFirstPart.getChildren().addAll(hbChooseContainer,tvReport);
+		vbFirstPart.setSpacing(5);
+		
+		vbSecondPart = new VBox();
+		vbSecondPart.getChildren().add(hbTotalContainer);
+		
+		bp = new BorderPane();
+		bp.setTop(vbFirstPart);
+		bp.setBottom(vbSecondPart);
+		
+		vbReportView.getChildren().add(bp);
+		vbReportView.setStyle("-fx-background-color:rgba(0,0,0,0.3)");
+	    vbReportView.setPadding(new Insets(10,10,0,10));
+	            
+		return vbReportView;
+	}
+}

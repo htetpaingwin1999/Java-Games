@@ -1,0 +1,81 @@
+package View;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+public class EmailSMSTemplate {
+	private static TabPane tabEmailSMSTemplateContainer;
+	private static Tab tabEmail;
+	private static Tab tabSMS;
+	private static VBox vbEmail;
+	private static VBox vbSMS;
+	private static ComboBox cbANormalText;
+	private static Button btnBold;
+	private static Button btnItalic;
+	private static Button btnUnderline;
+	private static Button btnSmall;
+	private static HBox hbButtonsContainer;
+	private static Button btnSave;
+	private static TextArea taEmail;
+	private static TabPane tabEmailSMSTemplate()
+	{
+		tabEmailSMSTemplateContainer = new TabPane();
+		
+		vbEmail = new VBox();
+		tabEmail = new Tab("Email",vbEmail);
+		
+		cbANormalText = new ComboBox();
+		cbANormalText.getItems().add("A Normal Text");
+		cbANormalText.getSelectionModel().select(0);
+		
+		btnBold = new Button("Bold");
+		btnBold.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		btnItalic = new Button("Italic");
+		btnItalic.setFont(Font.font(("Times New Roman"),FontWeight.NORMAL,FontPosture.ITALIC,15));
+
+		btnUnderline = new Button("Underline");
+		btnUnderline.setFont(Font.font(("Times New Roman"),FontWeight.NORMAL,FontPosture.REGULAR,15));
+		btnUnderline.setUnderline(true);
+		
+		btnSmall = new Button("Small");
+		btnSmall.setFont(Font.font(("Times New Roman"),FontWeight.NORMAL,FontPosture.ITALIC,15));
+
+		hbButtonsContainer = new HBox();
+		hbButtonsContainer.getChildren().addAll(cbANormalText,btnBold,btnItalic,btnUnderline,btnSmall);
+		hbButtonsContainer.setSpacing(10);
+		
+		taEmail = new TextArea();
+		taEmail.setPrefHeight(300);
+		
+		vbSMS = new VBox();
+		tabSMS = new Tab("SMS",vbSMS);
+		
+		tabEmailSMSTemplateContainer.getTabs().add(tabEmail);
+		tabEmailSMSTemplateContainer.getTabs().add(tabSMS);
+		
+		return tabEmailSMSTemplateContainer;
+	}
+
+}

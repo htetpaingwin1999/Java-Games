@@ -1,0 +1,152 @@
+package View;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+public class QuickInventoryReport {
+	private static VBox vbQuickInventoryReport;
+	private static ImageView imgLogo;
+	private static Label lTitle;
+	private static Label lAddress;
+	private static Label lIndex;
+	private static VBox vbInfoContainer;
+	private static HBox hbImageNInfoContainer;
+	private static BorderPane bpDate;
+	private static Label lDate;
+	private static BorderPane bpTotalBooks;
+	private static Label lTotalBooks;
+	private static Label lTotalBooksNo;
+	private static BorderPane bpTotalMembers;
+	private static Label lTotalMembers;
+	private static Label lTotalMembersNo;
+	private static BorderPane bpTotalPriceBooks;
+	private static Label lTotalPriceBooks;
+	private static Label lTotalPriceBooksNo;
+	private static BorderPane bpTotalBooksLost;
+	private static Label lTotalBooksLost;
+	private static Label lTotalBooksLostNo;
+	private static BorderPane bpTotalBorrowedBooks;
+	private static Label lTotalBorrowedBooks;
+	private static Label lTotalBorrowedBooksNo;
+	
+	
+	public static VBox vbQuickInventoryReport()
+	{
+		vbQuickInventoryReport = new VBox();
+		
+		imgLogo = new ImageView(new Image("Icon/MIITLogo.png"));
+	
+		lTitle = new Label("MIIT LIBRARY");
+		lTitle.setTextFill(Color.BLACK);
+		lTitle.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,25));
+		
+		lAddress = new Label("Mandalay");
+		lAddress.setFont(Font.font(("Times New Roman"),FontWeight.NORMAL,FontPosture.REGULAR,15));
+
+		lIndex  = new Label("Quick Inventory Report");
+		lIndex.setFont(Font.font(("Times New Roman"),FontWeight.NORMAL,FontPosture.REGULAR,15));
+
+		bpDate = new BorderPane();
+		
+		
+		lDate = new Label("Saturday 12 2020"); // set the current date
+		lDate.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		bpDate.setRight(lDate);
+		bpDate.setPrefWidth(1000);
+		
+		vbInfoContainer = new VBox();
+		vbInfoContainer.getChildren().addAll(lTitle,lAddress,lIndex,bpDate);
+		vbInfoContainer.setSpacing(20);
+		
+		hbImageNInfoContainer = new HBox();
+		hbImageNInfoContainer.getChildren().addAll(imgLogo,vbInfoContainer);
+		hbImageNInfoContainer.setSpacing(20);
+
+		bpTotalBooks = new BorderPane();
+		
+		lTotalBooks = new Label("Total Books:");
+		lTotalBooks.setFont(Font.font(("Times New Roman"),FontWeight.NORMAL,FontPosture.REGULAR,15));
+		
+		lTotalBooksNo = new Label("10"); // set the value
+		lTotalBooksNo.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		bpTotalBooks.setLeft(lTotalBooks);
+		bpTotalBooks.setRight(lTotalBooksNo);
+		bpTotalBooks.setStyle("-fx-background-color:#f2f2f2;");
+		bpTotalBooks.setPadding(new Insets(10,10,10,10));
+		
+		bpTotalMembers = new BorderPane();
+		
+		lTotalMembers = new Label("Total Books:");
+		lTotalMembers.setFont(Font.font(("Times New Roman"),FontWeight.NORMAL,FontPosture.REGULAR,15));
+		
+		lTotalMembersNo = new Label("10"); // set the value
+		lTotalMembersNo.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		bpTotalMembers.setLeft(lTotalMembers);
+		bpTotalMembers.setRight(lTotalMembersNo);
+		bpTotalMembers.setStyle("-fx-background-color:#f2f2f2;");
+		bpTotalMembers.setPadding(new Insets(10,10,10,10));
+		
+		bpTotalPriceBooks = new BorderPane();
+		
+		lTotalPriceBooks = new Label("Total Books:");
+		lTotalPriceBooks.setFont(Font.font(("Times New Roman"),FontWeight.NORMAL,FontPosture.REGULAR,15));
+		
+		lTotalPriceBooksNo = new Label("10"); // set the value
+		lTotalPriceBooksNo.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		bpTotalPriceBooks.setLeft(lTotalPriceBooks);
+		bpTotalPriceBooks.setRight(lTotalPriceBooksNo);
+		bpTotalPriceBooks.setStyle("-fx-background-color:#f2f2f2;");
+		bpTotalPriceBooks.setPadding(new Insets(10,10,10,10));
+		
+		bpTotalBooksLost = new BorderPane();
+		
+		lTotalBooksLost = new Label("Total Books:");
+		lTotalBooksLost.setFont(Font.font(("Times New Roman"),FontWeight.NORMAL,FontPosture.REGULAR,15));
+		
+		lTotalBooksLostNo = new Label("10"); // set the value
+		lTotalBooksLostNo.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		bpTotalBooksLost.setLeft(lTotalBooksLost);
+		bpTotalBooksLost.setRight(lTotalBooksLostNo);
+		bpTotalBooksLost.setStyle("-fx-background-color:#f2f2f2;");
+		bpTotalBooksLost.setPadding(new Insets(10,10,10,10));
+		
+		bpTotalBorrowedBooks = new BorderPane();
+		
+		lTotalBorrowedBooks = new Label("Total Borrowed Books:");
+		lTotalBorrowedBooks.setFont(Font.font(("Times New Roman"),FontWeight.NORMAL,FontPosture.REGULAR,15));
+		
+		lTotalBorrowedBooksNo = new Label("5"); // set the value
+		lTotalBorrowedBooksNo.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		bpTotalBorrowedBooks.setLeft(lTotalBooksLost);
+		bpTotalBorrowedBooks.setRight(lTotalBooksLostNo);
+		bpTotalBorrowedBooks.setStyle("-fx-background-color:#f2f2f2;");
+		bpTotalBorrowedBooks.setPadding(new Insets(10,10,10,10));
+		
+		vbQuickInventoryReport.getChildren().addAll(hbImageNInfoContainer,bpTotalBooks,bpTotalMembers,bpTotalPriceBooks,bpTotalBooksLost,bpTotalBorrowedBooks);
+		vbQuickInventoryReport.setPrefSize(1060, 660);
+		vbQuickInventoryReport.setSpacing(20);
+		return vbQuickInventoryReport;
+	}
+}

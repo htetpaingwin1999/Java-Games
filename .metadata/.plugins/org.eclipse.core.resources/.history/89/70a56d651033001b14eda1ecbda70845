@@ -1,0 +1,740 @@
+package View;
+import javax.print.DocFlavor.URL;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+public class LibraryMainView {
+	private static VBox vbMainView;
+	private static VBox vbLeftHeader;
+	private static BorderPane bpRightHeader;
+	private static HBox hbHeader;
+	private static VBox vbButtonPanel;
+	private static VBox vbWorkPanel; /***max 660px ***/
+	private static Label lCopyRightText;
+	private static Label lAllRightReserved;
+	private static HBox hbCopyRightContainer;
+	private static Label lVersion;
+	private static BorderPane bpFooter;
+	private static BorderPane bpWorkPanelContainer;
+	private static HBox hbPanel;
+	private static ImageView imgUserImage;
+	private static Label lUserName;
+	private static HBox hbUserInformation;
+	private static Button btnMainNavigation;
+	private static Button btnHome;
+	private static Button btnBook;
+	private static Button btnBookExpand;
+	private static HBox hbBookNExpand;
+	private static VBox vbBookContainer;
+	private static Button btnList;
+	private static Button btnAddBook;
+	private static Button btnAuthors;
+	private static Button btnCategories;
+	private static Button btnBookCodes;
+	private static Boolean isBookClick = false;
+	private static Button btnCirculation;
+	private static Button btnCirculationExpand;
+	private static HBox hbCirculationNExpand;
+	private static VBox vbCirculationContainer;
+	private static Button btnIssueBooks;
+	private static Button btnReturnBooks;
+	private static Button btnBorrowedBooks;
+	private static Button btnLostBooks;
+	private static Button btnReturnedBooks;
+	private static Boolean isCirculationClick = false;
+	private static Button btnAdminPanel;
+	private static Button btnAdminPanelExpand;
+	private static HBox hbAdminPanelNExpand;
+	private static VBox vbAdminPanelContainer;
+	private static Boolean isAdminPanelClick = false;
+	//Change AdminPanel1 to 4 as you wish
+	private static Button btnAdminPanel1;
+	private static Button btnAdminPanel2;
+	private static Button btnAdminPanel3;
+	private static Button btnAdminPanel4;
+	//
+	private static Button btnSettings; /*with settings icon*/
+	private static Button btnSettingsExpand;
+	private static HBox hbSettingsNExpand;
+	private static VBox vbSettingsContainer;
+	private static Boolean isSettingsClick = false;
+	private static Button btnSMSConfig;
+	private static Button btnDatabaseVersion;
+	private static Button btnSettingss; /*with circluar icon , sub setting */
+	private static Button btnReports;
+	private static Button btnReportsExpand;
+	private static HBox hbReportsNExpand;
+	private static VBox vbReportsContainer;
+	private static Boolean isReportsClick = false;
+	//Change Reports1 to 4 as you wish
+	private static Button btnReports1;
+	private static Button btnReports2;
+	private static Button btnReports3;
+	private static Button btnReports4;
+	//
+	public static VBox vbMainView()
+	{
+		vbMainView = new VBox();
+		
+		vbLeftHeader = LeftHeader();
+		
+		bpRightHeader = RightHeader();
+		
+		hbHeader = new HBox();
+		hbHeader.getChildren().addAll(vbLeftHeader,bpRightHeader);
+		
+		vbButtonPanel = new VBox();
+		vbButtonPanel.setStyle("-fx-background-color:#191919");
+		vbButtonPanel.setPrefSize(280, 700);
+		
+		vbWorkPanel = QuickInventoryReport.vbQuickInventoryReport();
+		//
+		bpFooter = new BorderPane();
+		lCopyRightText = new Label("Copyright \u00a9 2020 MIIT Library Management System.");
+		lCopyRightText.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		lAllRightReserved = new Label("All right reserved");
+		lAllRightReserved.setFont(Font.font(("Times New Roman"),FontWeight.NORMAL,FontPosture.REGULAR,15));
+		
+		hbCopyRightContainer = new HBox();
+		hbCopyRightContainer.getChildren().addAll(lCopyRightText,lAllRightReserved);
+		hbCopyRightContainer.setSpacing(10);
+		
+		lVersion = new Label("Version 2.2");
+		lVersion.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		bpFooter.setLeft(hbCopyRightContainer);
+		bpFooter.setRight(lVersion);
+
+		bpWorkPanelContainer = new BorderPane();
+		bpWorkPanelContainer.setPrefSize(1100, 700);
+		bpWorkPanelContainer.setStyle("-fx-background-color:#e5e5e5");
+		bpWorkPanelContainer.setPadding(new Insets(20,10,10,20));
+		bpWorkPanelContainer.setTop(vbWorkPanel);
+		bpWorkPanelContainer.setBottom(bpFooter);
+		//edit
+		
+		hbPanel = new HBox();
+		hbPanel.setPrefSize(1350, 700);
+		hbPanel.getChildren().addAll(vbButtonPanel,bpWorkPanelContainer);
+		
+		imgUserImage = new ImageView("Icon/User64.png");
+		
+		lUserName = new Label("Htet Paing Win"); // set data from database
+		lUserName.setTextFill(Color.WHITE);
+		lUserName.setAlignment(Pos.CENTER);
+		lUserName.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		lUserName.setPadding(new Insets(10,10,10,10));
+		lUserName.setStyle("-fx-font-weight:bold;");
+		
+		hbUserInformation = new HBox();
+		hbUserInformation.getChildren().addAll(imgUserImage,lUserName);
+		hbUserInformation.setSpacing(20);
+		hbUserInformation.setPrefHeight(66);
+		hbUserInformation.setPadding(new Insets(10,10,10,20));
+
+		btnMainNavigation = new Button("MAIN NAVIGATION");
+		btnMainNavigation.setTextFill(Color.GREY);
+		btnMainNavigation.setPadding(new Insets(10,10,10,10));
+		btnMainNavigation.setStyle("-fx-background-color:#191919;");
+		btnMainNavigation.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnMainNavigation.setMaxWidth(280);	
+		btnMainNavigation.setAlignment(Pos.CENTER_LEFT);
+
+		btnHome = new Button("  Home",new ImageView("Icon/Home.png"));
+		btnHome.setStyle("-fx-background-color:#191919;");
+		btnHome.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnHome.setMaxWidth(280);	
+		btnHome.setAlignment(Pos.CENTER_LEFT);
+		btnHome.setTextFill(Color.WHITE);
+		btnHome.setPadding(new Insets(7,0,7,20));
+		
+		/***BOOK ***/
+		btnBook = new Button(" Books",new ImageView("Icon/Book.png"));
+		btnBook.setStyle("-fx-background-color:#191919;");
+		btnBook.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnBook.setPrefWidth(250);	
+		btnBook.setAlignment(Pos.CENTER_LEFT);
+		btnBook.setTextFill(Color.WHITE);
+		btnBook.setPadding(new Insets(7,0,7,20));
+		
+		btnBookExpand = new Button("",new ImageView("Icon/Expand.png"));
+		btnBookExpand.setStyle("-fx-background-color:#191919;");
+		btnBookExpand.setPadding(new Insets(10,0,0,-10));
+		btnBookExpand.setPrefWidth(30);
+		
+		hbBookNExpand = new HBox();
+		hbBookNExpand.setPrefWidth(250);
+		hbBookNExpand.getChildren().addAll(btnBook,btnBookExpand);
+		
+		vbBookContainer = new VBox();
+		vbBookContainer.getChildren().addAll(hbBookNExpand);
+		
+		btnList = new Button("  Lists",new ImageView("Icon/CO.png"));
+		btnList.setStyle("-fx-background-color:#323232;");
+		btnList.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnList.setPrefWidth(280);	
+		btnList.setAlignment(Pos.CENTER_LEFT);
+		btnList.setTextFill(Color.WHITE);
+		btnList.setPadding(new Insets(7,0,7,30));
+		
+		btnAddBook = new Button("  Add Book",new ImageView("Icon/CO.png"));
+		btnAddBook.setStyle("-fx-background-color:#323232;");
+		btnAddBook.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddBook.setPrefWidth(280);	
+		btnAddBook.setAlignment(Pos.CENTER_LEFT);
+		btnAddBook.setTextFill(Color.WHITE);
+		btnAddBook.setPadding(new Insets(7,0,7,30));
+		
+		btnAuthors = new Button("  Authors",new ImageView("Icon/CO.png"));
+		btnAuthors.setStyle("-fx-background-color:#323232;");
+		btnAuthors.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAuthors.setPrefWidth(280);	
+		btnAuthors.setAlignment(Pos.CENTER_LEFT);
+		btnAuthors.setTextFill(Color.WHITE);
+		btnAuthors.setPadding(new Insets(7,0,7,30));
+		
+		btnCategories = new Button("  Categories",new ImageView("Icon/CO.png"));
+		btnCategories.setStyle("-fx-background-color:#323232;");
+		btnCategories.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnCategories.setPrefWidth(280);	
+		btnCategories.setAlignment(Pos.CENTER_LEFT);
+		btnCategories.setTextFill(Color.WHITE);
+		btnCategories.setPadding(new Insets(7,0,7,30));
+		
+		btnBookCodes = new Button("  Book Codes",new ImageView("Icon/CO.png"));
+		btnBookCodes.setStyle("-fx-background-color:#323232;");
+		btnBookCodes.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnBookCodes.setPrefWidth(280);	
+		btnBookCodes.setAlignment(Pos.CENTER_LEFT);
+		btnBookCodes.setTextFill(Color.WHITE);
+		btnBookCodes.setPadding(new Insets(7,0,7,30));
+		
+		/***BOOK ***/
+
+		
+		/***CIRCULATION***/
+		btnCirculation = new Button(" Circulation",new ImageView("Icon/Circulation.png"));
+		btnCirculation.setStyle("-fx-background-color:#191919;");
+		btnCirculation.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnCirculation.setPrefWidth(250);	
+		btnCirculation.setAlignment(Pos.CENTER_LEFT);
+		btnCirculation.setTextFill(Color.WHITE);
+		btnCirculation.setPadding(new Insets(7,0,7,20));
+		
+		btnCirculationExpand = new Button("",new ImageView("Icon/Expand.png"));
+		btnCirculationExpand.setStyle("-fx-background-color:#191919;");
+		btnCirculationExpand.setPadding(new Insets(10,0,0,-10));
+		btnCirculationExpand.setPrefWidth(30);
+		
+		hbCirculationNExpand = new HBox();
+		hbCirculationNExpand.setPrefWidth(250);
+		hbCirculationNExpand.getChildren().addAll(btnCirculation,btnCirculationExpand);
+		
+		vbCirculationContainer = new VBox();
+		vbCirculationContainer.getChildren().addAll(hbCirculationNExpand);
+		
+		btnIssueBooks = new Button("  Issue Book(s)",new ImageView("Icon/CO.png"));
+		btnIssueBooks.setStyle("-fx-background-color:#323232;");
+		btnIssueBooks.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnIssueBooks.setPrefWidth(280);	
+		btnIssueBooks.setAlignment(Pos.CENTER_LEFT);
+		btnIssueBooks.setTextFill(Color.WHITE);
+		btnIssueBooks.setPadding(new Insets(7,0,7,30));
+		
+		btnReturnBooks = new Button("  Return Book(s)",new ImageView("Icon/CO.png"));
+		btnReturnBooks.setStyle("-fx-background-color:#323232;");
+		btnReturnBooks.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnReturnBooks.setPrefWidth(280);	
+		btnReturnBooks.setAlignment(Pos.CENTER_LEFT);
+		btnReturnBooks.setTextFill(Color.WHITE);
+		btnReturnBooks.setPadding(new Insets(7,0,7,30));
+		
+		btnBorrowedBooks = new Button("  Borrowed Book(s)",new ImageView("Icon/CO.png"));
+		btnBorrowedBooks.setStyle("-fx-background-color:#323232;");
+		btnBorrowedBooks.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnBorrowedBooks.setPrefWidth(280);	
+		btnBorrowedBooks.setAlignment(Pos.CENTER_LEFT);
+		btnBorrowedBooks.setTextFill(Color.WHITE);
+		btnBorrowedBooks.setPadding(new Insets(7,0,7,30));
+		
+		btnLostBooks = new Button("  Lost Book(s)",new ImageView("Icon/CO.png"));
+		btnLostBooks.setStyle("-fx-background-color:#323232;");
+		btnLostBooks.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnLostBooks.setPrefWidth(280);	
+		btnLostBooks.setAlignment(Pos.CENTER_LEFT);
+		btnLostBooks.setTextFill(Color.WHITE);
+		btnLostBooks.setPadding(new Insets(7,0,7,30));
+		
+		btnReturnedBooks = new Button("  Returned Book(s)",new ImageView("Icon/CO.png"));
+		btnReturnedBooks.setStyle("-fx-background-color:#323232;");
+		btnReturnedBooks.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnReturnedBooks.setPrefWidth(280);	
+		btnReturnedBooks.setAlignment(Pos.CENTER_LEFT);
+		btnReturnedBooks.setTextFill(Color.WHITE);
+		btnReturnedBooks.setPadding(new Insets(7,0,7,30));
+		/***CIRCULATION***/
+		
+		/***ADMIN PANEL***/
+		
+		btnAdminPanel = new Button(" Admin Panel",new ImageView("Icon/AdminPanel.png"));
+		btnAdminPanel.setStyle("-fx-background-color:#191919;");
+		btnAdminPanel.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAdminPanel.setPrefWidth(250);	
+		btnAdminPanel.setAlignment(Pos.CENTER_LEFT);
+		btnAdminPanel.setTextFill(Color.WHITE);
+		btnAdminPanel.setPadding(new Insets(7,0,7,20));
+		
+		btnAdminPanelExpand = new Button("",new ImageView("Icon/Expand.png"));
+		btnAdminPanelExpand.setStyle("-fx-background-color:#191919;");
+		btnAdminPanelExpand.setPadding(new Insets(10,0,0,-10));
+		btnAdminPanelExpand.setPrefWidth(30);
+		
+		hbAdminPanelNExpand = new HBox();
+		hbAdminPanelNExpand.setPrefWidth(250);
+		hbAdminPanelNExpand.getChildren().addAll(btnAdminPanel,btnAdminPanelExpand);
+		
+		vbAdminPanelContainer = new VBox();
+		vbAdminPanelContainer.getChildren().addAll(hbAdminPanelNExpand);
+		
+		btnAdminPanel1 = new Button("  Admin Panel1",new ImageView("Icon/CO.png"));
+		btnAdminPanel1.setStyle("-fx-background-color:#323232;");
+		btnAdminPanel1.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAdminPanel1.setPrefWidth(280);	
+		btnAdminPanel1.setAlignment(Pos.CENTER_LEFT);
+		btnAdminPanel1.setTextFill(Color.WHITE);
+		btnAdminPanel1.setPadding(new Insets(7,0,7,30));
+		
+		btnAdminPanel2 = new Button("  Admin Panel2",new ImageView("Icon/CO.png"));
+		btnAdminPanel2.setStyle("-fx-background-color:#323232;");
+		btnAdminPanel2.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAdminPanel2.setPrefWidth(280);	
+		btnAdminPanel2.setAlignment(Pos.CENTER_LEFT);
+		btnAdminPanel2.setTextFill(Color.WHITE);
+		btnAdminPanel2.setPadding(new Insets(7,0,7,30));
+		
+		btnAdminPanel3 = new Button("  Admin Panel3",new ImageView("Icon/CO.png"));
+		btnAdminPanel3.setStyle("-fx-background-color:#323232;");
+		btnAdminPanel3.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAdminPanel3.setPrefWidth(280);	
+		btnAdminPanel3.setAlignment(Pos.CENTER_LEFT);
+		btnAdminPanel3.setTextFill(Color.WHITE);
+		btnAdminPanel3.setPadding(new Insets(7,0,7,30));
+		
+		btnAdminPanel4 = new Button("  Admin Panel4",new ImageView("Icon/CO.png"));
+		btnAdminPanel4.setStyle("-fx-background-color:#323232;");
+		btnAdminPanel4.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAdminPanel4.setPrefWidth(280);	
+		btnAdminPanel4.setAlignment(Pos.CENTER_LEFT);
+		btnAdminPanel4.setTextFill(Color.WHITE);
+		btnAdminPanel4.setPadding(new Insets(7,0,7,30));
+		
+		/***ADMIN PANEL***/
+		
+		/***SETTINGS***/
+		
+		btnSettings = new Button(" Settings",new ImageView("Icon/Setting.png"));
+		btnSettings.setStyle("-fx-background-color:#191919;");
+		btnSettings.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnSettings.setPrefWidth(250);	
+		btnSettings.setAlignment(Pos.CENTER_LEFT);
+		btnSettings.setTextFill(Color.WHITE);
+		btnSettings.setPadding(new Insets(7,0,7,20));
+		
+		btnSettingsExpand = new Button("",new ImageView("Icon/Expand.png"));
+		btnSettingsExpand.setStyle("-fx-background-color:#191919;");
+		btnSettingsExpand.setPadding(new Insets(10,0,0,-10));
+		btnSettingsExpand.setPrefWidth(30);
+		
+		hbSettingsNExpand = new HBox();
+		hbSettingsNExpand.setPrefWidth(250);
+		hbSettingsNExpand.getChildren().addAll(btnSettings,btnSettingsExpand);
+		
+		vbSettingsContainer = new VBox();
+		vbSettingsContainer.getChildren().addAll(hbSettingsNExpand);
+		
+		btnDatabaseVersion = new Button("  Database Versions",new ImageView("Icon/CO.png"));
+		btnDatabaseVersion.setStyle("-fx-background-color:#323232;");
+		btnDatabaseVersion.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnDatabaseVersion.setPrefWidth(280);	
+		btnDatabaseVersion.setAlignment(Pos.CENTER_LEFT);
+		btnDatabaseVersion.setTextFill(Color.WHITE);
+		btnDatabaseVersion.setPadding(new Insets(7,0,7,30));
+		
+		btnSMSConfig = new Button("  SMS Config",new ImageView("Icon/CO.png"));
+		btnSMSConfig.setStyle("-fx-background-color:#323232;");
+		btnSMSConfig.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnSMSConfig.setPrefWidth(280);	
+		btnSMSConfig.setAlignment(Pos.CENTER_LEFT);
+		btnSMSConfig.setTextFill(Color.WHITE);
+		btnSMSConfig.setPadding(new Insets(7,0,7,30));
+		
+		/***SETTINGS***/
+		
+		
+		/***Reports***/
+				
+			btnReports = new Button(" Reports",new ImageView("Icon/Report.png"));
+			btnReports.setStyle("-fx-background-color:#191919;");
+			btnReports.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+			btnReports.setPrefWidth(250);	
+			btnReports.setAlignment(Pos.CENTER_LEFT);
+			btnReports.setTextFill(Color.WHITE);
+			btnReports.setPadding(new Insets(7,0,7,20));
+			
+			btnReportsExpand = new Button("",new ImageView("Icon/Expand.png"));
+			btnReportsExpand.setStyle("-fx-background-color:#191919;");
+			btnReportsExpand.setPadding(new Insets(10,0,0,-10));
+			btnReportsExpand.setPrefWidth(30);
+			
+			hbReportsNExpand = new HBox();
+			hbReportsNExpand.setPrefWidth(250);
+			hbReportsNExpand.getChildren().addAll(btnReports,btnReportsExpand);
+			
+			vbReportsContainer = new VBox();
+			vbReportsContainer.getChildren().addAll(hbReportsNExpand);
+			
+			btnReports1 = new Button("  Reports1",new ImageView("Icon/CO.png"));
+			btnReports1.setStyle("-fx-background-color:#323232;");
+			btnReports1.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+			btnReports1.setPrefWidth(280);	
+			btnReports1.setAlignment(Pos.CENTER_LEFT);
+			btnReports1.setTextFill(Color.WHITE);
+			btnReports1.setPadding(new Insets(7,0,7,30));
+			
+			btnReports2 = new Button("  Reports2",new ImageView("Icon/CO.png"));
+			btnReports2.setStyle("-fx-background-color:#323232;");
+			btnReports2.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+			btnReports2.setPrefWidth(280);	
+			btnReports2.setAlignment(Pos.CENTER_LEFT);
+			btnReports2.setTextFill(Color.WHITE);
+			btnReports2.setPadding(new Insets(7,0,7,30));
+			
+			btnReports3 = new Button("  Report3",new ImageView("Icon/CO.png"));
+			btnReports3.setStyle("-fx-background-color:#323232;");
+			btnReports3.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+			btnReports3.setPrefWidth(280);	
+			btnReports3.setAlignment(Pos.CENTER_LEFT);
+			btnReports3.setTextFill(Color.WHITE);
+			btnReports3.setPadding(new Insets(7,0,7,30));
+			
+			btnReports4 = new Button("  Report4",new ImageView("Icon/CO.png"));
+			btnReports4.setStyle("-fx-background-color:#323232;");
+			btnReports4.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+			btnReports4.setPrefWidth(280);	
+			btnReports4.setAlignment(Pos.CENTER_LEFT);
+			btnReports4.setTextFill(Color.WHITE);
+			btnReports4.setPadding(new Insets(7,0,7,30));
+			
+		/***SETTINGS***/
+		
+		/***BUTTON ACTION***/
+		btnHome.setOnAction(e->{
+			vbWorkPanel = QuickInventoryReport.vbQuickInventoryReport();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbBookContainer.getChildren().clear();
+			vbCirculationContainer.getChildren().clear();
+			vbAdminPanelContainer.getChildren().clear();
+			vbSettingsContainer.getChildren().clear();
+			vbReportsContainer.getChildren().clear();
+			vbBookContainer.getChildren().add(hbBookNExpand);
+			vbCirculationContainer.getChildren().add(hbCirculationNExpand);
+			vbAdminPanelContainer.getChildren().add(hbAdminPanelNExpand);
+			vbSettingsContainer.getChildren().add(hbSettingsNExpand);
+			vbReportsContainer.getChildren().add(hbReportsNExpand);
+		
+			isBookClick = false;
+			isCirculationClick = false;
+			isAdminPanelClick = false;
+			isSettingsClick = false;
+			isReportsClick = false;
+		});
+			
+		btnBook.setOnAction(e->{
+			vbWorkPanel = BookLists.vbBookLists();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbBookContainer.getChildren().clear();
+			vbCirculationContainer.getChildren().clear();
+			vbAdminPanelContainer.getChildren().clear();
+			vbSettingsContainer.getChildren().clear();
+			vbReportsContainer.getChildren().clear();
+			vbBookContainer.getChildren().add(hbBookNExpand);
+			vbCirculationContainer.getChildren().add(hbCirculationNExpand);
+			vbAdminPanelContainer.getChildren().add(hbAdminPanelNExpand);
+			vbSettingsContainer.getChildren().add(hbSettingsNExpand);
+			vbReportsContainer.getChildren().add(hbReportsNExpand);
+		
+			isBookClick = false;
+			isCirculationClick = false;
+			isAdminPanelClick = false;
+			isSettingsClick = false;
+			isReportsClick = false;
+		});	
+		btnSettings.setOnAction(e->{
+			vbWorkPanel = GeneralSettings.vbGeneralSettings();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbBookContainer.getChildren().clear();
+			vbCirculationContainer.getChildren().clear();
+			vbAdminPanelContainer.getChildren().clear();
+			vbSettingsContainer.getChildren().clear();
+			vbReportsContainer.getChildren().clear();
+			vbBookContainer.getChildren().add(hbBookNExpand);
+			vbCirculationContainer.getChildren().add(hbCirculationNExpand);
+			vbNotifyDelayedMembersContainer.getChildren().add(hbNotifyDelayedMembersNExpand);
+			vbAdminPanelContainer.getChildren().add(hbAdminPanelNExpand);
+			vbSettingsContainer.getChildren().add(hbSettingsNExpand);
+			vbReportsContainer.getChildren().add(hbReportsNExpand);
+		
+			isBookClick = false;
+			isCirculationClick = false;
+			isNotifyDelayedMembersClick = false;
+			isAdminPanelClick = false;
+			isSettingsClick = false;
+			isReportsClick = false;
+		});
+		btnEmailNSMSTemplates.setOnAction(e->{
+			vbWorkPanel = EmailSMSTemplate.vbEmailSMSTemplate();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbBookContainer.getChildren().clear();
+			vbCirculationContainer.getChildren().clear();
+			vbNotifyDelayedMembersContainer.getChildren().clear();
+			vbAdminPanelContainer.getChildren().clear();
+			vbSettingsContainer.getChildren().clear();
+			vbReportsContainer.getChildren().clear();
+			vbBookContainer.getChildren().add(hbBookNExpand);
+			vbCirculationContainer.getChildren().add(hbCirculationNExpand);
+			vbNotifyDelayedMembersContainer.getChildren().add(hbNotifyDelayedMembersNExpand);
+			vbAdminPanelContainer.getChildren().add(hbAdminPanelNExpand);
+			vbSettingsContainer.getChildren().add(hbSettingsNExpand);
+			vbReportsContainer.getChildren().add(hbReportsNExpand);
+		
+			isBookClick = false;
+			isCirculationClick = false;
+			isNotifyDelayedMembersClick = false;
+			isAdminPanelClick = false;
+			isSettingsClick = false;
+			isReportsClick = false;
+		});
+			
+		btnBookExpand.setOnAction(e->{
+			vbBookContainer.getChildren().clear();
+			vbCirculationContainer.getChildren().clear();
+			vbNotifyDelayedMembersContainer.getChildren().clear();
+			vbAdminPanelContainer.getChildren().clear();
+			vbSettingsContainer.getChildren().clear();
+			vbReportsContainer.getChildren().clear();
+			vbBookContainer.getChildren().add(hbBookNExpand);
+			vbCirculationContainer.getChildren().add(hbCirculationNExpand);
+			vbNotifyDelayedMembersContainer.getChildren().add(hbNotifyDelayedMembersNExpand);
+			vbAdminPanelContainer.getChildren().add(hbAdminPanelNExpand);
+			vbSettingsContainer.getChildren().add(hbSettingsNExpand);
+			vbReportsContainer.getChildren().add(hbReportsNExpand);
+			
+			if(isBookClick == false)
+			{
+				vbBookContainer.getChildren().addAll(btnList,btnAddBook,btnAuthors,btnCategories,btnBookCodes);
+			}
+			isBookClick = !isBookClick;
+			isCirculationClick = false;
+			isNotifyDelayedMembersClick = false;
+			isAdminPanelClick = false;
+			isSettingsClick = false;
+			isReportsClick = false;
+			
+		});
+		btnCirculationExpand.setOnAction(e->{
+			vbBookContainer.getChildren().clear();
+			vbCirculationContainer.getChildren().clear();
+			vbNotifyDelayedMembersContainer.getChildren().clear();
+			vbAdminPanelContainer.getChildren().clear();
+			vbSettingsContainer.getChildren().clear();
+			vbReportsContainer.getChildren().clear();
+			vbBookContainer.getChildren().add(hbBookNExpand);
+			vbCirculationContainer.getChildren().add(hbCirculationNExpand);
+			vbNotifyDelayedMembersContainer.getChildren().add(hbNotifyDelayedMembersNExpand);
+			vbAdminPanelContainer.getChildren().add(hbAdminPanelNExpand);
+			vbSettingsContainer.getChildren().add(hbSettingsNExpand);
+			vbReportsContainer.getChildren().add(hbReportsNExpand);
+			if(isCirculationClick == false)
+			{
+				vbCirculationContainer.getChildren().addAll(btnIssueBooks,btnReturnBooks,btnBorrowedBooks,btnLostBooks,btnReturnedBooks);
+			}
+			isCirculationClick = !isCirculationClick;
+			isBookClick = false;
+			isNotifyDelayedMembersClick = false;
+			isAdminPanelClick = false;
+			isSettingsClick = false;
+			isReportsClick = false;
+		});
+		btnNotifyDelayedMembersExpand.setOnAction(e->{
+			vbBookContainer.getChildren().clear();
+			vbCirculationContainer.getChildren().clear();
+			vbNotifyDelayedMembersContainer.getChildren().clear();
+			vbAdminPanelContainer.getChildren().clear();
+			vbSettingsContainer.getChildren().clear();
+			vbReportsContainer.getChildren().clear();
+			vbBookContainer.getChildren().add(hbBookNExpand);
+			vbCirculationContainer.getChildren().add(hbCirculationNExpand);
+			vbNotifyDelayedMembersContainer.getChildren().add(hbNotifyDelayedMembersNExpand);
+			vbAdminPanelContainer.getChildren().add(hbAdminPanelNExpand);
+			vbSettingsContainer.getChildren().add(hbSettingsNExpand);
+			vbReportsContainer.getChildren().add(hbReportsNExpand);
+			
+			if(isNotifyDelayedMembersClick == false)
+			{
+				vbNotifyDelayedMembersContainer.getChildren().addAll(btnNotify,btnEmailNSMSTemplates);
+			}
+			
+			isBookClick = false;
+			isCirculationClick = false;
+			isNotifyDelayedMembersClick = !isNotifyDelayedMembersClick;
+			isAdminPanelClick = false;
+			isSettingsClick = false;
+			isReportsClick = false;	
+		});
+		btnAdminPanelExpand.setOnAction(e->{
+			vbBookContainer.getChildren().clear();
+			vbCirculationContainer.getChildren().clear();
+			vbNotifyDelayedMembersContainer.getChildren().clear();
+			vbAdminPanelContainer.getChildren().clear();
+			vbSettingsContainer.getChildren().clear();
+			vbReportsContainer.getChildren().clear();
+			vbBookContainer.getChildren().add(hbBookNExpand);
+			vbCirculationContainer.getChildren().add(hbCirculationNExpand);
+			vbNotifyDelayedMembersContainer.getChildren().add(hbNotifyDelayedMembersNExpand);
+			vbAdminPanelContainer.getChildren().add(hbAdminPanelNExpand);
+			vbSettingsContainer.getChildren().add(hbSettingsNExpand);
+			vbReportsContainer.getChildren().add(hbReportsNExpand);
+			
+			if(isAdminPanelClick == false)
+			{
+				vbAdminPanelContainer.getChildren().addAll(btnAdminPanel1,btnAdminPanel2,btnAdminPanel3,btnAdminPanel4);
+			}
+			
+			isBookClick = false;
+			isCirculationClick = false;
+			isNotifyDelayedMembersClick = false;
+			isAdminPanelClick = !isAdminPanelClick;
+			isSettingsClick = false;
+			isReportsClick = false;
+		});
+		btnSettingsExpand.setOnAction(e->{
+			vbBookContainer.getChildren().clear();
+			vbCirculationContainer.getChildren().clear();
+			vbNotifyDelayedMembersContainer.getChildren().clear();
+			vbAdminPanelContainer.getChildren().clear();
+			vbSettingsContainer.getChildren().clear();
+			vbReportsContainer.getChildren().clear();
+			vbBookContainer.getChildren().add(hbBookNExpand);
+			vbCirculationContainer.getChildren().add(hbCirculationNExpand);
+			vbNotifyDelayedMembersContainer.getChildren().add(hbNotifyDelayedMembersNExpand);
+			vbAdminPanelContainer.getChildren().add(hbAdminPanelNExpand);
+			vbSettingsContainer.getChildren().add(hbSettingsNExpand);
+			vbReportsContainer.getChildren().add(hbReportsNExpand);
+			
+			if(isSettingsClick == false)
+			{
+				vbSettingsContainer.getChildren().addAll(btnDatabaseVersion,btnSMSConfig);
+			}
+			
+			isBookClick = false;
+			isCirculationClick = false;
+			isNotifyDelayedMembersClick = false;
+			isAdminPanelClick = false;
+			isSettingsClick = !isSettingsClick;
+			isReportsClick = false;
+		});
+		btnReportsExpand.setOnAction(e->{
+			vbBookContainer.getChildren().clear();
+			vbCirculationContainer.getChildren().clear();
+			vbNotifyDelayedMembersContainer.getChildren().clear();
+			vbAdminPanelContainer.getChildren().clear();
+			vbSettingsContainer.getChildren().clear();
+			vbReportsContainer.getChildren().clear();
+			vbBookContainer.getChildren().add(hbBookNExpand);
+			vbCirculationContainer.getChildren().add(hbCirculationNExpand);
+			vbNotifyDelayedMembersContainer.getChildren().add(hbNotifyDelayedMembersNExpand);
+			vbAdminPanelContainer.getChildren().add(hbAdminPanelNExpand);
+			vbSettingsContainer.getChildren().add(hbSettingsNExpand);
+			vbReportsContainer.getChildren().add(hbReportsNExpand);
+			
+			if(isReportsClick == false)
+			{
+				vbReportsContainer.getChildren().addAll(btnReports1,btnReports2,btnReports3,btnReports4);
+			}
+			isBookClick = false;
+			isCirculationClick = false;
+			isNotifyDelayedMembersClick = false;
+			isAdminPanelClick = false;
+			isSettingsClick = false;
+			isReportsClick = !isReportsClick;
+		});
+		/***BUTTON ACTION***/
+		
+		vbButtonPanel.getChildren().addAll(hbUserInformation,btnMainNavigation,btnHome,vbBookContainer,vbCirculationContainer,vbNotifyDelayedMembersContainer,vbSettingsContainer,vbReportsContainer);
+		
+		vbButtonPanel.setSpacing(20);
+		vbMainView.getChildren().addAll(hbHeader,hbPanel);
+		return vbMainView;
+	}
+	private static VBox LeftHeader()
+	{
+		VBox vbLeftHeader = new VBox();
+		vbLeftHeader.setStyle("-fx-background-color:#7f7fff;");
+		
+		Label lLibraryName = new Label("MIIT");
+		lLibraryName.setTextFill(Color.WHITE);
+		lLibraryName.setAlignment(Pos.CENTER);
+		lLibraryName.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,40));
+		lLibraryName.setPadding(new Insets(10,10,10,10));
+		
+		vbLeftHeader.getChildren().add(lLibraryName);
+		vbLeftHeader.setPadding(new Insets(7,0,7,40));
+
+		vbLeftHeader.setPrefSize(280, 50);
+		return vbLeftHeader;
+	}
+	private static BorderPane RightHeader()
+	{
+		BorderPane bpRightHeader = new BorderPane();
+		
+		ImageView imgLangugageIcon = new ImageView(new Image("Icon/EnglishLanguage.png"));
+		
+		Label lEmail = new Label("2016-miit-ece-009");
+		lEmail.setTextFill(Color.WHITE);
+		lEmail.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+
+		HBox hbLanguageEmail = new HBox();
+		hbLanguageEmail.getChildren().addAll(imgLangugageIcon,lEmail);
+		hbLanguageEmail.setSpacing(20);
+		hbLanguageEmail.setPadding(new Insets(10,10,10,10));
+		
+		bpRightHeader.setRight(hbLanguageEmail);
+		bpRightHeader.setStyle("-fx-background-color:#7f7fff;");
+		bpRightHeader.setPrefSize(1100, 50);
+//
+		return bpRightHeader;
+	}
+}

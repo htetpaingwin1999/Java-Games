@@ -1,0 +1,316 @@
+package View;
+
+import java.awt.Desktop;
+import java.util.Date;
+
+import Handler.StaffHandler;
+import List.SectionLists;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+
+public class SectionDataView {
+	private static VBox vbAddStaffView;
+	private static Label lTitle;
+	private static HBox hbTitleCon;
+	private static Label lSubTitle;
+	private static Label lSectionID,llSectionID;
+	private static Label lCourseName,llCourseName;
+	private static Label lCourseFee,llCourseFee;
+	private static Label lStaffID,llStaffID;
+	private static Label lStaffName,llStaffName;
+	private static Label lAdminID,llAdminID;
+	private static Label lAdminName,llAdminName;
+	private static Label lStartDate,llStartDate;
+	private static Label lEndDate,llEndDate;
+	private static Label lFirstDay,llFirstDay;
+	private static Label lSecondDay,llSecondDay;
+	private static Label lFirstTime,llFirstTime;
+	private static Label lSecondTime,llSecondTime;
+	private static Label lModifiedDate,llModifiedDate;
+	private static Label lNoofStudentJoined,llNoofStudentJoined;
+	
+	private static VBox vbCourseDataPart;
+	private static HBox hbCourseTitlePart;
+	private static Label  lCourseTitle;
+	private static GridPane gpCourseDataPart;
+
+	private static VBox vbSectionDataPart;
+	private static HBox hbSectionTitlePart;
+	private static Label  lSectionTitle;
+	private static GridPane gpSectionDataPart;
+	
+	private static VBox vbAdminDataPart;
+	private static HBox hbAdminTitlePart;
+	private static Label  lAdminDataTitle;
+	private static GridPane gpAdminDataPart;
+	
+	private static VBox vbStaffDataPart;
+	private static HBox hbStaffTitlePart;
+	private static Label  lStaffDataTitle;
+	private static GridPane gpStaffDataPart;
+	
+	public static VBox vbStaffDataView(int id)
+	{
+		SectionLists s = Handler.SectionHandler.GetSectionData(id);
+		vbAddStaffView = new VBox();
+				
+		lTitle = new Label("Section Detail");
+		lTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,20));
+		
+		hbTitleCon = new HBox();
+		hbTitleCon.setPadding(new Insets(20,50,20,50));
+		hbTitleCon.setPrefSize(1080,50);
+		hbTitleCon.setStyle("-fx-background-color:white");
+		hbTitleCon.getChildren().add(lTitle);
+		
+		lSectionID = new Label("Section ID:");
+		lSectionID.setFont(Font.font("Times New Roman", 15));
+		lSectionID.setTextFill(Color.BLACK);
+
+		llSectionID = new Label();
+		lSectionID.setFont(Font.font("Times New Roman", 15));
+		llSectionID.setTextFill(Color.GREY);
+		llSectionID.setText(s.getSectionID()+"");
+		
+		lCourseName = new Label("Course Name:");
+		lCourseName.setFont(Font.font("Times New Roman", 15));
+		lCourseName.setTextFill(Color.BLACK);
+
+		llCourseName = new Label();
+		lCourseName.setFont(Font.font("Times New Roman", 15));
+		llCourseName.setTextFill(Color.GREY);
+		llCourseName.setText(s.getCourseName());
+
+		lCourseFee = new Label("CourseFee:");
+		lCourseFee.setFont(Font.font("Times New Roman", 15));
+		lCourseFee.setTextFill(Color.BLACK);
+
+		llCourseFee = new Label();
+		lCourseFee.setFont(Font.font("Times New Roman", 15));
+		llCourseFee.setTextFill(Color.GREY);
+		llCourseFee.setText(s.getCourseFee()+"");
+
+		lAdminID = new Label("Admin ID:");
+		lAdminID.setFont(Font.font("Times New Roman", 15));
+		lAdminID.setTextFill(Color.BLACK);
+
+		llAdminID = new Label();
+		lAdminID.setFont(Font.font("Times New Roman", 15));
+		llAdminID.setTextFill(Color.GREY);
+		llAdminID.setText(s.getAdminID()+"");
+		
+		lAdminName = new Label("Admin Name:");
+		lAdminName.setFont(Font.font("Times New Roman", 15));
+		lAdminName.setTextFill(Color.BLACK);
+
+		llAdminName = new Label();
+		lAdminName.setFont(Font.font("Times New Roman", 15));
+		llAdminName.setTextFill(Color.GREY);
+		llAdminName.setText(s.getAdminName());
+
+		lStaffID = new Label("Teacher ID:");
+		lStaffID.setFont(Font.font("Times New Roman", 15));
+		lStaffID.setTextFill(Color.BLACK);
+
+		llStaffID = new Label();
+		lStaffID.setFont(Font.font("Times New Roman", 15));
+		llStaffID.setTextFill(Color.GREY);
+		llStaffID.setText(s.getStaffID()+"");
+		
+		lStaffName = new Label("Teacher Name:");
+		lStaffName.setFont(Font.font("Times New Roman", 15));
+		lStaffName.setTextFill(Color.BLACK);
+
+		llStaffName = new Label();
+		lStaffName.setFont(Font.font("Times New Roman", 15));
+		llStaffName.setTextFill(Color.GREY);
+		llStaffName.setText(s.getStaffName());
+		
+		lStartDate = new Label("Start Date:");
+		lStartDate.setFont(Font.font("Times New Roman", 15));
+		lStartDate.setTextFill(Color.BLACK);
+
+		llStartDate = new Label();
+		lStartDate.setFont(Font.font("Times New Roman", 15));
+		llStartDate.setTextFill(Color.GREY);
+		llStartDate.setText(s.getStartDate()+"");
+		
+		lEndDate = new Label("End Date:");
+		lEndDate.setFont(Font.font("Times New Roman", 15));
+		lEndDate.setTextFill(Color.BLACK);
+
+		llEndDate = new Label();
+		lEndDate.setFont(Font.font("Times New Roman", 15));
+		llEndDate.setTextFill(Color.GREY);
+		llEndDate.setText(s.getEndDate()+"");
+		
+		lFirstDay = new Label("First Day:");
+		lFirstDay.setFont(Font.font("Times New Roman", 15));
+		lFirstDay.setTextFill(Color.BLACK);
+
+		llFirstDay = new Label();
+		lFirstDay.setFont(Font.font("Times New Roman", 15));
+		llFirstDay.setTextFill(Color.GREY);
+		llFirstDay.setText(s.getFirstDay());
+		
+		lFirstTime = new Label("First Time:");
+		lFirstTime.setFont(Font.font("Times New Roman", 15));
+		lFirstTime.setTextFill(Color.BLACK);
+		lFirstTime.setText(s.getFirstTime());
+		
+		llFirstTime = new Label();
+		lFirstTime.setFont(Font.font("Times New Roman", 15));
+		llFirstTime.setTextFill(Color.GREY);
+		llFirstTime.setText(s.getFirstTime());
+		
+		lSecondDay = new Label("Second Day:");
+		lSecondDay.setFont(Font.font("Times New Roman", 15));
+		lSecondDay.setTextFill(Color.BLACK);
+
+		llSecondDay = new Label();
+		lSecondDay.setFont(Font.font("Times New Roman", 15));
+		llSecondDay.setTextFill(Color.GREY);
+		llSecondDay.setText(s.getSecondDay());
+
+		lSecondTime = new Label("Second Time:");
+		lSecondTime.setFont(Font.font("Times New Roman", 15));
+		lSecondTime.setTextFill(Color.BLACK);
+
+		llSecondTime = new Label();
+		lSecondTime.setFont(Font.font("Times New Roman", 15));
+		llSecondTime.setTextFill(Color.GREY);
+		llSecondTime.setText(s.getSecondTime());
+		
+		lModifiedDate = new Label("Modified Date:");
+		lModifiedDate.setFont(Font.font("Times New Roman", 15));
+		lModifiedDate.setTextFill(Color.BLACK);
+
+		llModifiedDate = new Label();
+		lModifiedDate.setFont(Font.font("Times New Roman", 15));
+		llModifiedDate.setTextFill(Color.GREY);
+		llModifiedDate.setText(s.getDefinedDate()+"");
+
+		lNoofStudentJoined = new Label("No of Student:");
+		lNoofStudentJoined.setFont(Font.font("Times New Roman", 15));
+		lNoofStudentJoined.setTextFill(Color.BLACK);
+
+		llNoofStudentJoined = new Label();
+		llNoofStudentJoined.setFont(Font.font("Times New Roman", 15));
+		llNoofStudentJoined.setTextFill(Color.GREY);
+		llNoofStudentJoined.setText(s.getNoOfStudent()+"");
+	
+
+		vbCourseDataPart = new VBox();
+		
+		hbCourseTitlePart = new HBox();
+		
+		ImageView imgCourseIcon = new ImageView(new Image("Icon/ocicon.png"));
+		
+		lCourseTitle = new Label("Course Details");
+		lCourseTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,18));
+		lCourseTitle.setTextFill(Color.BLACK);
+		
+		hbCourseTitlePart.getChildren().addAll(imgCourseIcon, lCourseTitle);
+		hbCourseTitlePart.setPadding(new Insets(10,10,10,10));
+		hbCourseTitlePart.setSpacing(5);
+		
+		gpCourseDataPart = new GridPane();
+		gpCourseDataPart.setStyle("-fx-background-color:white");
+		gpCourseDataPart.setPadding(new Insets(10,10,10,10));
+		gpCourseDataPart.add(lCourseName, 0, 0);
+		gpCourseDataPart.add(llCourseName, 1, 0);
+		gpCourseDataPart.add(lCourseFee, 0, 1);
+		gpCourseDataPart.add(llCourseFee, 1, 1);
+		gpCourseDataPart.setHgap(17);
+		gpCourseDataPart.setVgap(17);
+		gpCourseDataPart.setPadding(new Insets(10,10,10,10));
+		
+		vbCourseDataPart = new VBox();
+		vbCourseDataPart.getChildren().addAll(hbCourseTitlePart,gpCourseDataPart);
+		vbCourseDataPart.setStyle("-fx-background-color:#f9f9f9;-fx-border-color:grey;-fx-border-width: 1;-fx-border-style: solid;");
+
+		
+		vbAdminDataPart = new VBox();
+		
+		hbAdminTitlePart = new HBox();
+		
+		ImageView imgAdminIcon = new ImageView(new Image("Icon/adminicon.png"));
+		
+		lAdminDataTitle = new Label("Admin Details");
+		lAdminDataTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,18));
+		lAdminDataTitle.setTextFill(Color.BLACK);
+		
+		hbAdminTitlePart.getChildren().addAll(imgAdminIcon, lAdminDataTitle);
+		hbAdminTitlePart.setPadding(new Insets(10,10,10,10));
+		hbAdminTitlePart.setSpacing(5);
+		
+		gpAdminDataPart = new GridPane();
+		gpAdminDataPart.setStyle("-fx-background-color:white");
+		gpAdminDataPart.add(lAdminID, 0, 0);
+		gpAdminDataPart.add(llAdminID, 1, 0);
+		gpAdminDataPart.add(lAdminName, 0, 1);
+		gpAdminDataPart.add(llAdminName, 1, 1);
+		gpAdminDataPart.setVgap(17);
+		gpAdminDataPart.setHgap(17);
+		gpAdminDataPart.setPadding(new Insets(10,10,10,10));
+	
+		vbAdminDataPart = new VBox();
+		vbAdminDataPart.getChildren().addAll(hbAdminTitlePart,gpAdminDataPart);
+		vbAdminDataPart.setStyle("-fx-background-color:#f9f9f9;-fx-border-color:grey;-fx-border-width: 1;-fx-border-style: solid;");
+
+		vbStaffDataPart = new VBox();
+		
+		hbStaffTitlePart = new HBox();
+		
+		ImageView imgStaffIcon = new ImageView(new Image("Icon/teachericon.png"));
+		
+		lStaffDataTitle = new Label("Teachers Details");
+		lStaffDataTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,18));
+		lStaffDataTitle.setTextFill(Color.BLACK);
+		
+		hbStaffTitlePart.getChildren().addAll(imgStaffIcon, lStaffDataTitle);
+		hbStaffTitlePart.setPadding(new Insets(10,10,10,10));
+		hbStaffTitlePart.setSpacing(5);
+		
+		gpStaffDataPart = new GridPane();
+		gpStaffDataPart.setStyle("-fx-background-color:white");
+		gpStaffDataPart.setPadding(new Insets(10,10,10,10));
+		gpStaffDataPart.add(lStaffID, 0, 0);
+		gpStaffDataPart.add(llStaffID, 1, 0);
+		gpStaffDataPart.add(lStaffName, 0, 1);
+		gpStaffDataPart.add(llStaffName, 1, 1);
+		
+		gpStaffDataPart.setHgap(17);
+		gpStaffDataPart.setVgap(17);
+		gpStaffDataPart.setPadding(new Insets(10,10,10,10));
+		
+		vbStaffDataPart = new VBox();
+		vbStaffDataPart.getChildren().addAll(hbStaffTitlePart,gpStaffDataPart);
+		vbStaffDataPart.setStyle("-fx-background-color:#f9f9f9;-fx-border-color:grey;-fx-border-width: 1;-fx-border-style: solid;");
+	
+		vbAddStaffView.getChildren().addAll(hbTitleCon,vbCourseDataPart,vbAdminDataPart,vbStaffDataPart);
+		vbAddStaffView.setStyle("-fx-background-color:white");
+		vbAddStaffView.setSpacing(5);
+		vbAddStaffView.setPadding(new Insets(10,20,10,20));
+		vbAddStaffView.setPrefHeight(700);
+		return vbAddStaffView;
+		}
+}
+

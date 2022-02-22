@@ -1,0 +1,232 @@
+package View;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+
+public class MembersPanel {
+	public static VBox vbMembersPanel(boolean isClick)
+	{
+		
+		VBox vbMembersPanel = new VBox();
+
+		Image imgMembers = new Image("member.png");
+
+		Button btnMembers = new Button("Members",new ImageView(imgMembers));
+		btnMembers.setStyle("-fx-background-color:#00BFFF;");
+		btnMembers.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnMembers.setMinWidth(290);	
+		btnMembers.setTextFill(Color.BLACK);
+		btnMembers.setAlignment(Pos.CENTER_LEFT);
+		btnMembers.setPadding(new Insets(7,0,7,20));
+		
+		
+		Image imgAddMembers = new Image("add.png");
+		Button btnAddMembers = new Button("Add New Member",new ImageView(imgAddMembers));
+		btnAddMembers.setStyle("-fx-background-color:#87CEFA;");
+		btnAddMembers.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddMembers.setMaxWidth(290);	
+		btnAddMembers.setTextFill(Color.BLACK);
+		btnAddMembers.setAlignment(Pos.CENTER_LEFT);
+		btnAddMembers.setPadding(new Insets(7,0,7,50));			
+		
+		Image imgMembersLists = new Image("list.png");
+		Button btnMembersLists = new Button("Member Lists",new ImageView(imgMembersLists));
+		btnMembersLists.setStyle("-fx-background-color:#87CEFA;");
+		btnMembersLists.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnMembersLists.setMinWidth(290);	
+		btnMembersLists.setTextFill(Color.BLACK);
+		btnMembersLists.setAlignment(Pos.CENTER_LEFT);
+		btnMembersLists.setPadding(new Insets(7,0,7,50));	
+		
+		Image imgNewMembers = new Image("list.png");
+		Button btnNewMembers = new Button("New Members",new ImageView(imgNewMembers));
+		btnNewMembers.setStyle("-fx-background-color:#87CEFA;");
+		btnNewMembers.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnNewMembers.setMinWidth(290);	
+		btnNewMembers.setTextFill(Color.BLACK);
+		btnNewMembers.setAlignment(Pos.CENTER_LEFT);
+		btnNewMembers.setPadding(new Insets(7,0,7,50));	
+		
+		vbMembersPanel.getChildren().add(btnMembers);
+			if(isClick == true)
+			{
+			    vbMembersPanel.getChildren().clear();
+			    vbMembersPanel.getChildren().addAll(btnMembers,btnAddMembers,btnMembersLists,btnNewMembers);
+			}
+			
+		return vbMembersPanel;		
+	}
+	public static VBox vbAddMemberView()
+	{
+		VBox vbAddMemberView = new VBox();
+	
+		VBox vbMembersTitleView = IndexTitleView.vbWelcomeText("MEMBERS");
+		
+		Label lFirstPortion = new Label("First Portion");
+		lFirstPortion.setFont(Font.font("Century Gothic",FontWeight.EXTRA_BOLD,FontPosture.REGULAR,15));
+		lFirstPortion.setPadding(new Insets(0,0,0,50));
+		
+		Label lSecondPortion = new Label("Second Portion");
+		lSecondPortion.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		lSecondPortion.setPadding(new Insets(0,0,0,50));
+
+		HBox hbFirstPortion = new HBox();
+		hbFirstPortion.setStyle("-fx-background-color:#FFFFFF");
+		hbFirstPortion.getChildren().add(lFirstPortion);
+		hbFirstPortion.setPadding(new Insets(20,20,20,20));
+		
+		HBox hbSecondPortion = new HBox();
+		hbSecondPortion.setStyle("-fx-background-color:#FFFFFF");
+		hbSecondPortion.getChildren().add(lSecondPortion);
+		hbSecondPortion.setPadding(new Insets(20,20,20,20));
+
+		Label lMemberID = new Label("Member ID");
+		lMemberID.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		lMemberID.setTextFill(Color.GREY);
+		
+		TextField tMemberID = new TextField();
+		tMemberID.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		tMemberID.setStyle("-fx-border-color:red");
+		
+		Label lMemberName = new Label("Member Name");
+		lMemberName.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		lMemberName.setTextFill(Color.GREY);
+		
+		TextField tMemberName = new TextField();
+		tMemberName.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		Label lPhoneNumber = new Label("Phone Number");
+		lPhoneNumber.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		lPhoneNumber.setTextFill(Color.GREY);
+		
+		TextField tPhoneNumber = new TextField();
+		tPhoneNumber.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		
+		Label lEmailAddress = new Label("Email Address");
+		lEmailAddress.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		lEmailAddress.setTextFill(Color.GREY);
+		
+		TextField tEmailAddress = new TextField();
+		tEmailAddress.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		tEmailAddress.setPrefWidth(450);
+
+		GridPane gpFirstPortion = new GridPane();
+		gpFirstPortion.add(lMemberID, 0, 0);
+		gpFirstPortion.add(tMemberID, 0, 1);
+		gpFirstPortion.add(lMemberName, 0, 2);
+		gpFirstPortion.add(tMemberName, 0, 3);
+		gpFirstPortion.add(lPhoneNumber, 0, 4);
+		gpFirstPortion.add(tPhoneNumber, 0, 5);
+		gpFirstPortion.add(lEmailAddress, 0, 6);
+		gpFirstPortion.add(tEmailAddress, 0, 7);
+		gpFirstPortion.setVgap(20);
+		gpFirstPortion.setPadding(new Insets(20,30,20,30));
+		gpFirstPortion.setStyle("-fx-background-color:white");
+		gpFirstPortion.setPrefWidth(450);
+		
+		VBox vbFirstPortion = new VBox();
+		vbFirstPortion.getChildren().addAll(hbFirstPortion,gpFirstPortion);
+		vbFirstPortion.setSpacing(5);
+		
+		Label lAddress = new Label("Address");
+		lAddress.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		lAddress.setTextFill(Color.GREY);
+		
+		TextField tAddress = new TextField();
+		tAddress.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		
+		Label lUploadPhoto = new Label("Choose photo");
+		lUploadPhoto.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		lUploadPhoto.setTextFill(Color.GREY);
+		
+		Label lPassword = new Label("Password");
+		lPassword.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		lPassword.setTextFill(Color.GREY);
+		
+		TextField tPassword = new TextField();
+		tPassword.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		tPassword.setPrefWidth(450);
+		
+//		FileChooser fileChooser = new FileChooser();
+//		fileChooser.setTitle("Open Resource File");
+//		fileChooser.showOpenDialog(LogIn.myStage);
+//		
+		Label lDateOfBirth = new Label("Date of Birth");
+		lDateOfBirth.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		lDateOfBirth.setTextFill(Color.GREY);
+		
+		HBox hbDateOfBirth = new HBox();
+		
+		ComboBox cbDay = new ComboBox();
+		for(int i =0;i<31;i++)
+		{
+			cbDay.getItems().addAll(i+1+"");
+		}
+		ComboBox cbMonth = new ComboBox();
+		for(int i =0;i<12;i++)
+		{
+			cbMonth.getItems().addAll(i+1+"");
+		}
+		ComboBox cbYear = new ComboBox();
+		for(int i = 2000;i<2025;i++)
+		{
+			cbYear.getItems().addAll(i+"");
+		}
+		
+		hbDateOfBirth.getChildren().addAll(cbDay,cbMonth,cbYear);
+		hbDateOfBirth.setSpacing(20);
+		
+		Button btnUploadPhoto = new Button("Upload Photo");
+		btnUploadPhoto.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		
+		Button btnSave = new Button("Save");
+		btnSave.setFont(Font.font("Century Gothic",FontWeight.BOLD,FontPosture.REGULAR,15));
+		btnSave.setTextFill(Color.WHITE);
+		btnSave.setStyle("-fx-background-color:green");
+		btnSave.setPadding(new Insets(10,10,10,10));
+		btnSave.setPrefWidth(120);
+		btnSave.setAlignment(Pos.CENTER);
+		
+		GridPane gpSecondPortion = new GridPane();
+		gpSecondPortion.add(lAddress, 0, 0);
+		gpSecondPortion.add(tAddress, 0, 1);
+		gpSecondPortion.add(lDateOfBirth, 0, 2);
+		gpSecondPortion.add(hbDateOfBirth, 0, 3);
+		gpSecondPortion.add(lPassword, 0, 4);
+		gpSecondPortion.add(tPassword, 0, 5);
+		gpSecondPortion.add(lUploadPhoto, 0, 6);
+		gpSecondPortion.add(btnUploadPhoto, 0, 7);
+		gpSecondPortion.add(btnSave, 0, 8);
+		gpSecondPortion.setVgap(20);
+		gpSecondPortion.setPadding(new Insets(20,30,20,30));
+		gpSecondPortion.setStyle("-fx-background-color:white");
+		gpSecondPortion.setPrefWidth(450);
+		
+		VBox vbSecondPortion = new VBox();
+		vbSecondPortion.getChildren().addAll(hbSecondPortion,gpSecondPortion);
+		vbSecondPortion.setSpacing(5);
+		
+		HBox hbPortionContainer = new HBox();
+		hbPortionContainer.getChildren().addAll(vbFirstPortion,vbSecondPortion);
+		hbPortionContainer.setSpacing(20);
+		
+		vbAddMemberView.getChildren().addAll(vbMembersTitleView,hbPortionContainer);
+		vbAddMemberView.setSpacing(30);
+		return vbAddMemberView;
+	}
+
+}

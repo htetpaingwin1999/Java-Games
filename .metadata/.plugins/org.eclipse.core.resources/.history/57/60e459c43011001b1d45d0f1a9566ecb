@@ -1,0 +1,6 @@
+package Database;
+
+public class Snippet {
+	public static BorderPane getSiginForm()
+		{}
+

@@ -1,0 +1,159 @@
+package Table;
+
+import java.util.Date;
+
+import List.StaffLists;
+import List.StaffLists;
+import View.AUDFineView;
+import View.AUDStaffView;
+import View.FineListsView;
+import View.StaffDataView;
+import View.MainView;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.util.Callback;
+
+public class StaffSalary {
+	private static ObservableList<StaffLists> datastaff = null;
+	private static TableColumn staffID,staffName,addDate,salary,amount,note,adminID,adminName;
+	private static TableView tvSalryPayment;
+	public static TableView tvStaffLists()
+	{
+		tvSalryPayment	= new TableView<StaffLists>();
+		tvSalryPayment.setMaxWidth(Region.USE_PREF_SIZE);
+		tvSalryPayment.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+
+		staffID = new TableColumn("Staff ID");
+		staffID.setCellValueFactory(new PropertyValueFactory<>("StaffID"));
+		staffID.setPrefWidth(50);
+		staffID.getStyleClass().add("Times New Roman,20");
+
+		staffName=new TableColumn("Staff Name");
+		staffName.setCellValueFactory(new PropertyValueFactory<>("StaffName"));
+		staffName.setPrefWidth(100);
+        staffName.getStyleClass().add("Times New Roman,20");
+
+		addDate=new TableColumn("Add Date");
+		addDate.setCellValueFactory(new PropertyValueFactory<>("AddDate"));
+		addDate.setPrefWidth(70);
+        addDate.getStyleClass().add("Times New Roman,20");
+
+        salary=new TableColumn("Salary");
+		salary.setCellValueFactory(new PropertyValueFactory<>("Salary"));
+        salary.setPrefWidth(80);
+        salary.getStyleClass().add("Times New Roman,20");
+        
+        amount=new TableColumn("Amount");
+        amount.setCellValueFactory(new PropertyValueFactory<>("Amount"));
+        amount.setPrefWidth(70);
+        amount.getStyleClass().add("Times New Roman,20");
+
+		note=new TableColumn("Note");
+		note.setCellValueFactory(new PropertyValueFactory<>("Note"));
+		note.setPrefWidth(100);
+		note.getStyleClass().add("Times New Roman,20");
+		
+		adminName=new TableColumn("Admin Name");
+		adminName.setCellValueFactory(new PropertyValueFactory<>("AdminName"));
+		adminName.setPrefWidth(100);
+		adminName.getStyleClass().add("Times New Roman,20");
+		
+		adminID=new TableColumn("Admin ID");
+		adminID.setCellValueFactory(new PropertyValueFactory<>("AdminID"));
+		adminID.setPrefWidth(100);
+		adminID.getStyleClass().add("Times New Roman,20");
+		
+		TableColumn<StaffLists, Void> colActionBtn = new TableColumn("Action");
+
+        Callback<TableColumn<StaffLists, Void>, TableCell<StaffLists, Void>> cellHB = new Callback<TableColumn<StaffLists, Void>, TableCell<StaffLists, Void>>() {
+            @Override
+            public TableCell<StaffLists, Void> call(final TableColumn<StaffLists, Void> param) {
+                final TableCell<StaffLists, Void> cell = new TableCell<StaffLists, Void>() {
+
+                    private final Button btnUpdate = new Button("",new ImageView(new Image("Icon/Edit.png")));
+                    private final Button btnDelete = new Button("",new ImageView(new Image("Icon/Delete.png")));
+                    private final Button btnView = new Button("",new ImageView(new Image("Icon/eye.png")));
+                    private final Button btnPaid = new Button("",new ImageView(new Image("Icon/Paid.png")));
+                    private final Button btnFine = new Button("",new ImageView(new Image("Icon/Fine.png")));
+                    private final HBox hbBtnCon = new HBox();
+                    {
+                    	btnUpdate.setStyle("-fx-background-color:white");
+                    	btnDelete.setStyle("-fx-background-color:white");
+                    	btnView.setStyle("-fx-background-color:white");
+                    	btnPaid.setStyle("-fx-background-color:white");
+                    	btnFine.setStyle("-fx-background-color:white");
+
+                    	btnUpdate.setOnAction((ActionEvent event) -> {
+                            StaffLists data = getTableView().getItems().get(getIndex());
+                            
+            				MainView.vbWorkSpaceCon.getChildren().remove(MainView.vbWorkSpace);
+            				MainView.vbWorkSpace = AUDStaffView.vbAddStaffView(data.getStaffID()+"", data.getStaffName(), data.getJoinDate()+"", data.getGender(), data.getDateofBirth()+"", data.getPhoneNo(), data.getPresentAddress(), data.getPassword(), data.getSalary()+"", data.getDesignation(),2);
+            				MainView.vbWorkSpaceCon.getChildren().add(MainView.vbWorkSpace);
+            				MainView.lHome.setTextFill(Color.GREY);
+            				MainView.lHome.setTextFill(Color.GREY);
+            				MainView.lIndex.setText("Staff Lists");
+            				MainView.lIndex.setTextFill(Color.GREY);
+            				MainView.lIndex1.setTextFill(Color.BLACK);
+            				MainView.lIndex1.setText("Update Staff");        
+            				});
+                    	btnDelete.setOnAction((ActionEvent event) -> {
+                            StaffLists data = getTableView().getItems().get(getIndex());
+                        });
+                    	btnView.setOnAction((ActionEvent event) -> {
+                            StaffLists data = getTableView().getItems().get(getIndex());
+                            MainView.vbWorkSpaceCon.getChildren().remove(MainView.vbWorkSpace);
+            				MainView.vbWorkSpace = StaffDataView.vbStaffDataView(data.getStaffID()+"", data.getStaffName(), data.getJoinDate()+"", data.getGender(), data.getDateofBirth()+"", data.getPhoneNo(), data.getPresentAddress(), data.getPassword(), data.getDepartment(), data.getDesignation(), data.getSalary()+""); 
+            				MainView.vbWorkSpaceCon.getChildren().add(MainView.vbWorkSpace);
+            				MainView.lHome.setTextFill(Color.GREY);
+            				MainView.lHome.setTextFill(Color.GREY);
+            				MainView.lIndex.setText("Staff Lists");
+            				MainView.lIndex.setTextFill(Color.GREY);
+            				MainView.lIndex1.setTextFill(Color.BLACK);
+            				MainView.lIndex1.setText("Staff Data");                            
+                        });
+                    	btnFine.setOnAction((ActionEvent event) -> {
+                            StaffLists data = getTableView().getItems().get(getIndex());
+                            MainView.vbWorkSpaceCon.getChildren().remove(MainView.vbWorkSpace);
+                            MainView.vbWorkSpace = AUDFineView.vbAddFineView("", "", "", "", data.getStaffID()+"", data.getStaffName(),"1", 1);
+                            System.out.println("Need to change admin id line 130");
+                            
+                            MainView.vbWorkSpaceCon.getChildren().add(MainView.vbWorkSpace);
+            				MainView.lHome.setTextFill(Color.GREY);
+            				MainView.lIndex.setText("Staff Lists");
+            				MainView.lIndex.setTextFill(Color.GREY);
+            				MainView.lIndex1.setTextFill(Color.BLACK);
+            				MainView.lIndex1.setText("Add Fine");                            
+                        });
+                    	hbBtnCon.getChildren().addAll(btnView,btnUpdate,btnPaid,btnFine,btnDelete);
+                    	hbBtnCon.setSpacing(5);
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(hbBtnCon);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        colActionBtn.setCellFactory(cellHB);
+		tvSalryPayment.getColumns().addAll(staffID,staffName,addDate,salary,amount,note,adminID,adminName,colActionBtn);
+		tvSalryPayment.setPrefSize(1200,558);
+		return tvSalryPayment;
+	}
+}

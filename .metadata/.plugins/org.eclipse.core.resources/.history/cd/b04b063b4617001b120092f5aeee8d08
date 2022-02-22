@@ -1,0 +1,55 @@
+package View;
+
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class BookIssuesPanel {
+
+	public static VBox vbBookIssuesPanel(boolean isClick)
+	{
+		
+		VBox vbBookIssuesPanel = new VBox();
+
+		Image imgBookIssues = new Image("issuessolve.png");
+
+		Button btnBookIssues = new Button("Issued Books",new ImageView(imgBookIssues));
+		btnBookIssues.setStyle("-fx-background-color:#00BFFF;");
+		btnBookIssues.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnBookIssues.setMinWidth(320);	
+		btnBookIssues.setTextFill(Color.BLACK);
+		btnBookIssues.setPadding(new Insets(10,10,10,-63));
+				
+		Image imgAddBookIssues = new Image("add.png");
+		Button btnAddBookIssues = new Button("Add New Book Issues",new ImageView(imgAddBookIssues));
+		btnAddBookIssues.setStyle("-fx-background-color:#87CEFA;");
+		btnAddBookIssues.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddBookIssues.setMaxWidth(320);	
+		btnAddBookIssues.setTextFill(Color.BLACK);
+		btnAddBookIssues.setPadding(new Insets(10,10,10,45));
+		
+		
+		Image imgBookIssuesLists = new Image("list.png");
+		Button btnBookIssuesLists = new Button("Issued Books Lists",new ImageView(imgBookIssuesLists));
+		btnBookIssuesLists.setStyle("-fx-background-color:#87CEFA;");
+		btnBookIssuesLists.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnBookIssuesLists.setMinWidth(320);	
+		btnBookIssuesLists.setTextFill(Color.BLACK);
+		btnBookIssuesLists.setPadding(new Insets(10,10,10,25));
+		
+		vbBookIssuesPanel.getChildren().add(btnBookIssues);
+			if(isClick == true)
+			{
+				vbBookIssuesPanel.getChildren().clear();
+				vbBookIssuesPanel.getChildren().addAll(btnBookIssues,btnAddBookIssues,btnBookIssuesLists);
+			}
+			return vbBookIssuesPanel;	
+	}
+}

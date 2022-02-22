@@ -1,0 +1,100 @@
+package View;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class MembersPanel {
+	public static VBox vbMembersPanel(boolean isClick)
+	{
+		
+		VBox vbMembersPanel = new VBox();
+
+		Image imgMembers = new Image("member.png");
+
+		Button btnMembers = new Button("Members",new ImageView(imgMembers));
+		btnMembers.setStyle("-fx-background-color:#00BFFF;");
+		btnMembers.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnMembers.setMinWidth(290);	
+		btnMembers.setTextFill(Color.BLACK);
+		btnMembers.setAlignment(Pos.CENTER_LEFT);
+		btnMembers.setPadding(new Insets(7,0,7,20));
+		
+		
+		Image imgAddMembers = new Image("add.png");
+		Button btnAddMembers = new Button("Add New Member",new ImageView(imgAddMembers));
+		btnAddMembers.setStyle("-fx-background-color:#87CEFA;");
+		btnAddMembers.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddMembers.setMaxWidth(290);	
+		btnAddMembers.setTextFill(Color.BLACK);
+		btnAddMembers.setAlignment(Pos.CENTER_LEFT);
+		btnAddMembers.setPadding(new Insets(7,0,7,50));			
+		
+		Image imgMembersLists = new Image("list.png");
+		Button btnMembersLists = new Button("Member Lists",new ImageView(imgMembersLists));
+		btnMembersLists.setStyle("-fx-background-color:#87CEFA;");
+		btnMembersLists.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnMembersLists.setMinWidth(290);	
+		btnMembersLists.setTextFill(Color.BLACK);
+		btnMembersLists.setAlignment(Pos.CENTER_LEFT);
+		btnMembersLists.setPadding(new Insets(7,0,7,50));	
+		
+		Image imgNewMembers = new Image("list.png");
+		Button btnNewMembers = new Button("New Members",new ImageView(imgNewMembers));
+		btnNewMembers.setStyle("-fx-background-color:#87CEFA;");
+		btnNewMembers.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnNewMembers.setMinWidth(290);	
+		btnNewMembers.setTextFill(Color.BLACK);
+		btnNewMembers.setAlignment(Pos.CENTER_LEFT);
+		btnNewMembers.setPadding(new Insets(7,0,7,50));	
+		
+		vbMembersPanel.getChildren().add(btnMembers);
+			if(isClick == true)
+			{
+			    vbMembersPanel.getChildren().clear();
+			    vbMembersPanel.getChildren().addAll(btnMembers,btnAddMembers,btnMembersLists,btnNewMembers);
+			}
+			
+		return vbMembersPanel;		
+	}
+	public static VBox vbMemberTitleView()
+	{
+		VBox vbMemberTitleView = new VBox();
+		
+		Label lTitle = new Label("Welcome to Dashboard");
+		lTitle.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,25));
+		
+		Label lIndex = new Label("Dashboard");
+		lIndex.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		lIndex.setTextFill(Color.GREY);
+		
+		Label lIndex = new Label("Dashboard");
+		lIndex.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		lIndex.setTextFill(Color.GREY);
+		
+		HBox hbIndex = new HBox();
+		hbIndex.getChildren().add(lIndex);
+		
+		VBox vbTitle = new VBox();
+		vbTitle.getChildren().addAll(lTitle,hbIndex);
+		vbTitle.setSpacing(20);
+		
+		vbMemberTitleView.getChildren().addAll(vbTitle);
+		return vbMemberTitleView;
+	}
+	public static VBox vbMemberView()
+	{
+		VBox vbMemberView = new VBox();
+		
+		return vbMemberView;
+	}
+}

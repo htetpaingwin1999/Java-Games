@@ -1,0 +1,4 @@
+.bgTest
+{
+	-fx-background-color:red
+}

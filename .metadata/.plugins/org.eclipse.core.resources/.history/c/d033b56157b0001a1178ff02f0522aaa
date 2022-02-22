@@ -1,0 +1,24 @@
+package Handler;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class StudentSectionHandler {
+	public static void AddNewStudentSection(int studentID,int sectionID))
+	{
+		
+		String q = "insert into studentsection (StudentID,SectionID,AddDate) VALUES (?,?,now())";
+		try {
+			Connection con = DBConnection.openConnection();
+			PreparedStatement ps =con.prepareStatement(q);
+			 ps.setInt(1, studentID);
+			 ps.setInt(2, sectionID);
+			 ps.executeUpdate();  
+			 con.close();
+		} catch (SQLException e) {
+				e.printStackTrace();
+		}
+		
+	}
+}

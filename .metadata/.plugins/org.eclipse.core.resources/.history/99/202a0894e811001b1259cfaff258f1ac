@@ -1,0 +1,57 @@
+package View;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+public class LogIn extends Application{
+	private static BorderPane bpMainView;
+
+	public static void main(String[] args) {
+		Application.launch(args);
+	}
+
+	public static BorderPane bpGetBackgroundImage()
+	{
+		BorderPane bpLoginForm = new BorderPane();
+		bpLoginForm.setStyle("-fx-background-image: url(\"book.jpg\");" + 
+				"    -fx-background-repeat: stretch;" + 
+				"    -fx-background-size: 1350 700;" + 
+				"    -fx-background-position: center center;"); 
+		
+//		VBox vbUpper = vbUpper("MIIT");
+		
+		bpLoginForm.setCenter(vbUpper);
+		
+		return bpLoginForm;
+	}
+	
+	public static VBox  vbUpper(String libraryName)
+	{
+		VBox vbUpper = new VBox();
+		
+		VBox vbLeft = new VBox();
+//		vbLeft.setStyle("-fx-background-image: url(\"bookicon.jpg\")");
+		vbLeft.setMaxWidth(200);vbLeft.setMaxHeight(200);
+		
+		Text t = new Text();
+		t.setText(libraryName);
+//		t.setStyle("-fx-font: 1.2rem Tahoma;");
+		t.setFill(Color.BLUE);
+		
+		return vbUpper;
+	}
+	public void start(Stage arg0) throws Exception {
+		Stage myStage = new Stage();
+		bpMainView = bpGetBackgroundImage();
+		Scene scene = new Scene(bpMainView, 1350, 700);
+	    scene.getStylesheets().addAll(this.getClass().getResource("myStyle.css").toExternalForm());
+	    myStage.setScene(scene);
+		myStage.show();
+	}
+
+}

@@ -1,0 +1,131 @@
+package AccountAndPasswordPK;
+
+import List.AccountList;
+import Table.AccountTable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class UpdateAccount {
+	private static VBox vbGetAdmitForm;
+	private static TableView tvAccount;
+	private static GridPane gpUserInput;
+	private static HBox hb,hbButtonContainer;
+	private static Button btnApply;
+	private static Label lID,lName,lPassword;
+	private static RadioButton rbActivate,rbDeactivate;
+	private static TextField tID,tName,tPassword;
+	private static Button btnLoadActivateAccount,btnLoadDeactivateAccount,btnSearch;
+	private static TextField tSearch;
+	private static ObservableList<AccountList> dataAccount;
+	public static VBox vbGetAccountForm()
+	{
+		vbGetAdmitForm = new VBox();
+		tvAccount = new AccountTable().GetAccountTable();
+		dataAccount = FXCollections.observableArrayList(Handler.AccountHandler.GetAllAccount(1));
+		tvAccount.setItems(dataAccount);
+		
+		lID = new Label("User-ID");
+		lID.setFont(Font.font("Time New Roman",FontWeight.BOLD,FontPosture.REGULAR,15));
+		
+		tID = new TextField();
+		tID.setFont(Font.font("Time New Roman",FontWeight.BOLD,FontPosture.REGULAR,15));
+		
+		lName = new Label("User-Name");
+		lName.setFont(Font.font("Time New Roman",FontWeight.BOLD,FontPosture.REGULAR,15));
+		
+		tName = new TextField();
+		tName.setFont(Font.font("Time New Roman",FontWeight.BOLD,FontPosture.REGULAR,15));
+	
+		lPassword = new Label("Password");
+		lPassword.setFont(Font.font("Time New Roman",FontWeight.BOLD,FontPosture.REGULAR,15));
+		
+		tPassword = new TextField();
+		tPassword.setFont(Font.font("Time New Roman",FontWeight.BOLD,FontPosture.REGULAR,15));
+		
+		rbActivate = new RadioButton("Activate");
+		
+		rbDeactivate = new RadioButton("Deactivate");
+		
+		tSearch = new TextField();
+		tSearch.setPromptText("Type User ID");
+
+		btnApply = new Button("Apply");
+		btnApply.setFont(Font.font("Time New Roman",FontWeight.BOLD,FontPosture.REGULAR,15));
+		btnApply.setTextFill(Color.WHITE);
+		btnApply.setStyle("-fx-background-color:orange");
+		btnApply.setPrefWidth(250);
+				
+		btnLoadActivateAccount = new Button("Load Activate Account");
+		btnLoadActivateAccount.setFont(Font.font("Time New Roman",FontWeight.BOLD,FontPosture.REGULAR,15));
+		btnLoadActivateAccount.setTextFill(Color.WHITE);
+		btnLoadActivateAccount.setStyle("-fx-background-color:green");
+		btnLoadActivateAccount.setPrefWidth(250);
+		
+		btnSearch = new Button("Search");
+		btnSearch.setFont(Font.font("Time New Roman",FontWeight.BOLD,FontPosture.REGULAR,15));
+		btnSearch.setTextFill(Color.WHITE);
+		btnSearch.setStyle("-fx-background-color:green");
+		btnSearch.setPrefWidth(250);
+		
+		hbButtonContainer = new HBox();
+		hbButtonContainer.getChildren().addAll(tSearch,btnSearch,btnLoadActivateAccount);
+		hbButtonContainer.setSpacing(20);
+		
+		gpUserInput = new GridPane();
+		gpUserInput.add(lID, 0, 0);
+		gpUserInput.add(tID, 1, 0);
+		gpUserInput.add(lName, 0, 1);
+		gpUserInput.add(tName, 1, 1);
+		gpUserInput.add(lPassword, 0, 2);
+		gpUserInput.add(tPassword, 1, 2);
+		gpUserInput.add(rbActivate, 0, 3);
+		gpUserInput.add(rbDeactivate, 1, 3);
+		gpUserInput.add(btnApply, 1, 4);
+		gpUserInput.setHgap(20);
+		gpUserInput.setVgap(20);	
+		
+		hb = new HBox();
+		hb.getChildren().addAll(gpUserInput,tvAccount);
+		hb.setSpacing(100);
+		
+		vbGetAdmitForm.getChildren().addAll(hbButtonContainer,hb);
+		vbGetAdmitForm.setSpacing(20);
+		
+		tvAccount.setOnMouseClicked(e->{
+			int index = tvAccount.getSelectionModel().getSelectedIndex();
+			AccountList ac = dataAccount.get(index);
+			tID.setText(ac.getId());tID.setEditable(false);
+			tName.setText(ac.getName());tName.setEditable(false);
+			tPassword.setText(ac.getPassword());tPassword.setEditable(false);
+			if(ac.getActivate().equals("1"))
+			{
+				rbActivate.setSelected(true);
+				rbDeactivate.setSelected(false);
+			}
+			else
+			{
+				rbActivate.setSelected(false);
+				rbDeactivate.setSelected(true);
+			}
+		});
+		btnApply.setOnAction(e->{
+			if(rbActivate.isSelected())
+			{
+				Handler.AccountHandler.ActivateAndDeactivateAccount(1, tID.getText(), tPassword.getText());
+			}
+		});
+		return vbGetAdmitForm;
+	}
+}

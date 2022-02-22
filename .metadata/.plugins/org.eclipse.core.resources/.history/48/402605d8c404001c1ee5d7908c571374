@@ -1,0 +1,13 @@
+package Main;
+
+import javafx.scene.Scene;
+
+public class GameController {
+	 private Scene gameScene;
+	 private Game  game;
+	 
+	 GameController() {
+		    newGame();
+	 }
+
+}

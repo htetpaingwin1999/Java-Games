@@ -1,0 +1,134 @@
+package View;
+
+import javax.print.DocFlavor.URL;
+
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+
+public class LogIn extends Application{
+	public static Stage myStage;
+
+	public static void main(String[] args) {
+		Application.launch(args);
+	}
+
+	public static VBox vbLoginView()
+	{
+		VBox vbLoginView = new VBox();
+		vbLoginView.setStyle(" -fx-background-image: url(\"book.jpg\");" + 
+				"    -fx-background-repeat: stretch;" + 
+				"    -fx-background-size: 1350 720;" );
+		
+		VBox vbLoginDesign = new VBox();
+		
+		VBox vbLoginForm = vbLoginForm();
+		vbLoginForm.setPadding(new Insets(20,0,20,0));
+		vbLoginForm.setStyle("-fx-background-color:white;");
+		vbLoginForm.setAlignment(Pos.CENTER);
+
+		vbLoginDesign.getChildren().add(vbLoginForm);
+		vbLoginDesign.setStyle("-fx-border-radius:10px;-fx-border-color:white;-fx-border-width:10px;");
+
+		vbLoginView.getChildren().add(vbLoginDesign);
+		vbLoginView.setPadding(new Insets(400,400,10,400));
+		return vbLoginView;
+	}
+	
+	private static VBox vbLoginForm()
+	{
+		VBox vbLoginForm = new VBox();
+		vbLoginForm.setMaxWidth(600);
+		
+		TextField tid = new TextField();
+		tid.setFont(Font.font("Lucida Fax",FontWeight.BOLD,FontPosture.REGULAR,15));
+		tid.setPromptText("Type your identity number");
+		tid.setStyle("-fx-background-color:white");
+		tid.setStyle("-fx-bottom-border-color:grey");
+		tid.setMaxWidth(450);
+		tid.setOnMouseClicked(e->{
+			tid.setStyle("-fx-bottom-border-color:blue");
+		});
+		tid.setOnMouseDragExited(e->{
+			tid.setStyle("-fx-background-color:grey");
+		});
+		
+		PasswordField ppassword = new PasswordField();
+		ppassword.setFont(Font.font("Lucida Fax",FontWeight.BOLD,FontPosture.REGULAR,15));
+		ppassword.setPromptText("Type Password");
+		ppassword.setStyle("-fx-background-color:white");
+		ppassword.setStyle("-fx-bottom-border-color:grey");
+		ppassword.setMaxWidth(450);
+		
+		ppassword.setOnMouseClicked(e->{
+			tid.setStyle("-fx-bottom-border-color:blue");
+		});
+		ppassword.setOnMouseDragExited(e->{
+			tid.setStyle("-fx-background-color:grey");
+		});
+		
+		Button btnLogin = new Button("Login");
+		btnLogin.setFont(Font.font("Lucida Fax",FontWeight.BOLD,FontPosture.REGULAR,15));
+		btnLogin.setTextFill(Color.WHITE);
+		btnLogin.setStyle("-fx-background-color:orange;");
+		btnLogin.setPrefWidth(450);
+		
+		btnLogin.setOnAction(e->{
+			//Alert al = new Alert(AlertType.WARNING,"Please input miss match");
+		//	al.showAndWait();
+			myStage.setScene(new Scene(MainView.vbMainView(), 1350, 700));
+			myStage.show();
+		});
+		
+		Label lOr = new Label("Or");
+		lOr.setFont(Font.font("Lucida Fax",FontWeight.BOLD,FontPosture.REGULAR,15));
+		lOr.setAlignment(Pos.CENTER);
+
+		Button btnCreate = new Button("Login");
+		btnCreate.setFont(Font.font("Lucida Fax",FontWeight.BOLD,FontPosture.REGULAR,15));
+		btnCreate.setTextFill(Color.WHITE);
+		btnCreate.setStyle("-fx-background-color:green;");
+		btnCreate.setPrefWidth(450);
+		
+		URL url = View.LogIn.myStage.getClass().getResource("/drawIcon.png");
+		Image image = ImageIO.read(url);
+
+		
+		vbLoginForm.getChildren().addAll(tid,ppassword,btnLogin);
+		vbLoginForm.setSpacing(20);
+		return vbLoginForm;
+	}
+	
+	private static VBox vbLoginForm(String libraryName)
+	{
+		VBox vbLoginForm = new VBox();
+		vbLoginForm.setStyle("-fx-background-image: url(\"bookicon.jpg\");-fx-background-repeat:no-repeat");
+		return vbLoginForm;
+	}
+	public void start(Stage arg0) throws Exception {
+		myStage = new Stage();
+	    myStage.setScene(new Scene(vbLoginView(), 1350, 700));
+		myStage.show();
+		myStage.setResizable(false);
+
+
+	}
+	
+
+}

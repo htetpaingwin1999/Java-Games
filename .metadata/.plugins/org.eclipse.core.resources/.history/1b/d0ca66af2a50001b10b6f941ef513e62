@@ -1,0 +1,131 @@
+package View;
+import Handler.AdminHandler;
+import Handler.StaffHandler;
+import List.AdminLists;
+import List.StaffLists;
+import Table.AdminTable;
+import Table.StaffTable;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.layout.BorderPane;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+public class StaffListsView {
+	private static VBox vbStaffListsView;
+	private static Label lTitle;
+	private static HBox hbTitleCon;
+	private static TableView tvStaff;
+	private static BorderPane bp;
+	private static TextField tStaffID;
+	private static TextField tStaffName;
+	private static TextField tStaffPosition;
+	private static Button btnRefresh;
+	private static HBox hbFilterCon;
+	private static Button btnAdd;
+	private static VBox vbStaffListsCon;
+	private static ObservableList<StaffLists> data;
+	private static StaffLists stl;
+	public static VBox vbStaffListsView()
+	{
+		vbStaffListsView = new VBox();
+		
+		lTitle = new Label("Staff Lists");
+		lTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,20));
+		
+		hbTitleCon = new HBox();
+		hbTitleCon.setPadding(new Insets(15,50,15,50));
+		hbTitleCon.setPrefSize(1080,50);
+		hbTitleCon.setStyle("-fx-background-color:white");
+		hbTitleCon.getChildren().add(lTitle);
+		
+		bp = new BorderPane();
+		
+		tStaffID = new TextField();
+		tStaffID.setPromptText("Staff ID");
+		tStaffID.setPrefHeight(50);
+
+		tStaffName = new TextField();
+		tStaffName.setPromptText("Staff Name");
+		tStaffName.setPrefHeight(50);
+
+		tStaffPosition = new TextField();
+		tStaffPosition.setPromptText("Staff Position");
+		tStaffPosition.setPrefHeight(50);
+
+		btnRefresh = new Button("",new ImageView(new Image("Icon/Refresh.png")));
+		btnRefresh.setStyle("-fx-background-color:white");
+
+		btnAdd = new Button("Add New Staff", new ImageView (new Image("Icon/Plus16.png")));
+		btnAdd.setFont(Font.font("Times New Roman", 18));
+		btnAdd.setPrefHeight(50);
+		btnAdd.setStyle("-fx-background-color:green");
+		btnAdd.setTextFill(Color.WHITE);
+		
+		hbFilterCon = new HBox();
+		hbFilterCon.getChildren().addAll(tStaffID,tStaffName,tStaffPosition,btnRefresh,btnAdd);
+		hbFilterCon.setSpacing(10);
+		
+		bp.setRight(hbFilterCon);
+		bp.setStyle("-fx-background-color:white");
+//		bp.setPadding(new Insets(10,10,10,0));
+		
+		StaffTable.tvStaffLists();
+		tvStaff = StaffTable.tvStaffLists();
+		data = FXCollections.observableArrayList(StaffHandler.GetAllStaff());
+		tvStaff.setItems(data);
+				
+		vbStaffListsCon = new VBox();
+		vbStaffListsCon.getChildren().addAll(bp,tvStaff);
+		vbStaffListsCon.setStyle("-fx-background-color:white");
+		vbStaffListsCon.setPadding(new Insets(10,10,10,10));
+		vbStaffListsCon.setSpacing(10);
+		
+		btnAdd.setOnAction(e->{
+			MainView.vbWorkSpaceCon.getChildren().remove(MainView.vbWorkSpace);
+			MainView.vbWorkSpace = AddStaffView.vbAddStaffView();
+			MainView.vbWorkSpaceCon.getChildren().add(MainView.vbWorkSpace);
+			MainView.lHome.setTextFill(Color.GREY);
+			MainView.lIndex.setText("Add New Staff");
+			MainView.lIndex.setTextFill(Color.BLACK);
+			System.out.println("Hey");
+		});
+		tvStaff.setOnMouseClicked(e->{
+			int index = tvStaff.getSelectionModel().getSelectedIndex();
+			if(index >=0)
+			{
+				stl = data.get(index);
+				MainView.vbWorkSpaceCon.getChildren().remove(MainView.vbWorkSpace);
+				MainView.vbWorkSpace = AdminDataView.vbAdminDataView(stl.getStaffID());
+				MainView.vbWorkSpaceCon.getChildren().add(MainView.vbWorkSpace);
+				MainView.lHome.setTextFill(Color.GREY);
+				MainView.lIndex.setText("Admin Data View");
+				MainView.lIndex.setTextFill(Color.BLACK);
+			}
+		});
+		vbStaffListsView.getChildren().addAll(hbTitleCon,vbStaffListsCon);
+		vbStaffListsView.setSpacing(5);
+		vbStaffListsView.setStyle("-fx-background-color:#f2f2f2");
+		vbStaffListsView.setPadding(new Insets(10,0,10,0));
+		return vbStaffListsView;
+	}
+}

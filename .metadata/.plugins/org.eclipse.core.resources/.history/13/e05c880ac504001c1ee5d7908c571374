@@ -1,0 +1,22 @@
+package Main;
+
+import javafx.scene.Scene;
+
+public class GameController {
+	 private Scene gameScene;
+	 private Game  game;
+	 
+	 GameController() {
+		    newGame();
+	 }
+
+	 public void newGame() {
+    game = new Game(this);
+
+    if (gameScene == null) {
+      gameScene = new Scene(game.getSkin());
+    } else {
+      gameScene.setRoot(game.getSkin());
+    }
+  }
+}

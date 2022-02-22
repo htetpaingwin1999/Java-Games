@@ -1,0 +1,18 @@
+package View;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class AdminView{
+	private static VBox vbAdminView;
+	private static Scene scAdminView;
+	public static Scene vbAdminView()
+	{
+		
+	}
+}

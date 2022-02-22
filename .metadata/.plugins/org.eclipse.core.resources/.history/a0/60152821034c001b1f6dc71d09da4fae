@@ -1,0 +1,754 @@
+package View;
+import javafx.application.Application;
+import javafx.scene.layout.BorderPane;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+public class MainView {
+	private static Label lWelcomeText;
+	private static ImageView imgUser;
+	private static BorderPane bpRightHeader;
+	private static Label lUserID;
+	private static HBox hbUser;
+	private static Menu menuAction;
+	private static MenuItem menuItemLogOut;
+	private static MenuItem menuItemSwitchAccount;
+	private static MenuBar menuBar;
+	
+	private static VBox vbMainView;
+	private static BorderPane bp;
+	private static VBox vbLeft;
+	private static VBox vbRight;
+	private static HBox hbHeader;
+	private static HBox hbFooter;
+	private static Label lClassName;
+	private static VBox vbClassNameCon;
+	private static ImageView imgIcon;
+	private static HBox hbImgIconCon;
+	private static Button btnDashboard;
+	private static Button btnCourseMain;
+	private static Button btnCourseExpand;
+	private static Button btnCourseLists;
+	private static Button btnAddCourse;
+	private static Button btnCourseActivity;
+	private static HBox hbCourseCon;
+	private static VBox vbCourseCon;
+	private static Boolean btnIsCourseExpand = false;
+	private static Button btnStaffMain;
+	private static Button btnStaffExpand;
+	private static Button btnStaffLists;
+	private static Button btnAddStaff;
+	private static Button btnPositionLists;
+	private static Button btnAddPosition;
+	private static HBox hbStaffCon;
+	private static VBox vbStaffCon;
+	private static Boolean btnIsStaffExpand = false;
+	private static Button btnSectionMain;
+	private static Button btnSectionExpand;
+	private static Button btnSectionLists;
+	private static Button btnAddSection;
+	private static HBox hbSectionCon;
+	private static VBox vbSectionCon;
+	private static Boolean btnIsSectionExpand = false;
+	private static Button btnStudentMain;
+	private static Button btnStudentExpand;
+	private static Button btnStudentLists;
+	private static Button btnAddStudent;
+	private static Button btnAttnedSectionLists;
+	private static Button btnAttendedLists;
+	private static Button btnStudentPaymentLists;
+	private static Button btnAddStudentPayment;
+	private static HBox hbStudentCon;
+	private static VBox vbStudentCon;
+	private static Boolean btnIsStudentExpand = false;
+	private static Button btnExpenseMain;
+	private static Button btnExpenseExpand;
+	private static Button btnExpenseLists;
+	private static Button btnAddExpense;
+	private static HBox hbExpenseCon;
+	private static VBox vbExpenseCon;
+	private static Boolean btnIsExpenseExpand = false;
+	private static Button btnReport;
+	public static VBox vbWorkSpaceCon;
+	public static VBox vbWorkSpace;
+	public static Label lHome;
+	public static Label lIndex;
+	public static HBox hbIndexCon;
+	
+	public static VBox vbMainView()
+	{
+		vbMainView = new VBox();
+				
+		bp = new BorderPane();
+		bp.setPrefSize(1366, 750);
+		
+		vbLeft = new VBox();
+		vbLeft.setPrefSize(266, 750);
+		vbLeft.setStyle("-fx-background-color:#454545");
+		
+		lClassName = new Label("Allin1");
+		lClassName.setFont(Font.font("Times New Roman", FontWeight.BOLD,FontPosture.REGULAR,30));
+		lClassName.setTextFill(Color.WHITE);
+		
+		vbClassNameCon = new VBox();
+		vbClassNameCon.setPrefHeight(72);
+		vbClassNameCon.setPadding(new Insets(21,10,21,20));
+		vbClassNameCon.setStyle("-fx-background-color:orange");
+		vbClassNameCon.getChildren().addAll(lClassName);
+		vbClassNameCon.setSpacing(3);
+		
+		btnDashboard = new Button("  Dashboard",new ImageView(new Image("Icon/Home.png")));
+		btnDashboard.setStyle("-fx-background-color:#454545");
+		btnDashboard.setPadding(new Insets(5,0,5,30));
+		btnDashboard.setTextFill(Color.WHITE);
+		btnDashboard.setFont(Font.font("Times New Roman", 15));
+		btnDashboard.setAlignment(Pos.CENTER_LEFT);
+		
+		btnCourseMain = new Button("    Course",new ImageView(new Image("Icon/Course.png")));
+		btnCourseMain.setStyle("-fx-background-color:#454545");
+		btnCourseMain.setPadding(new Insets(5,0,5,30));
+		btnCourseMain.setTextFill(Color.WHITE);
+		btnCourseMain.setFont(Font.font("Times New Roman", 15));
+		btnCourseMain.setPrefWidth(200);
+		btnCourseMain.setAlignment(Pos.CENTER_LEFT);
+
+		btnCourseExpand = new Button("",new ImageView(new Image("Icon/Expand.png")));
+		btnCourseExpand.setStyle("-fx-background-color:#454545");
+		btnCourseExpand.setPrefWidth(66);
+	
+		btnCourseLists = new Button("    Course Lists",new ImageView(new Image("Icon/CO.png")));
+		btnCourseLists.setStyle("-fx-background-color:#454545");
+		btnCourseLists.setPadding(new Insets(5,0,5,50));
+		btnCourseLists.setTextFill(Color.WHITE);
+		btnCourseLists.setFont(Font.font("Times New Roman", 15));
+		btnCourseLists.setPrefWidth(266);
+		btnCourseLists.setAlignment(Pos.CENTER_LEFT);
+		
+		btnAddCourse = new Button("    Add New Course",new ImageView(new Image("Icon/CO.png")));
+		btnAddCourse.setStyle("-fx-background-color:#454545");
+		btnAddCourse.setPadding(new Insets(5,0,5,50));
+		btnAddCourse.setTextFill(Color.WHITE);
+		btnAddCourse.setFont(Font.font("Times New Roman", 15));
+		btnAddCourse.setPrefWidth(266);
+		btnAddCourse.setAlignment(Pos.CENTER_LEFT);
+		
+		btnCourseActivity = new Button("    Course History",new ImageView(new Image("Icon/CO.png")));
+		btnCourseActivity.setStyle("-fx-background-color:#454545");
+		btnCourseActivity.setPadding(new Insets(5,0,5,50));
+		btnCourseActivity.setTextFill(Color.WHITE);
+		btnCourseActivity.setFont(Font.font("Times New Roman", 15));
+		btnCourseActivity.setPrefWidth(266);
+		btnCourseActivity.setAlignment(Pos.CENTER_LEFT);
+		
+		btnReport = new Button("  Report",new ImageView(new Image("Icon/Report.png")));
+		btnReport.setStyle("-fx-background-color:#454545");
+		btnReport.setPadding(new Insets(5,0,5,30));
+		btnReport.setTextFill(Color.WHITE);
+		btnReport.setFont(Font.font("Times New Roman", 15));
+		btnReport.setAlignment(Pos.CENTER_LEFT);
+		
+		hbCourseCon = new HBox();
+		hbCourseCon.getChildren().addAll(btnCourseMain,btnCourseExpand);
+		hbCourseCon.setSpacing(0);
+		
+		vbCourseCon = new VBox();
+		vbCourseCon.getChildren().add(hbCourseCon);
+		vbCourseCon.setSpacing(5);
+		
+		btnStaffMain = new Button("    Staff",new ImageView(new Image("Icon/Teacher.png")));
+		btnStaffMain.setStyle("-fx-background-color:#454545");
+		btnStaffMain.setPadding(new Insets(5,0,5,30));
+		btnStaffMain.setTextFill(Color.WHITE);
+		btnStaffMain.setFont(Font.font("Times New Roman", 15));
+		btnStaffMain.setPrefWidth(200);
+		btnStaffMain.setAlignment(Pos.CENTER_LEFT);
+
+		btnStaffExpand = new Button("",new ImageView(new Image("Icon/Expand.png")));
+		btnStaffExpand.setStyle("-fx-background-color:#454545");
+		btnStaffExpand.setPrefWidth(66);
+	
+		btnStaffLists = new Button("    Staff Lists",new ImageView(new Image("Icon/CO.png")));
+		btnStaffLists.setStyle("-fx-background-color:#454545");
+		btnStaffLists.setPadding(new Insets(5,0,5,50));
+		btnStaffLists.setTextFill(Color.WHITE);
+		btnStaffLists.setFont(Font.font("Times New Roman", 15));
+		btnStaffLists.setPrefWidth(266);
+		btnStaffLists.setAlignment(Pos.CENTER_LEFT);
+		
+		btnAddStaff = new Button("    Add New Staff",new ImageView(new Image("Icon/CO.png")));
+		btnAddStaff.setStyle("-fx-background-color:#454545");
+		btnAddStaff.setPadding(new Insets(5,0,5,50));
+		btnAddStaff.setTextFill(Color.WHITE);
+		btnAddStaff.setFont(Font.font("Times New Roman", 15));
+		btnAddStaff.setPrefWidth(266);
+		btnAddStaff.setAlignment(Pos.CENTER_LEFT);
+		
+		btnPositionLists = new Button("    Position Lists",new ImageView(new Image("Icon/CO.png")));
+		btnPositionLists.setStyle("-fx-background-color:#454545");
+		btnPositionLists.setPadding(new Insets(5,0,5,50));
+		btnPositionLists.setTextFill(Color.WHITE);
+		btnPositionLists.setFont(Font.font("Times New Roman", 15));
+		btnPositionLists.setPrefWidth(266);
+		btnPositionLists.setAlignment(Pos.CENTER_LEFT);
+		
+		btnAddPosition = new Button("    Add New Position",new ImageView(new Image("Icon/CO.png")));
+		btnAddPosition.setStyle("-fx-background-color:#454545");
+		btnAddPosition.setPadding(new Insets(5,0,5,50));
+		btnAddPosition.setTextFill(Color.WHITE);
+		btnAddPosition.setFont(Font.font("Times New Roman", 15));
+		btnAddPosition.setPrefWidth(266);
+		btnAddPosition.setAlignment(Pos.CENTER_LEFT);
+				
+		hbStaffCon = new HBox();
+		hbStaffCon.getChildren().addAll(btnStaffMain,btnStaffExpand);
+		hbStaffCon.setSpacing(0);
+		
+		vbStaffCon = new VBox();
+		vbStaffCon.getChildren().add(hbStaffCon);
+		vbStaffCon.setSpacing(5);
+		
+		btnSectionMain = new Button("    Section",new ImageView(new Image("Icon/Time.png")));
+		btnSectionMain.setStyle("-fx-background-color:#454545");
+		btnSectionMain.setPadding(new Insets(5,0,5,30));
+		btnSectionMain.setTextFill(Color.WHITE);
+		btnSectionMain.setFont(Font.font("Times New Roman", 15));
+		btnSectionMain.setPrefWidth(200);
+		btnSectionMain.setAlignment(Pos.CENTER_LEFT);
+
+		btnSectionExpand = new Button("",new ImageView(new Image("Icon/Expand.png")));
+		btnSectionExpand.setStyle("-fx-background-color:#454545");
+		btnSectionExpand.setPrefWidth(66);
+	
+		btnSectionLists = new Button("    Section Lists",new ImageView(new Image("Icon/CO.png")));
+		btnSectionLists.setStyle("-fx-background-color:#454545");
+		btnSectionLists.setPadding(new Insets(5,0,5,50));
+		btnSectionLists.setTextFill(Color.WHITE);
+		btnSectionLists.setFont(Font.font("Times New Roman", 15));
+		btnSectionLists.setPrefWidth(266);
+		btnSectionLists.setAlignment(Pos.CENTER_LEFT);
+		
+		btnAddSection = new Button("    Add New Section",new ImageView(new Image("Icon/CO.png")));
+		btnAddSection.setStyle("-fx-background-color:#454545");
+		btnAddSection.setPadding(new Insets(5,0,5,50));
+		btnAddSection.setTextFill(Color.WHITE);
+		btnAddSection.setFont(Font.font("Times New Roman", 15));
+		btnAddSection.setPrefWidth(266);
+		btnAddSection.setAlignment(Pos.CENTER_LEFT);
+	
+		hbSectionCon = new HBox();
+		hbSectionCon.getChildren().addAll(btnSectionMain,btnSectionExpand);
+		hbSectionCon.setSpacing(0);
+		
+		vbSectionCon = new VBox();
+		vbSectionCon.getChildren().add(hbSectionCon);
+		vbSectionCon.setSpacing(5);
+		
+		btnStudentMain = new Button("    Students",new ImageView(new Image("Icon/Student.png")));
+		btnStudentMain.setStyle("-fx-background-color:#454545");
+		btnStudentMain.setPadding(new Insets(5,0,5,30));
+		btnStudentMain.setTextFill(Color.WHITE);
+		btnStudentMain.setFont(Font.font("Times New Roman", 15));
+		btnStudentMain.setPrefWidth(200);
+		btnStudentMain.setAlignment(Pos.CENTER_LEFT);
+
+		btnStudentExpand = new Button("",new ImageView(new Image("Icon/Expand.png")));
+		btnStudentExpand.setStyle("-fx-background-color:#454545");
+		btnStudentExpand.setPrefWidth(66);
+	
+		btnStudentLists = new Button("    Student Lists",new ImageView(new Image("Icon/CO.png")));
+		btnStudentLists.setStyle("-fx-background-color:#454545");
+		btnStudentLists.setPadding(new Insets(5,0,5,50));
+		btnStudentLists.setTextFill(Color.WHITE);
+		btnStudentLists.setFont(Font.font("Times New Roman", 15));
+		btnStudentLists.setPrefWidth(266);
+		btnStudentLists.setAlignment(Pos.CENTER_LEFT);
+		
+		btnAddStudent = new Button("    Add New Students",new ImageView(new Image("Icon/CO.png")));
+		btnAddStudent.setStyle("-fx-background-color:#454545");
+		btnAddStudent.setPadding(new Insets(5,0,5,50));
+		btnAddStudent.setTextFill(Color.WHITE);
+		btnAddStudent.setFont(Font.font("Times New Roman", 15));
+		btnAddStudent.setPrefWidth(266);
+		btnAddStudent.setAlignment(Pos.CENTER_LEFT);
+		
+		btnAttnedSectionLists = new Button("    Section Attended Lists",new ImageView(new Image("Icon/CO.png")));
+		btnAttnedSectionLists.setStyle("-fx-background-color:#454545");
+		btnAttnedSectionLists.setPadding(new Insets(5,0,5,50));
+		btnAttnedSectionLists.setTextFill(Color.WHITE);
+		btnAttnedSectionLists.setFont(Font.font("Times New Roman", 15));
+		btnAttnedSectionLists.setPrefWidth(266);
+		btnAttnedSectionLists.setAlignment(Pos.CENTER_LEFT);
+		
+		btnAttendedLists = new Button("    Attend New Section",new ImageView(new Image("Icon/CO.png")));
+		btnAttendedLists.setStyle("-fx-background-color:#454545");
+		btnAttendedLists.setPadding(new Insets(5,0,5,50));
+		btnAttendedLists.setTextFill(Color.WHITE);
+		btnAttendedLists.setFont(Font.font("Times New Roman", 15));
+		btnAttendedLists.setPrefWidth(266);
+		btnAttendedLists.setAlignment(Pos.CENTER_LEFT);
+		
+		btnStudentPaymentLists = new Button("    Student Payment Lists",new ImageView(new Image("Icon/CO.png")));
+		btnStudentPaymentLists.setStyle("-fx-background-color:#454545");
+		btnStudentPaymentLists.setPadding(new Insets(5,0,5,50));
+		btnStudentPaymentLists.setTextFill(Color.WHITE);
+		btnStudentPaymentLists.setFont(Font.font("Times New Roman", 15));
+		btnStudentPaymentLists.setPrefWidth(266);
+		btnStudentPaymentLists.setAlignment(Pos.CENTER_LEFT);
+		
+		btnAddStudentPayment = new Button("    Add New Payment",new ImageView(new Image("Icon/CO.png")));
+		btnAddStudentPayment.setStyle("-fx-background-color:#454545");
+		btnAddStudentPayment.setPadding(new Insets(5,0,5,50));
+		btnAddStudentPayment.setTextFill(Color.WHITE);
+		btnAddStudentPayment.setFont(Font.font("Times New Roman", 15));
+		btnAddStudentPayment.setPrefWidth(266);
+		btnAddStudentPayment.setAlignment(Pos.CENTER_LEFT);
+		
+		hbStudentCon = new HBox();
+		hbStudentCon.getChildren().addAll(btnStudentMain,btnStudentExpand);
+		hbStudentCon.setSpacing(0);
+		
+		vbStudentCon = new VBox();
+		vbStudentCon.getChildren().add(hbStudentCon);
+		vbStudentCon.setSpacing(5);
+		
+		btnExpenseMain = new Button("    Expense",new ImageView(new Image("Icon/Time.png")));
+		btnExpenseMain.setStyle("-fx-background-color:#454545");
+		btnExpenseMain.setPadding(new Insets(5,0,5,30));
+		btnExpenseMain.setTextFill(Color.WHITE);
+		btnExpenseMain.setFont(Font.font("Times New Roman", 15));
+		btnExpenseMain.setPrefWidth(200);
+		btnExpenseMain.setAlignment(Pos.CENTER_LEFT);
+
+		btnExpenseExpand = new Button("",new ImageView(new Image("Icon/Expand.png")));
+		btnExpenseExpand.setStyle("-fx-background-color:#454545");
+		btnExpenseExpand.setPrefWidth(66);
+	
+		btnExpenseLists = new Button("    Expense Lists",new ImageView(new Image("Icon/CO.png")));
+		btnExpenseLists.setStyle("-fx-background-color:#454545");
+		btnExpenseLists.setPadding(new Insets(5,0,5,50));
+		btnExpenseLists.setTextFill(Color.WHITE);
+		btnExpenseLists.setFont(Font.font("Times New Roman", 15));
+		btnExpenseLists.setPrefWidth(266);
+		btnExpenseLists.setAlignment(Pos.CENTER_LEFT);
+		
+		btnAddExpense = new Button("    Add New Expense",new ImageView(new Image("Icon/CO.png")));
+		btnAddExpense.setStyle("-fx-background-color:#454545");
+		btnAddExpense.setPadding(new Insets(5,0,5,50));
+		btnAddExpense.setTextFill(Color.WHITE);
+		btnAddExpense.setFont(Font.font("Times New Roman", 15));
+		btnAddExpense.setPrefWidth(266);
+		btnAddExpense.setAlignment(Pos.CENTER_LEFT);
+	
+		hbExpenseCon = new HBox();
+		hbExpenseCon.getChildren().addAll(btnExpenseMain,btnExpenseExpand);
+		hbExpenseCon.setSpacing(0);
+		
+		vbExpenseCon = new VBox();
+		vbExpenseCon.getChildren().add(hbExpenseCon);
+		vbExpenseCon.setSpacing(5);
+		
+		vbLeft.getChildren().addAll(vbClassNameCon,btnDashboard,vbCourseCon,vbStaffCon,vbSectionCon,vbStudentCon,vbExpenseCon,btnReport);
+		vbLeft.setSpacing(5);
+		
+		vbRight = new VBox();
+		vbRight.setPrefSize(1100, 750);
+		
+		bpRightHeader = bpRightHeader("");
+		bpRightHeader.setPrefHeight(72);
+		
+		vbWorkSpaceCon = new VBox();
+		vbWorkSpaceCon.setPrefSize(1100,678);
+//		vbWorkSpaceCon.setStyle("-fx-background-color:#b2b2b2");
+
+		lHome = new Label("Home");
+		lHome.setFont(Font.font("Times New Roman", 15));
+		lHome.setTextFill(Color.BLACK);
+
+		lIndex = new Label("");
+		lIndex.setFont(Font.font("Times New Roman", 15));
+		lIndex.setTextFill(Color.BLACK);
+		
+		hbIndexCon = new HBox();
+		hbIndexCon.getChildren().addAll(lHome,lIndex);
+		hbIndexCon.setPrefSize(1100, 40);	
+		hbIndexCon.setPadding(new Insets(12.5,0,12.5,20));
+		hbIndexCon.setSpacing(10);
+		
+		vbWorkSpace = DashboardView.vbDashboardView();
+		
+		vbWorkSpace.setPrefSize(1080,638);
+		
+		vbWorkSpaceCon.getChildren().addAll(hbIndexCon,vbWorkSpace);
+		vbWorkSpaceCon.setPadding(new Insets(10,20,10,20));
+		vbWorkSpaceCon.setSpacing(5);
+		
+		vbRight.getChildren().addAll(bpRightHeader,vbWorkSpaceCon);
+		
+		bp.setLeft(vbLeft);
+		bp.setRight(vbRight);
+		
+		btnDashboard.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = DashboardView.vbDashboardView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.BLACK);
+			lIndex.setText("");
+			lIndex.setTextFill(Color.WHITE);
+			vbCourseCon.getChildren().clear();
+			vbSectionCon.getChildren().clear();
+			vbStaffCon.getChildren().clear();
+			vbCourseCon.getChildren().addAll(hbCourseCon);
+			vbStaffCon.getChildren().addAll(hbStaffCon);
+			vbSectionCon.getChildren().addAll(hbSectionCon);
+			vbExpenseCon.getChildren().clear();
+			vbExpenseCon.getChildren().add(hbExpenseCon);
+			btnIsCourseExpand = false;
+			btnIsStaffExpand = false;
+			btnIsSectionExpand = false;
+			btnIsStudentExpand = false;
+			btnIsExpenseExpand = false;
+		});
+		btnCourseExpand.setOnAction(e->{
+			vbCourseCon.getChildren().clear();
+			vbCourseCon.getChildren().add(hbCourseCon);
+			vbStaffCon.getChildren().clear();
+			vbStaffCon.getChildren().add(hbStaffCon);
+			vbSectionCon.getChildren().clear();
+			vbSectionCon.getChildren().add(hbSectionCon);
+			vbSectionCon.getChildren().clear();
+			vbSectionCon.getChildren().add(hbSectionCon);
+			vbStudentCon.getChildren().clear();
+			vbStudentCon.getChildren().add(hbStudentCon);
+			vbExpenseCon.getChildren().clear();
+			vbExpenseCon.getChildren().add(hbExpenseCon);
+			if(btnIsCourseExpand == false)
+			{
+				vbCourseCon.getChildren().addAll(btnCourseLists,btnAddCourse);
+			}
+			btnIsCourseExpand = !btnIsCourseExpand;
+			btnIsStaffExpand = false;
+			btnIsSectionExpand = false;
+			btnIsStudentExpand = false;
+			btnIsExpenseExpand = false;
+		});
+		btnStaffExpand.setOnAction(e->{
+			vbCourseCon.getChildren().clear();
+			vbCourseCon.getChildren().add(hbCourseCon);
+			vbStaffCon.getChildren().clear();
+			vbStaffCon.getChildren().add(hbStaffCon);
+			vbSectionCon.getChildren().clear();
+			vbSectionCon.getChildren().add(hbSectionCon);
+			vbSectionCon.getChildren().clear();
+			vbSectionCon.getChildren().add(hbSectionCon);
+			vbStudentCon.getChildren().clear();
+			vbStudentCon.getChildren().add(hbStudentCon);
+			vbExpenseCon.getChildren().clear();
+			vbExpenseCon.getChildren().add(hbExpenseCon);
+			if(btnIsStaffExpand == false)
+			{
+				vbStaffCon.getChildren().addAll(btnStaffLists,btnAddStaff,btnPositionLists,btnAddPosition);
+			}
+			btnIsStaffExpand = !btnIsStaffExpand;
+			btnIsCourseExpand = false;
+			btnIsSectionExpand = false;
+			btnIsStudentExpand = false;
+			btnIsExpenseExpand = false;
+		});
+		btnSectionExpand.setOnAction(e->{
+			vbCourseCon.getChildren().clear();
+			vbCourseCon.getChildren().add(hbCourseCon);
+			vbStaffCon.getChildren().clear();
+			vbStaffCon.getChildren().add(hbStaffCon);
+			vbSectionCon.getChildren().clear();
+			vbSectionCon.getChildren().add(hbSectionCon);
+			vbSectionCon.getChildren().clear();
+			vbSectionCon.getChildren().add(hbSectionCon);
+			vbStudentCon.getChildren().clear();
+			vbStudentCon.getChildren().add(hbStudentCon);
+			vbExpenseCon.getChildren().clear();
+			vbExpenseCon.getChildren().add(hbExpenseCon);
+			if(btnIsSectionExpand == false)
+			{
+				vbSectionCon.getChildren().addAll(btnSectionLists,btnAddSection);
+			}
+			btnIsCourseExpand = false;
+			btnIsStaffExpand = false;
+			btnIsSectionExpand = !btnIsSectionExpand;
+			btnIsStudentExpand = false;
+			btnIsExpenseExpand = false;
+		});
+		btnStudentExpand.setOnAction(e->{
+			vbCourseCon.getChildren().clear();
+			vbCourseCon.getChildren().add(hbCourseCon);
+			vbStaffCon.getChildren().clear();
+			vbStaffCon.getChildren().add(hbStaffCon);
+			vbSectionCon.getChildren().clear();
+			vbSectionCon.getChildren().add(hbSectionCon);
+			vbSectionCon.getChildren().clear();
+			vbSectionCon.getChildren().add(hbSectionCon);
+			vbStudentCon.getChildren().clear();
+			vbStudentCon.getChildren().add(hbStudentCon);
+			vbExpenseCon.getChildren().clear();
+			vbExpenseCon.getChildren().add(hbExpenseCon);
+			if(btnIsStudentExpand == false)
+			{
+				vbStudentCon.getChildren().addAll(btnStudentLists,btnAddStudent,btnAttnedSectionLists,btnAttendedLists,btnStudentPaymentLists,btnAddStudentPayment);
+			}
+			btnIsCourseExpand = false;
+			btnIsStaffExpand = false;
+			btnIsSectionExpand = false;
+			btnIsStudentExpand = !btnIsStudentExpand;
+			btnIsExpenseExpand = false;
+		});
+		btnExpenseExpand.setOnAction(e->{
+			vbCourseCon.getChildren().clear();
+			vbCourseCon.getChildren().add(hbCourseCon);
+			vbStaffCon.getChildren().clear();
+			vbStaffCon.getChildren().add(hbStaffCon);
+			vbSectionCon.getChildren().clear();
+			vbSectionCon.getChildren().add(hbSectionCon);
+			vbSectionCon.getChildren().clear();
+			vbSectionCon.getChildren().add(hbSectionCon);
+			vbStudentCon.getChildren().clear();
+			vbStudentCon.getChildren().add(hbStudentCon);
+			vbExpenseCon.getChildren().clear();
+			vbExpenseCon.getChildren().add(hbExpenseCon);
+			if(btnIsExpenseExpand == false)
+			{
+				vbExpenseCon.getChildren().addAll(btnExpenseLists,btnAddExpense);
+			}
+			btnIsCourseExpand = false;
+			btnIsStaffExpand = false;
+			btnIsSectionExpand = false;
+			btnIsStudentExpand = false;
+			btnIsExpenseExpand = !btnIsExpenseExpand;
+		});
+		btnReport.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = ReportView.vbReportView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.BLACK);
+			lIndex.setText("");
+			lIndex.setTextFill(Color.WHITE);
+			vbCourseCon.getChildren().clear();
+			vbSectionCon.getChildren().clear();
+			vbStaffCon.getChildren().clear();
+			vbCourseCon.getChildren().addAll(hbCourseCon);
+			vbStaffCon.getChildren().addAll(hbStaffCon);
+			vbSectionCon.getChildren().addAll(hbSectionCon);
+			vbExpenseCon.getChildren().clear();
+			vbExpenseCon.getChildren().add(hbExpenseCon);
+			lIndex.setText("Add New Report");
+			lIndex.setTextFill(Color.BLACK);
+			btnIsCourseExpand = false;
+			btnIsStaffExpand = false;
+			btnIsSectionExpand = false;
+			btnIsStudentExpand = false;
+			btnIsExpenseExpand = false;
+		});
+		btnCourseLists.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = CourseListsView.vbCourseListsView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Course Lists");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		btnAddCourse.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = AddCourseView.vbAddCourseView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Add New Course");
+			lIndex.setTextFill(Color.BLACK);
+		});
+//		btnCourseActivity.setOnAction(e->{
+//			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+//			vbWorkSpace = CourseActivityView.vbCourseAcitivityView();
+//			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+//			lHome.setTextFill(Color.GREY);
+//			lIndex.setText("Add New Course");
+//			lIndex.setTextFill(Color.BLACK);
+//		});
+		btnStaffLists.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = StaffListsView.vbStaffListsView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Course Lists");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		btnAddStaff.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = AddStaffView.vbAddStaffView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Add New Staff");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		btnPositionLists.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = PositionListsView.vbPositionListsListsView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Position Lists");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		btnAddPosition.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = AddPositionView.vbAddPositionView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Add New Position");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		
+		btnSectionLists.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = SectionListsView.vbSectionListsView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Section Lists");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		btnAddSection.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = AddSectionView.vbAddSectionView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Add New Section");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		btnStudentLists.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = StudentListsView.vbStudentListsView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Section Lists");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		btnAddStudent.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = AddStudentView.vbAddStudentView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Add New Staff");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		btnAttnedSectionLists.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = StudentSectionListsView.vbStudentSectionListsView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Section Lists");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		btnAttendedLists.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = AddStudentSectionView.vbAddStudentSectionView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Add New Staff");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		btnStudentPaymentLists.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = StudentPaymentListsView.vbStudentPaymentListsView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Section Lists");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		btnAddStudentPayment.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = AddStudentPaymentView.vbAddStudentPaymentView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Add New Staff");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		lHome.setOnMouseClicked(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = DashboardView.vbDashboardView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.BLACK);
+			lIndex.setText("");
+			vbCourseCon.getChildren().clear();
+			vbCourseCon.getChildren().add(hbCourseCon);
+			vbStaffCon.getChildren().clear();
+			vbStaffCon.getChildren().add(hbStaffCon);
+		});
+		btnExpenseLists.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = ExpenseListsView.vbExpenseListsView();
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Expense Lists");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		btnAddExpense.setOnAction(e->{
+			vbWorkSpaceCon.getChildren().remove(vbWorkSpace);
+			vbWorkSpace = AddExpenseView.vbAddExpenseView(); 
+			vbWorkSpaceCon.getChildren().add(vbWorkSpace);
+			lHome.setTextFill(Color.GREY);
+			lIndex.setText("Add New Expense");
+			lIndex.setTextFill(Color.BLACK);
+		});
+		vbMainView.getChildren().addAll(bp);
+		return vbMainView;
+	}
+	private static BorderPane bpRightHeader(String userID)
+	{
+		BorderPane bpRightHeader = new BorderPane();
+		
+		lWelcomeText = new Label("Welcome To Brilliant Software Developer");
+		lWelcomeText.setFont(Font.font("Times New Roman", 20));
+		lWelcomeText.setTextFill(Color.BLUE);
+		imgUser = new ImageView(new Image("Icon/User24.png"));
+		
+		lUserID = new Label("BSDA-001");
+		lUserID.setFont(Font.font("Times New Roman", 15));
+		
+		menuAction = new Menu("",new ImageView(new Image("Icon/Expand.png")));
+		
+		menuItemLogOut = new MenuItem("Log Out");
+
+		menuItemSwitchAccount = new MenuItem("Switch Account");
+
+		menuAction.getItems().add(menuItemLogOut);
+		menuAction.getItems().add(menuItemSwitchAccount);
+
+		menuBar = new MenuBar();
+		menuBar.getMenus().add(menuAction);
+		menuBar.setStyle("-fx-background-color:white");
+		
+		hbUser = new HBox();
+		hbUser.getChildren().addAll(imgUser,lUserID,menuBar);
+		hbUser.setSpacing(5);
+		
+		bpRightHeader.setRight(hbUser);
+		bpRightHeader.setLeft(lWelcomeText);
+		bpRightHeader.setPadding(new Insets(26,0,26,20));
+		bpRightHeader.setStyle("-fx-background-color:white");
+		return bpRightHeader;
+	}
+}

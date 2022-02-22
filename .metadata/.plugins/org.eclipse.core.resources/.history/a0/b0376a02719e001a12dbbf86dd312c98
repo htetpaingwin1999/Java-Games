@@ -1,0 +1,70 @@
+package View;
+
+import javafx.application.Application;
+import javafx.stage.Stage;
+import javafx.animation.KeyFrame;
+import javafx.animation.KeyValue;
+import javafx.animation.Timeline;
+import javafx.application.Application;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.image.Image;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+
+public class SignIn extends Application {
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    public void start(Stage primaryStage) {
+
+        TabPane tabPane = new TabPane();
+
+        Label l1 = new Label("Name1");
+        Label l2 = new Label("Name2");
+        Label l3 = new Label("Name3");
+
+        VBox vb = new VBox();
+        
+        Tab tab1 = new Tab("Planes", vb);
+        Tab tab2 = new Tab("Cars"  , new Label("Show all cars available"));
+        Tab tab3 = new Tab("Boats" , new Label("Show all boats available"));
+
+        tabPane.getTabs().add(tab1);
+        tabPane.getTabs().add(tab2);
+        tabPane.getTabs().add(tab3);
+
+        VBox vBox = new VBox(tabPane);
+        Scene scene = new Scene(vBox);
+
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("JavaFX App");
+
+        primaryStage.show();
+    }
+}

@@ -1,0 +1,60 @@
+package View;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class NotesPanel {
+	public static VBox vbNotesPanel(boolean isClick)
+	{
+		
+		VBox vbNotesPanel = new VBox();
+
+		Image imgNotes = new Image("notes.png");
+
+		Button btnNotes = new Button("Notes",new ImageView(imgNotes));
+		btnNotes.setStyle("-fx-background-color:red;");
+		btnNotes.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnNotes.setMinWidth(320);	
+		btnNotes.setTextFill(Color.BLACK);
+		btnNotes.setAlignment(Pos.CENTER_LEFT);
+		btnNotes.setAlignment(Pos.CENTER_LEFT);
+		btnNotes.setPadding(new Insets(7,0,7,20));
+
+		Image imgAddNotes = new Image("add.png");
+		Button btnAddNotes = new Button("Add New Note",new ImageView(imgAddNotes));
+		btnAddNotes.setStyle("-fx-background-color:#87CEFA;");
+		btnAddNotes.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddNotes.setMaxWidth(320);	
+		btnAddNotes.setTextFill(Color.BLACK);
+		btnAddNotes.setAlignment(Pos.CENTER_LEFT);
+		btnAddNotes.setPadding(new Insets(5,0,5,70));
+		
+		Image imgNoteLists = new Image("list.png");
+		Button btnNoteLists = new Button("Notes List",new ImageView(imgNoteLists));
+		btnNoteLists.setStyle("-fx-background-color:#87CEFA;");
+		btnNoteLists.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnNoteLists.setMinWidth(320);	
+		btnNoteLists.setTextFill(Color.BLACK);
+		btnNoteLists.setAlignment(Pos.CENTER_LEFT);
+		btnNoteLists.setPadding(new Insets(5,0,5,70));
+		
+		vbNotesPanel.getChildren().add(btnNotes);
+		
+			if(isClick == true)
+			{
+				vbNotesPanel.getChildren().clear();
+				vbNotesPanel.getChildren().addAll(btnNotes,btnAddNotes,btnNoteLists);
+			}
+		
+		return vbNotesPanel;		
+	}
+}

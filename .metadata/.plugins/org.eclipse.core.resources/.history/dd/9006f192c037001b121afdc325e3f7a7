@@ -1,0 +1,111 @@
+package View;
+
+import Table.StudentTable;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+
+public class RegisterNewStudent {
+	private static VBox vbRegisterNewStudentView;
+	private static Label lIndexTitle;
+	private static Label lDashboard;
+	private static Label lStudent;
+	private static Label lRegisterNewStudent;
+	private static HBox hbIndexContainer;
+	private static BorderPane bpHeader;
+	private static VBox vbBody;
+	private static Button btnSave;
+	private static Button btnClear;
+	private static Label lFirstName,lSeconName;
+	private static TextField tFirstName,tSecondName;
+	private static Label lEmail,lRegistrationDate,lStudentID,lPhoneNo,lAddress;
+	private static TextField tEmail,tStudntID,tPhoneNo;
+	private static TextArea tAddress;
+	private static DatePicker dpRegistrationDate;
+	private static GridPane gpUserInfo;
+	public static VBox vbRegisterNewStudentView()
+	{
+		vbRegisterNewStudentView = new VBox();
+		
+		lIndexTitle = new Label("Register New Student");
+		lIndexTitle.setTextFill(Color.BLUE);
+		lIndexTitle.setFont(Font.font("Times New Roman",21));
+		
+		lDashboard = new Label("Dashboard >");
+		lDashboard.setFont(Font.font("Times New Roman", 21));
+		lDashboard.setTextFill(Color.GREY);
+
+		lStudent = new Label(" Student >");
+		lStudent.setFont(Font.font("Times New Roman", 21));
+		lStudent.setTextFill(Color.GREY);
+
+		lRegisterNewStudent = new Label(" Register New Student");
+		lRegisterNewStudent.setFont(Font.font("Times New Roman", 21));
+		lRegisterNewStudent.setTextFill(Color.GREY);
+	
+		hbIndexContainer = new HBox();
+		hbIndexContainer.getChildren().addAll(lDashboard,lStudent,lRegisterNewStudent);
+		
+		bpHeader = new BorderPane();
+		bpHeader.setLeft(lIndexTitle);
+		bpHeader.setRight(hbIndexContainer);
+		bpHeader.setPadding(new Insets(20,20,20,20));
+		bpHeader.setStyle("-fx-background-color:#FFFFFF");
+		
+		vbBody = new VBox();
+		
+		btnSave = new Button("Save");
+		btnSave.setTextFill(Color.WHITE);
+		btnSave.setPadding(new Insets(10,10,10,10));
+		btnSave.setStyle("-fx-background-color:green");
+		btnSave.setPrefSize(100,30);
+		btnSave.setFont(Font.font("Times New Roman", 15));
+
+		btnClear = new Button("Clear");
+		btnClear.setTextFill(Color.WHITE);
+		btnClear.setPadding(new Insets(10,10,10,10));
+		btnClear.setStyle("-fx-background-color:red");
+		btnClear.setPrefSize(100,30);
+		btnClear.setFont(Font.font("Times New Roman", 15));
+		
+		gpUserInfo = new GridPane();
+		
+		lFirstName = new Label("First Name");
+		lFirstName.setFont(Font.font("Times New Roman", 21));
+		lFirstName.setTextFill(Color.GREY);
+		
+		lFirstName = new Label("Dashboard >");
+		lFirstName.setFont(Font.font("Times New Roman", 21));
+		lFirstName.setTextFill(Color.GREY);
+		
+		tFirstName = new TextField();
+		
+		tSecondName = new TextField();
+		
+		gpUserInfo.add(lFirstName, 0, 0);
+		gpUserInfo.add(lSeconName, 0, 1);
+		gpUserInfo.add(tFirstName, 1, 0);
+		gpUserInfo.add(tSecondName, 1, 1);
+		
+		vbBody.setStyle("-fx-background-color:#FFFFFF");
+		vbBody.setPrefHeight(580);
+		vbBody.setPadding(new Insets(20,40,20,40));
+		vbBody.setSpacing(20);
+		vbBody.getChildren().add(gpUserInfo);
+		
+		vbRegisterNewStudentView.getChildren().addAll(bpHeader,vbBody);
+		return vbRegisterNewStudentView;
+	}
+}

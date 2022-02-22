@@ -1,0 +1,262 @@
+package View;
+
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class MainView {
+
+	static boolean isBookClick = false;
+	public static VBox vbMainView()
+	{
+		VBox vbMainView = new VBox();
+		
+		VBox vbButtons = vbButtons();
+		vbMainView.getChildren().addAll(vbButtons);
+		
+		return vbMainView;
+	}
+	private static VBox vbButtons()
+	{
+		VBox vbButtons = new VBox();
+		vbButtons.setMaxWidth(270);
+//		ImageView imgDashBoard = new ImageView();
+//		imgDashBoard.setImage(new Image("url(\"home.png\")"));
+//		imgDashBoard.setFitHeight(30);
+//		imgDashBoard.setFitWidth(20);
+		
+		Button btnDashBoard = new Button("Dash Board");
+		btnDashBoard.setTextFill(Color.WHITE);
+		btnDashBoard.setStyle("-fx-background-color:#00BFFF");
+		btnDashBoard.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnDashBoard.setPrefWidth(270);	
+		
+		VBox vbBooksPanel = vbBooksPanel();
+		vbBooksPanel.setPrefWidth(270);
+		
+		VBox vbCategoryPanel = vbCategoryPanel();
+		vbCategoryPanel.setPrefWidth(270);
+		
+		VBox vbMembersPanel = vbMembersPanel();
+		vbMembersPanel.setPrefWidth(270);
+		
+		
+		vbButtons.getChildren().addAll(btnDashBoard,vbBooksPanel,vbCategoryPanel,vbMembersPanel);
+		vbButtons.setStyle("-fx-background-color:#00BFFF");
+		return vbButtons;
+	}
+	private static VBox vbBooksPanel()
+	{
+		
+		VBox vbBooksPanel = new VBox();
+
+		Image imgHome = new Image("home.png");
+
+		Button btnBooks = new Button("Books",new ImageView(imgHome));
+		btnBooks.setStyle("-fx-background-color:#00BFFF;");
+		btnBooks.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnBooks.setMinWidth(240);	
+		btnBooks.setTextFill(Color.BLACK);
+		
+		Image imgPlus = new Image("add.png");
+		Button btnPlus = new Button("",new ImageView(imgPlus));
+		btnPlus.setStyle("-fx-background-color:#00BFFF;");
+		btnPlus.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnPlus.setMaxWidth(30);	
+		btnPlus.setTextFill(Color.BLACK);
+		
+		HBox hbBooks = new HBox();
+		hbBooks.getChildren().addAll(btnBooks,btnPlus);
+		hbBooks.setStyle("-fx-background-color:#00BFFF;");
+		hbBooks.setPadding(new Insets(2,2,2,10));
+		
+		//B0E0E6;
+		
+		Image imgBookAdd = new Image("add.png");
+		Button btnAddNewBook = new Button("Add New Books",new ImageView(imgBookAdd));
+		btnAddNewBook.setStyle("-fx-background-color:#87CEFA;");
+		btnAddNewBook.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddNewBook.setMaxWidth(290);	
+		btnAddNewBook.setTextFill(Color.BLACK);
+		btnAddNewBook.setPadding(new Insets(10,10,10,40));
+		
+		Image imgBookList = new Image("list.png");
+		Button btnBookList = new Button("Books List",new ImageView(imgBookList));
+		btnBookList.setStyle("-fx-background-color:#87CEFA;");
+		btnBookList.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnBookList.setMinWidth(290);	
+		btnBookList.setTextFill(Color.BLACK);
+		btnBookList.setPadding(new Insets(10,10,10,-3));
+		
+		Image imgCategoryBookList = new Image("list.png");
+		Button btnCategoryBookList = new Button("Category Wise Books",new ImageView(imgCategoryBookList));
+		btnCategoryBookList.setStyle("-fx-background-color:#87CEFA;");
+		btnCategoryBookList.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnCategoryBookList.setMinWidth(290);	
+		btnCategoryBookList.setTextFill(Color.BLACK);
+		btnCategoryBookList.setPadding(new Insets(10,10,10,80));
+		
+		vbBooksPanel.getChildren().add(hbBooks);
+		int i = 0;
+		final boolean isClick = false;
+		btnPlus.setOnAction(e->{
+			isBookClick = ! (isBookClick);
+			if(isBookClick == true)
+			{
+			vbBooksPanel.getChildren().clear();
+			vbBooksPanel.getChildren().addAll(hbBooks,btnAddNewBook,btnBookList,btnCategoryBookList);
+			}
+			else
+			{
+				vbBooksPanel.getChildren().clear();
+				vbBooksPanel.getChildren().addAll(hbBooks);	
+			}
+		});
+		return vbBooksPanel;		
+	}
+	private static VBox vbCategoryPanel()
+	{
+		
+		VBox vbCategoryPanel = new VBox();
+
+		Image imgHome = new Image("home.png");
+
+		Button btnCategories = new Button("Categories",new ImageView(imgHome));
+		btnCategories.setStyle("-fx-background-color:#00BFFF;");
+		btnCategories.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnCategories.setMinWidth(240);	
+		btnCategories.setTextFill(Color.BLACK);
+		btnCategories.setPadding(new Insets(10,10,10,43));
+		
+		Image imgPlus = new Image("add.png");
+		Button btnPlus = new Button("",new ImageView(imgPlus));
+		btnPlus.setStyle("-fx-background-color:#00BFFF;");
+		btnPlus.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnPlus.setMaxWidth(30);	
+		btnPlus.setTextFill(Color.BLACK);
+		
+		HBox hbCategories = new HBox();
+		hbCategories.getChildren().addAll(btnCategories,btnPlus);
+		hbCategories.setStyle("-fx-background-color:#00BFFF;");
+		hbCategories.setPadding(new Insets(2,2,2,10));
+		
+		//B0E0E6;
+		
+		Image imgAddCategory = new Image("add.png");
+		Button btnAddNewCategory = new Button("Add New Books",new ImageView(imgAddCategory));
+		btnAddNewCategory.setStyle("-fx-background-color:#87CEFA;");
+		btnAddNewCategory.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddNewCategory.setMaxWidth(290);	
+		btnAddNewCategory.setTextFill(Color.BLACK);
+		btnAddNewCategory.setPadding(new Insets(10,10,10,40));
+		
+		
+		Image imgCategoryList = new Image("list.png");
+		Button btnCategoryList = new Button("Category Wise Books",new ImageView(imgCategoryList));
+		btnCategoryList.setStyle("-fx-background-color:#87CEFA;");
+		btnCategoryList.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnCategoryList.setMinWidth(290);	
+		btnCategoryList.setTextFill(Color.BLACK);
+		btnCategoryList.setPadding(new Insets(10,10,10,80));
+		
+		vbCategoryPanel.getChildren().add(hbCategories);
+		int i = 0;
+		final boolean isClick = false;
+		btnPlus.setOnAction(e->{
+			isBookClick = ! (isBookClick);
+			if(isBookClick == true)
+			{
+			   vbCategoryPanel.getChildren().clear();
+			   vbCategoryPanel.getChildren().addAll(hbCategories,btnAddNewCategory,btnCategoryList);
+			}
+			else
+			{
+				vbCategoryPanel.getChildren().clear();
+				vbCategoryPanel.getChildren().addAll(hbCategories);	
+			}
+		});
+		return vbCategoryPanel;		
+	}
+	private static VBox vbMembersPanel()
+	{
+		
+		VBox vbMembersPanel = new VBox();
+
+		Image imgHome = new Image("home.png");
+
+		Button btnMemeber = new Button("Members",new ImageView(imgHome));
+		btnMemeber.setStyle("-fx-background-color:#00BFFF;");
+		btnMemeber.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnMemeber.setMinWidth(240);	
+		btnMemeber.setTextFill(Color.BLACK);
+		btnMemeber.setPadding(new Insets(10,10,10,33));
+		
+		Image imgPlus = new Image("add.png");
+		Button btnPlus = new Button("",new ImageView(imgPlus));
+		btnPlus.setStyle("-fx-background-color:#00BFFF;");
+		btnPlus.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnPlus.setMaxWidth(30);	
+		btnPlus.setTextFill(Color.BLACK);
+		
+		HBox hbMembers = new HBox();
+		hbMembers.getChildren().addAll(btnMemeber,btnPlus);
+		hbMembers.setStyle("-fx-background-color:#00BFFF;");
+		hbMembers.setPadding(new Insets(2,2,2,10));
+		
+		//B0E0E6;
+		
+		Image imgAddMembers = new Image("add.png");
+		Button btnAddMembers = new Button("Add New Member",new ImageView(imgAddMembers));
+		btnAddMembers.setStyle("-fx-background-color:#87CEFA;");
+		btnAddMembers.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddMembers.setMaxWidth(290);	
+		btnAddMembers.setTextFill(Color.BLACK);
+		btnAddMembers.setPadding(new Insets(10,10,10,40));
+		
+		
+		Image imgMembersList = new Image("list.png");
+		Button btnMembersList = new Button("Category Wise Books",new ImageView(imgMembersList));
+		btnMembersList.setStyle("-fx-background-color:#87CEFA;");
+		btnMembersList.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnMembersList.setMinWidth(290);	
+		btnMembersList.setTextFill(Color.BLACK);
+		btnMembersList.setPadding(new Insets(10,10,10,80));
+		
+		Image imgNewMembers = new Image("list.png");
+		Button btnNewMembers = new Button("New Members",new ImageView(imgNewMembers));
+		btnNewMembers.setStyle("-fx-background-color:#87CEFA;");
+		btnNewMembers.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnNewMembers.setMinWidth(290);	
+		btnNewMembers.setTextFill(Color.BLACK);
+		btnNewMembers.setPadding(new Insets(10,10,10,80));
+		
+		vbMembersPanel.getChildren().add(hbMembers);
+		int i = 0;
+		final boolean isClick = false;
+		btnPlus.setOnAction(e->{
+			isBookClick = ! (isBookClick);
+			if(isBookClick == true)
+			{
+			   vbMembersPanel.getChildren().clear();
+			   vbMembersPanel.getChildren().addAll(hbMembers,btnAddMembers,btnMembersList,btnNewMembers);
+			}
+			else
+			{
+				vbMembersPanel.getChildren().clear();
+				vbMembersPanel.getChildren().addAll(hbMembers);	
+			}
+		});
+		return vbMembersPanel;		
+	}
+}

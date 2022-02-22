@@ -1,0 +1,7 @@
+package Lists;
+
+public class FineLists {
+	private String memberId,memberName;
+	private String bookCode;
+	private int dayPassed,money;
+}

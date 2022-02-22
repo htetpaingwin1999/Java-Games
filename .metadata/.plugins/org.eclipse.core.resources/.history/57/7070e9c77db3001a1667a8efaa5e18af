@@ -1,0 +1,185 @@
+package Handler;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+
+import List.CourseList;
+import List.StaffList;
+import List.StudentList;
+
+public class StaffHandler {
+	public static ArrayList<String> GetAllStaffName()
+	{
+		ArrayList<String> staffList = new ArrayList<String>();	
+		int i = 0;
+		try {
+			Connection con = DBConnection.openConnection();
+		String q = "select StaffID,StaffName from staff where Dt=?";
+		PreparedStatement ps = con.prepareStatement(q);
+	    ps.setInt(1, 0);
+
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {		
+			String s = rs.getString(1)+"-"+rs.getString(2);
+			staffList.add(s);
+		}
+		con.close();
+		} catch (SQLException e) {
+		}
+		return staffList;
+	}
+	/*	public StaffList(String staffID, String staffName, Date staffDoB, String staffPhoneNo, String staffAddress,
+			String staffDegree, String staffNrc)*/
+	public static ArrayList<StaffList> GetAllStaff()
+	{
+		ArrayList<StaffList> staffList = new ArrayList<StaffList>();	
+		int i = 0;
+		try {
+			Connection con = DBConnection.openConnection();
+		String q = "select StaffID,StaffName,StaffDoB,StaffPhoneNo,StaffAddress,StaffDegree,StaffNrc,StaffGender from staff where Dt=?";
+		PreparedStatement ps = con.prepareStatement(q);
+	    ps.setInt(1, 0);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {		
+			StaffList st = new StaffList(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
+			staffList.add(st);
+		}
+		con.close();
+		} catch (SQLException e) {
+		}
+		return staffList;
+	}
+	public static ArrayList<StaffList> GetIndividualStaffByID(String staffID)
+	{
+		ArrayList<StaffList> staffList = new ArrayList<StaffList>();	
+		int i = 0;
+		try {
+			Connection con = DBConnection.openConnection();
+		String q = "select StaffID,StaffName,StaffDoB,StaffPhoneNo,StaffAddress,StaffDegree,StaffNrc,StaffGender from staff where Dt=? and StaffID=?";
+		PreparedStatement ps = con.prepareStatement(q);
+	    ps.setInt(1, 0);
+	    ps.setString(2, staffID);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {		
+			StaffList st = new StaffList(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
+			staffList.add(st);
+		}
+		con.close();
+		} catch (SQLException e) {
+		}
+		return staffList;
+	}
+	public static ArrayList<StaffList> GetAllStaffByGender(String gender)
+	{
+		ArrayList<StaffList> staffList = new ArrayList<StaffList>();	
+		int i = 0;
+		try {
+			Connection con = DBConnection.openConnection();
+		String q = "select StaffID,StaffName,StaffDoB,StaffPhoneNo,StaffAddress,StaffDegree,StaffNrc,StaffGender from staff where Dt=? and StaffGender=?";
+		PreparedStatement ps = con.prepareStatement(q);
+	    ps.setInt(1, 0);
+	    ps.setString(2, gender);
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {		
+			StaffList st = new StaffList(rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8));
+			staffList.add(st);
+		}
+		con.close();
+		} catch (SQLException e) {
+		}
+		return staffList;
+	}
+	public static int GetNoofStaff()
+	{
+		int no = 0;
+		ArrayList<StudentList> studentList = new ArrayList<StudentList>();	
+		try {
+			Connection con = DBConnection.openConnection();
+			String q = "select staff.StaffID from staff where staff.Dt=?";
+		PreparedStatement ps = con.prepareStatement(q);
+	    ps.setInt(1, 0);
+
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {		
+			no++;
+		}
+		
+		con.close();
+		} catch (SQLException e) {
+		}
+		return no;
+	}
+	public static void AddNewStaff(String staffID,String staffName,String staffPhoneNo,String staffAddress,String staffNrc,String staffDoB,String staffDegree,String staffGender) 
+	{
+		
+		String q = "insert into staff (StaffID,StaffName,StaffPhoneNo,StaffAddress,StaffNrc,StaffDoB,StaffGender,StaffDegree)"
+				+ "VALUES (?,?,?,?,?,?,?,?)";
+		try {
+			Connection con = DBConnection.openConnection();
+			PreparedStatement ps =con.prepareStatement(q);
+			 ps.setString(1, staffID);
+			 ps.setString(2, staffName);
+			 ps.setString(3, staffPhoneNo);
+			 ps.setString(4, staffAddress);
+			 ps.setString(5, staffNrc);
+			 ps.setString(6, staffDoB);
+			 ps.setString(7, staffGender);
+			 ps.setString(8, staffDegree);
+			 ps.executeUpdate();  
+			 con.close();
+		} catch (SQLException e) {
+				e.printStackTrace();
+		}
+		
+	}
+	public static void UpdateStaff(String staffID,String staffName,String staffPhoneNo,String staffAddress,String staffNrc,String staffDoB,String staffGender,String staffDegree) 
+	{
+		
+		
+		String q = "update staff set StaffName=?,StaffPhoneNo=?,StaffAddress=?,"
+				+ "StaffNrc=?,StaffDoB=?,StaffGender=?,StaffDegree=? where StaffID=?";
+		try {
+			Connection con = DBConnection.openConnection();
+			PreparedStatement ps =con.prepareStatement(q);
+			 ps.setString(1, staffName);
+			 ps.setString(2, staffPhoneNo);
+			 ps.setString(3, staffAddress);
+			 ps.setString(4, staffNrc);
+			 ps.setString(5, staffDoB);
+			 ps.setString(6, staffGender);
+			 ps.setString(7, staffDegree);
+			 ps.setString(8, staffID);
+			 ps.executeUpdate();  
+			 con.close();
+		} catch (SQLException e) {
+				e.printStackTrace();
+		}
+
+	}
+	public static void DeleteStaff(String staffID)
+	{
+		
+		String q = "update staff set Dt=? where StaffID=?";
+		try {
+			Connection con = DBConnection.openConnection();
+			PreparedStatement ps =con.prepareStatement(q);
+			 ps.setInt(1, 1);
+			 ps.setString(2, staffID);
+			 ps.executeUpdate();  
+			 con.close();
+		} catch (SQLException e) {
+				e.printStackTrace();
+		}
+		
+	}
+	public static String ReturnStaffID(String value)
+	{
+		String[] s = value.split("-");
+		
+		return (s[0]+"-"+s[1]);
+	}
+}

@@ -1,0 +1,794 @@
+package View;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class MainView {
+	private static VBox vbMainView;
+	private static VBox vbLeftHeader;
+	private static BorderPane bpRightHeader;
+	private static HBox hbHeader;
+	private static VBox vbButtonPanel;
+	public static VBox vbWorkPanel; /***max 660px ***/
+	private static Label lCopyRightText;
+	private static Label lAllRightReserved;
+	private static HBox hbCopyRightContainer;
+	private static Label lVersion;
+	private static BorderPane bpFooter;
+	public static BorderPane bpWorkPanelContainer;
+	private static HBox hbPanel;
+	private static ImageView imgUserImage;
+	private static Label lUserName;
+	private static HBox hbUserInformation;
+	private static Button btnMainNavigation;
+	private static Button btnHome;
+	private static Button btnStudent;
+	private static Button btnStudentExpand;
+	private static HBox hbStudentNExpand;
+	private static VBox vbStudentContainer;
+	private static Button btnStudentLists;
+	private static Button btnRegisterNewStudent;
+	private static Boolean isStudentClick = false;
+	private static Button btnCourse;
+	private static Button btnCourseExpand;
+	private static HBox hbCourseNExpand;
+	private static VBox vbCourseContainer;
+	private static Button btnCourseLists;
+	private static Button btnRegisterNewCourse;
+	private static Boolean isCourseClick = false;
+	private static Button btnSectionPanel;
+	private static Button btnSectionPanelExpand;
+	private static HBox hbSectionPanelNExpand;
+	private static VBox vbSectionContainer;
+	private static Boolean isSectionPanelClick = false;
+	//Change SectionPanel1 to 4 as you wish
+	private static Button btnSectionLists;
+	private static Button btnRegisterNewSection;
+	private static Button btnPreviousSection;
+	private static Button btnSectionPanel4;
+	//
+	private static Button btnPayments; /*with Payments icon*/
+	private static Button btnPaymentsExpand;
+	private static HBox hbPaymentsNExpand;
+	private static VBox vbPaymentsContainer;
+	private static Boolean isPaymentsClick = false;
+	private static Button btnPaymentLists;
+	private static Button btnAddPayment;
+	private static Button btnPaymentss; /*with circluar icon , sub setting */
+	private static Button btnStaff;
+	private static Button btnStaffExpand;
+	private static HBox hbStaffNExpand;
+	private static VBox vbStaffContainer;
+	private static Boolean isStaffClick = false;
+	//Change Staff1 to 4 as you wish
+	private static Button btnStaffLists;
+	private static Button btnRegisterNewStaff;
+	//
+	public static VBox vbMainView()
+	{
+		vbMainView = new VBox();
+		
+		vbLeftHeader = LeftHeader();
+		
+		bpRightHeader = RightHeader();
+		
+		hbHeader = new HBox();
+		hbHeader.getChildren().addAll(vbLeftHeader,bpRightHeader);
+		
+		vbButtonPanel = new VBox();
+		vbButtonPanel.setStyle("-fx-background-color:#000066");
+		vbButtonPanel.setPrefSize(250, 710);
+		
+		vbWorkPanel =StudentListView.vbStudentListView();
+		//
+		bpFooter = new BorderPane();
+		lCopyRightText = new Label("Copyright \u00a9 2020 MIIT Library Management System.");
+		lCopyRightText.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		lAllRightReserved = new Label("All right reserved");
+		lAllRightReserved.setFont(Font.font(("Times New Roman"),FontWeight.NORMAL,FontPosture.REGULAR,15));
+		
+		hbCopyRightContainer = new HBox();
+		hbCopyRightContainer.getChildren().addAll(lCopyRightText,lAllRightReserved);
+		hbCopyRightContainer.setSpacing(10);
+		
+		lVersion = new Label("Version 2.2");
+		lVersion.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		bpFooter.setLeft(hbCopyRightContainer);
+		bpFooter.setRight(lVersion);
+
+		bpWorkPanelContainer = new BorderPane();
+		bpWorkPanelContainer.setPrefSize(1110, 700);
+		bpWorkPanelContainer.setStyle("-fx-background-color:#FFFFFF");
+		bpWorkPanelContainer.setPadding(new Insets(20,10,10,20));
+		bpWorkPanelContainer.setTop(vbWorkPanel);
+		bpWorkPanelContainer.setBottom(bpFooter);
+		//edit
+		
+		hbPanel = new HBox();
+		hbPanel.setPrefSize(1350, 700);
+		hbPanel.getChildren().addAll(vbButtonPanel,bpWorkPanelContainer);
+		
+		imgUserImage = new ImageView("Icon/User64.png");
+		
+		lUserName = new Label("Htet Paing Win"); // set data from database
+		lUserName.setTextFill(Color.WHITE);
+		lUserName.setAlignment(Pos.CENTER);
+		lUserName.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		lUserName.setPadding(new Insets(10,10,10,10));
+		lUserName.setStyle("-fx-font-weight:bold;");
+		
+		hbUserInformation = new HBox();
+		hbUserInformation.getChildren().addAll(imgUserImage,lUserName);
+		hbUserInformation.setSpacing(20);
+		hbUserInformation.setPrefHeight(66);
+		hbUserInformation.setPadding(new Insets(10,10,10,20));
+
+		btnMainNavigation = new Button("MAIN NAVIGATION");
+		btnMainNavigation.setTextFill(Color.GREY);
+		btnMainNavigation.setPadding(new Insets(10,10,10,10));
+		btnMainNavigation.setStyle("-fx-background-color:#000066;");
+		btnMainNavigation.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnMainNavigation.setMaxWidth(280);	
+		btnMainNavigation.setAlignment(Pos.CENTER_LEFT);
+
+		btnHome = new Button("  Home",new ImageView("Icon/Home.png"));
+		btnHome.setStyle("-fx-background-color:#000066;");
+		btnHome.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnHome.setMaxWidth(280);	
+		btnHome.setAlignment(Pos.CENTER_LEFT);
+		btnHome.setTextFill(Color.WHITE);
+		btnHome.setPadding(new Insets(7,0,7,20));
+		
+		/***Student ***/
+		btnStudent = new Button(" Students",new ImageView("Icon/User.png"));
+		btnStudent.setStyle("-fx-background-color:#000066;");
+		btnStudent.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnStudent.setPrefWidth(250);	
+		btnStudent.setAlignment(Pos.CENTER_LEFT);
+		btnStudent.setTextFill(Color.WHITE);
+		btnStudent.setPadding(new Insets(7,0,7,20));
+		
+		btnStudentExpand = new Button("",new ImageView("Icon/Expand.png"));
+		btnStudentExpand.setStyle("-fx-background-color:#000066;");
+		btnStudentExpand.setPadding(new Insets(10,0,0,-10));
+		btnStudentExpand.setPrefWidth(30);
+		
+		hbStudentNExpand = new HBox();
+		hbStudentNExpand.setPrefWidth(250);
+		hbStudentNExpand.getChildren().addAll(btnStudent,btnStudentExpand);
+		
+		vbStudentContainer = new VBox();
+		vbStudentContainer.getChildren().addAll(hbStudentNExpand);
+		
+		btnStudentLists = new Button("  Student Lists",new ImageView("Icon/CO.png"));
+		btnStudentLists.setStyle("-fx-background-color:#323232;");
+		btnStudentLists.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnStudentLists.setPrefWidth(280);	
+		btnStudentLists.setAlignment(Pos.CENTER_LEFT);
+		btnStudentLists.setTextFill(Color.WHITE);
+		btnStudentLists.setPadding(new Insets(7,30,7,30));
+		
+		btnRegisterNewStudent = new Button("  Register New Student",new ImageView("Icon/CO.png"));
+		btnRegisterNewStudent.setStyle("-fx-background-color:#323232;");
+		btnRegisterNewStudent.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnRegisterNewStudent.setPrefWidth(280);	
+		btnRegisterNewStudent.setAlignment(Pos.CENTER_LEFT);
+		btnRegisterNewStudent.setTextFill(Color.WHITE);
+		btnRegisterNewStudent.setPadding(new Insets(7,30,7,30));
+		
+		btnAddPayment = new Button("  Add Payment",new ImageView("Icon/CO.png"));
+		btnAddPayment.setStyle("-fx-background-color:#323232;");
+		btnAddPayment.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddPayment.setPrefWidth(280);	
+		btnAddPayment.setAlignment(Pos.CENTER_LEFT);
+		btnAddPayment.setTextFill(Color.WHITE);
+		btnAddPayment.setPadding(new Insets(7,30,7,30));
+		/***Student ***/
+
+		
+		/***COURSE***/
+		btnCourse = new Button(" Course",new ImageView("Icon/Circulation.png"));
+		btnCourse.setStyle("-fx-background-color:#000066;");
+		btnCourse.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnCourse.setPrefWidth(250);	
+		btnCourse.setAlignment(Pos.CENTER_LEFT);
+		btnCourse.setTextFill(Color.WHITE);
+		btnCourse.setPadding(new Insets(7,0,7,20));
+		
+		btnCourseExpand = new Button("",new ImageView("Icon/Expand.png"));
+		btnCourseExpand.setStyle("-fx-background-color:#000066;");
+		btnCourseExpand.setPadding(new Insets(10,0,0,-10));
+		btnCourseExpand.setPrefWidth(30);
+		
+		hbCourseNExpand = new HBox();
+		hbCourseNExpand.setPrefWidth(250);
+		hbCourseNExpand.getChildren().addAll(btnCourse,btnCourseExpand);
+		
+		vbCourseContainer = new VBox();
+		vbCourseContainer.getChildren().addAll(hbCourseNExpand);
+		
+		btnCourseLists = new Button("  Course List(s)",new ImageView("Icon/CO.png"));
+		btnCourseLists.setStyle("-fx-background-color:#323232;");
+		btnCourseLists.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnCourseLists.setPrefWidth(280);	
+		btnCourseLists.setAlignment(Pos.CENTER_LEFT);
+		btnCourseLists.setTextFill(Color.WHITE);
+		btnCourseLists.setPadding(new Insets(7,30,7,30));
+		
+		btnRegisterNewCourse = new Button("  Add New Course",new ImageView("Icon/CO.png"));
+		btnRegisterNewCourse.setStyle("-fx-background-color:#323232;");
+		btnRegisterNewCourse.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnRegisterNewCourse.setPrefWidth(280);	
+		btnRegisterNewCourse.setAlignment(Pos.CENTER_LEFT);
+		btnRegisterNewCourse.setTextFill(Color.WHITE);
+		btnRegisterNewCourse.setPadding(new Insets(7,30,7,30));
+	
+		/***COURSE***/
+		
+		/***Section PANEL***/
+		
+		btnSectionPanel = new Button(" Section",new ImageView("Icon/Time.png"));
+		btnSectionPanel.setStyle("-fx-background-color:#000066;");
+		btnSectionPanel.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnSectionPanel.setPrefWidth(250);	
+		btnSectionPanel.setAlignment(Pos.CENTER_LEFT);
+		btnSectionPanel.setTextFill(Color.WHITE);
+		btnSectionPanel.setPadding(new Insets(7,0,7,20));
+		
+		btnSectionPanelExpand = new Button("",new ImageView("Icon/Expand.png"));
+		btnSectionPanelExpand.setStyle("-fx-background-color:#000066;");
+		btnSectionPanelExpand.setPadding(new Insets(10,0,0,-10));
+		btnSectionPanelExpand.setPrefWidth(30);
+		
+		hbSectionPanelNExpand = new HBox();
+		hbSectionPanelNExpand.setPrefWidth(250);
+		hbSectionPanelNExpand.getChildren().addAll(btnSectionPanel,btnSectionPanelExpand);
+		
+		vbSectionContainer = new VBox();
+		vbSectionContainer.getChildren().addAll(hbSectionPanelNExpand);
+		
+		btnSectionLists = new Button("  Section Lists",new ImageView("Icon/CO.png"));
+		btnSectionLists.setStyle("-fx-background-color:#323232;");
+		btnSectionLists.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnSectionLists.setPrefWidth(280);	
+		btnSectionLists.setAlignment(Pos.CENTER_LEFT);
+		btnSectionLists.setTextFill(Color.WHITE);
+		btnSectionLists.setPadding(new Insets(7,30,7,30));
+		
+		btnRegisterNewSection = new Button("  Register New Section",new ImageView("Icon/CO.png"));
+		btnRegisterNewSection.setStyle("-fx-background-color:#323232;");
+		btnRegisterNewSection.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnRegisterNewSection.setPrefWidth(280);	
+		btnRegisterNewSection.setAlignment(Pos.CENTER_LEFT);
+		btnRegisterNewSection.setTextFill(Color.WHITE);
+		btnRegisterNewSection.setPadding(new Insets(7,30,7,30));
+		
+		btnPreviousSection = new Button("  Previous Section",new ImageView("Icon/CO.png"));
+		btnPreviousSection.setStyle("-fx-background-color:#323232;");
+		btnPreviousSection.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnPreviousSection.setPrefWidth(280);	
+		btnPreviousSection.setAlignment(Pos.CENTER_LEFT);
+		btnPreviousSection.setTextFill(Color.WHITE);
+		btnPreviousSection.setPadding(new Insets(7,30,7,30));
+		
+		btnSectionPanel4 = new Button("  Section Panel4",new ImageView("Icon/CO.png"));
+		btnSectionPanel4.setStyle("-fx-background-color:#323232;");
+		btnSectionPanel4.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnSectionPanel4.setPrefWidth(280);	
+		btnSectionPanel4.setAlignment(Pos.CENTER_LEFT);
+		btnSectionPanel4.setTextFill(Color.WHITE);
+		btnSectionPanel4.setPadding(new Insets(7,30,7,30));
+		
+		/***Section PANEL***/
+		
+		/***Payments***/
+		
+		btnPayments = new Button(" Payments",new ImageView("Icon/Setting.png"));
+		btnPayments.setStyle("-fx-background-color:#000066;");
+		btnPayments.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnPayments.setPrefWidth(250);	
+		btnPayments.setAlignment(Pos.CENTER_LEFT);
+		btnPayments.setTextFill(Color.WHITE);
+		btnPayments.setPadding(new Insets(7,0,7,20));
+		
+		btnPaymentsExpand = new Button("",new ImageView("Icon/Expand.png"));
+		btnPaymentsExpand.setStyle("-fx-background-color:#000066;");
+		btnPaymentsExpand.setPadding(new Insets(10,0,0,-10));
+		btnPaymentsExpand.setPrefWidth(30);
+		
+		hbPaymentsNExpand = new HBox();
+		hbPaymentsNExpand.setPrefWidth(250);
+		hbPaymentsNExpand.getChildren().addAll(btnPayments,btnPaymentsExpand);
+		
+		vbPaymentsContainer = new VBox();
+		vbPaymentsContainer.getChildren().addAll(hbPaymentsNExpand);
+		
+		btnAddPayment = new Button("  Add Payment",new ImageView("Icon/CO.png"));
+		btnAddPayment.setStyle("-fx-background-color:#323232;");
+		btnAddPayment.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddPayment.setPrefWidth(280);	
+		btnAddPayment.setAlignment(Pos.CENTER_LEFT);
+		btnAddPayment.setTextFill(Color.WHITE);
+		btnAddPayment.setPadding(new Insets(7,30,7,30));
+		
+		btnPaymentLists = new Button("  Payment Lists",new ImageView("Icon/CO.png"));
+		btnPaymentLists.setStyle("-fx-background-color:#323232;");
+		btnPaymentLists.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnPaymentLists.setPrefWidth(280);	
+		btnPaymentLists.setAlignment(Pos.CENTER_LEFT);
+		btnPaymentLists.setTextFill(Color.WHITE);
+		btnPaymentLists.setPadding(new Insets(7,30,7,30));
+		
+		/***Payments***/
+		
+		
+		/***Staff***/
+				
+			btnStaff = new Button(" Staff",new ImageView("Icon/User.png"));
+			btnStaff.setStyle("-fx-background-color:#000066;");
+			btnStaff.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+			btnStaff.setPrefWidth(250);	
+			btnStaff.setAlignment(Pos.CENTER_LEFT);
+			btnStaff.setTextFill(Color.WHITE);
+			btnStaff.setPadding(new Insets(7,0,7,20));
+			
+			btnStaffExpand = new Button("",new ImageView("Icon/Expand.png"));
+			btnStaffExpand.setStyle("-fx-background-color:#000066;");
+			btnStaffExpand.setPadding(new Insets(10,0,0,-10));
+			btnStaffExpand.setPrefWidth(30);
+			
+			hbStaffNExpand = new HBox();
+			hbStaffNExpand.setPrefWidth(250);
+			hbStaffNExpand.getChildren().addAll(btnStaff,btnStaffExpand);
+			
+			vbStaffContainer = new VBox();
+			vbStaffContainer.getChildren().addAll(hbStaffNExpand);
+			
+			btnStaffLists = new Button("  Staff Lists",new ImageView("Icon/CO.png"));
+			btnStaffLists.setStyle("-fx-background-color:#323232;");
+			btnStaffLists.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+			btnStaffLists.setPrefWidth(280);	
+			btnStaffLists.setAlignment(Pos.CENTER_LEFT);
+			btnStaffLists.setTextFill(Color.WHITE);
+			btnStaffLists.setPadding(new Insets(7,30,7,30));
+			
+			btnRegisterNewStaff = new Button("  Register New Staff",new ImageView("Icon/CO.png"));
+			btnRegisterNewStaff.setStyle("-fx-background-color:#323232;");
+			btnRegisterNewStaff.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+			btnRegisterNewStaff.setPrefWidth(280);	
+			btnRegisterNewStaff.setAlignment(Pos.CENTER_LEFT);
+			btnRegisterNewStaff.setTextFill(Color.WHITE);
+			btnRegisterNewStaff.setPadding(new Insets(7,30,7,30));
+			
+		/***Payments***/
+		
+		/***BUTTON ACTION***/
+		btnHome.setOnAction(e->{
+//			vbWorkPanel = QuickInventoryStaff.vbQuickInventoryStaff();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+		
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+			
+		btnStudent.setOnAction(e->{
+//			vbWorkPanel = StudentLists.vbStudentLists();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+		
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+		btnStudentLists.setOnAction(e->{
+			vbWorkPanel = StudentListView.vbStudentListView();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+		
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+		btnRegisterNewStudent.setOnAction(e->{
+			vbWorkPanel = RegisterNewStudent.vbRegisterNewStudentView();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+		
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+		
+		btnCourseLists.setOnAction(e->{
+			vbWorkPanel = CourseListView.vbCourseListView();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+		
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+		btnRegisterNewCourse.setOnAction(e->{
+			vbWorkPanel = RegisterNewStudent.vbRegisterNewStudentView();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+		
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+		btnPayments.setOnAction(e->{
+//			vbWorkPanel = GeneralPayments.vbGeneralPayments();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+		
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+		btnSectionLists.setOnAction(e->{
+			vbWorkPanel = SectionListsView.vbSectionListView();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+		
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+		
+		btnRegisterNewSection.setOnAction(e->{
+			vbWorkPanel = RegisterNewSection.vbRegisterNewSectionView();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+		
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+		btnStaffLists.setOnAction(e->{
+			vbWorkPanel = StaffListsView.vbStaffListView();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+		
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+		btnRegisterNewStaff.setOnAction(e->{
+			vbWorkPanel = RegisterNewStaffView.vbRegisterStaffView();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+		
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+		btnStudentExpand.setOnAction(e->{
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+			
+			if(isStudentClick == false)
+			{
+				vbStudentContainer.getChildren().addAll(btnStudentLists,btnRegisterNewStudent,btnAddPayment);
+			}
+			isStudentClick = !isStudentClick;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+			
+		});
+		btnCourseExpand.setOnAction(e->{
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+			if(isCourseClick == false)
+			{
+				vbCourseContainer.getChildren().addAll(btnCourseLists,btnRegisterNewCourse);
+			}
+			isCourseClick = !isCourseClick;
+			isStudentClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+		
+		btnRegisterNewCourse.setOnAction(e->{
+			vbWorkPanel = RegisterNewCourse.vbRegisterNewCourseView();
+			bpWorkPanelContainer.getChildren().remove(vbWorkPanel);
+			bpWorkPanelContainer.setTop(vbWorkPanel);
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+		
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+		
+		btnSectionPanelExpand.setOnAction(e->{
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+			
+			if(isSectionPanelClick == false)
+			{
+				vbSectionContainer.getChildren().addAll(btnSectionLists,btnRegisterNewSection,btnPreviousSection,btnSectionPanel4);
+			}
+			
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = !isSectionPanelClick;
+			isPaymentsClick = false;
+			isStaffClick = false;
+		});
+		btnPaymentsExpand.setOnAction(e->{
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+			
+			if(isPaymentsClick == false)
+			{
+				vbPaymentsContainer.getChildren().addAll(btnAddPayment,btnPaymentLists);
+			}
+			
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = !isPaymentsClick;
+			isStaffClick = false;
+		});
+		btnStaffExpand.setOnAction(e->{
+			vbStudentContainer.getChildren().clear();
+			vbCourseContainer.getChildren().clear();
+			vbSectionContainer.getChildren().clear();
+			vbPaymentsContainer.getChildren().clear();
+			vbStaffContainer.getChildren().clear();
+			vbStudentContainer.getChildren().add(hbStudentNExpand);
+			vbCourseContainer.getChildren().add(hbCourseNExpand);
+			vbSectionContainer.getChildren().add(hbSectionPanelNExpand);
+			vbPaymentsContainer.getChildren().add(hbPaymentsNExpand);
+			vbStaffContainer.getChildren().add(hbStaffNExpand);
+			
+			if(isStaffClick == false)
+			{
+				vbStaffContainer.getChildren().addAll(btnStaffLists,btnRegisterNewStaff);
+			}
+			isStudentClick = false;
+			isCourseClick = false;
+			isSectionPanelClick = false;
+			isPaymentsClick = false;
+			isStaffClick = !isStaffClick;
+		});
+		/***BUTTON ACTION***/
+		
+		vbButtonPanel.getChildren().addAll(hbUserInformation,btnMainNavigation,btnHome,vbStudentContainer,vbCourseContainer,vbSectionContainer,vbPaymentsContainer,vbStaffContainer);
+		
+		vbButtonPanel.setSpacing(20);
+		vbMainView.getChildren().addAll(hbHeader,hbPanel);
+		return vbMainView;
+	}
+	private static VBox LeftHeader()
+	{
+		VBox vbLeftHeader = new VBox();
+		vbLeftHeader.setStyle("-fx-background-color:orange;");
+		
+		Label lLibraryName = new Label("MIIT");
+		lLibraryName.setTextFill(Color.WHITE);
+		lLibraryName.setAlignment(Pos.CENTER);
+		lLibraryName.setFont(Font.font("Times New Roman",FontWeight.MEDIUM,FontPosture.REGULAR,40));
+		
+		vbLeftHeader.getChildren().add(lLibraryName);
+		vbLeftHeader.setPadding(new Insets(5,0,5,40));
+
+		vbLeftHeader.setPrefSize(250, 30);
+		return vbLeftHeader;
+	}
+	private static BorderPane RightHeader()
+	{
+		BorderPane bpRightHeader = new BorderPane();
+		
+		ImageView imgLangugageIcon = new ImageView(new Image("Icon/EnglishLanguage.png"));
+		
+		Label lEmail = new Label("2016-miit-ece-009");
+		lEmail.setTextFill(Color.WHITE);
+		lEmail.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+
+		HBox hbLanguageEmail = new HBox();
+		hbLanguageEmail.getChildren().addAll(imgLangugageIcon,lEmail);
+		hbLanguageEmail.setSpacing(20);
+		hbLanguageEmail.setPadding(new Insets(5,10,5,10));
+		
+		bpRightHeader.setRight(hbLanguageEmail);
+		bpRightHeader.setStyle("-fx-background-color:#000066;");
+		bpRightHeader.setPrefWidth(1110);
+		bpRightHeader.setPrefHeight(20);
+//
+		return bpRightHeader;
+	}
+}
+

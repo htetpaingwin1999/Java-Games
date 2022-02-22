@@ -1,0 +1,636 @@
+package View;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class MainView {
+
+	private static VBox vbBooksPanel;
+	private static VBox vbBookIssuesPanel;
+	private static VBox vbCategoriesPanel;
+	private static VBox vbMembersPanel;
+	private static VBox vbMyBookListsPanel;
+	private static VBox vbNotesPanel;
+	private static VBox vbProfilePanel;
+	private static VBox vbSystemManagersPanel;
+	private static VBox vbTermsAndConditionsPanel;
+	private static VBox vbDashboardButtonPanel;
+	private static VBox vbButtons;
+	private static HBox hbLogo;
+	private static Label lLibararyName;
+	private static ImageView miit;
+	private static Image imgLogo;
+	private static Button btnBooksPlus,btnBookIssuesPlus,btnCategoriesPlus,btnMembersPlus;
+	private static Button btnNotesPlus,btnSystemManagersPlus,btnTermsAndConditionsPlus;
+	private static Button btnDashboard;
+	private static Image imgDashboard;
+	private static Image imgGeneralSetting;
+	private static Button btnGeneralSetting;
+	private static HBox hbBooksPanel,hbBookIssuesPanel, hbCategoriesPanel, hbMembersPanel;
+	private static HBox hbNotesPanel , hbSystemManagersPanel, hbTermsAndConditionsPanel;
+	private static boolean isBooksClick = false;
+	private static boolean isBookIssuesClick = false;
+	private static boolean isCategoriesClick = false;
+	private static boolean isMembersClick = false;
+	private static boolean isNotesClick = false;
+	private static boolean isSystemManagersClick = false;
+	private static boolean isTermsAndConditionsClick = false;
+	private static HBox hbMainView;
+	private static BorderPane bpHeader;
+	private static VBox vbWorkSpace;
+	private static VBox vbMainSpace;
+	
+	public static HBox hbMainView()
+	{
+		hbMainView = new HBox();		
+
+		bpHeader = bpHeader();
+
+		vbWorkSpace = DashboardPanel.vbDashboardPanel();
+		vbWorkSpace.setPadding(new Insets(0,0,0,30));
+
+		vbMainSpace = new VBox();
+
+		vbMainSpace.getChildren().addAll(bpHeader,vbWorkSpace);
+		vbMainSpace.setSpacing(20);
+		
+		hbLogo = new HBox();
+		
+		imgLogo = new Image("librarylogo.png");
+		
+		miit = new ImageView(imgLogo);
+		miit.setStyle("-fx-background-color:#00BFFF");
+		
+		lLibararyName = new Label("MIIT LIBRARY");
+		lLibararyName.setFont(Font.font("Lucida Fax",FontWeight.BOLD,FontPosture.REGULAR,20));
+		lLibararyName.setPadding(new Insets(5,0,0,20));
+		
+		hbLogo.getChildren().addAll(miit,lLibararyName);
+		hbLogo.setStyle("-fx-background-color:#00BFFF");
+		hbLogo.setPrefWidth(280);
+		hbLogo.setAlignment(Pos.CENTER_LEFT);
+		hbLogo.setPadding(new Insets(5,0,5,40));
+		
+		vbButtons = new VBox();
+		vbButtons.setMaxWidth(290);
+		vbButtons.setPrefHeight(750);
+		vbButtons.setSpacing(15);
+		
+		imgDashboard = new Image("home.png");
+
+		btnDashboard = new Button("Dashboard",new ImageView(imgDashboard));
+		btnDashboard.setStyle("-fx-background-color:#00BFFF;");
+		btnDashboard.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnDashboard.setMinWidth(290);	
+		btnDashboard.setTextFill(Color.BLACK);
+		btnDashboard.setAlignment(Pos.CENTER_LEFT);
+		btnDashboard.setPadding(new Insets(7,0,7,20));	
+		
+		btnBooksPlus = new Button("+");
+		btnBooksPlus.setStyle("-fx-background-color:#00BFFF;-fx-font-size:20pt;-fx-font-weight:bolder;");
+		btnBooksPlus.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnBooksPlus.setMaxWidth(30);	
+		btnBooksPlus.setTextFill(Color.BLACK);
+		btnBooksPlus.setPadding(new Insets(-10,0,0,-30));
+		
+		vbBooksPanel = BooksPanel.vbBooksPanel(false);
+		vbBooksPanel.setMinWidth(250);
+		
+		hbBooksPanel = new HBox();
+		hbBooksPanel.getChildren().addAll(vbBooksPanel,btnBooksPlus);
+				
+		btnBookIssuesPlus = new Button("+");
+		btnBookIssuesPlus.setStyle("-fx-background-color:#00BFFF;-fx-font-size:20pt;-fx-font-weight:bolder;");
+		btnBookIssuesPlus.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnBookIssuesPlus.setMaxWidth(30);	
+		btnBookIssuesPlus.setTextFill(Color.BLACK);
+		btnBookIssuesPlus.setPadding(new Insets(-10,0,0,-30));
+		
+		vbBookIssuesPanel = BookIssuesPanel.vbBookIssuesPanel(false);
+		vbBookIssuesPanel.setMinWidth(290);
+
+		hbBookIssuesPanel = new HBox();
+		hbBookIssuesPanel.getChildren().addAll(vbBookIssuesPanel,btnBookIssuesPlus);
+		
+		btnCategoriesPlus = new Button("+");
+		btnCategoriesPlus.setStyle("-fx-background-color:#00BFFF;-fx-font-size:20pt;-fx-font-weight:bolder;");
+		btnCategoriesPlus.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnCategoriesPlus.setMaxWidth(30);	
+		btnCategoriesPlus.setTextFill(Color.BLACK);
+		btnCategoriesPlus.setPadding(new Insets(-10,0,0,-30));
+		
+		vbCategoriesPanel = CategoriesPanel.vbCategoryPanel(false);
+		vbCategoriesPanel.setMinWidth(290);
+		
+		hbCategoriesPanel = new HBox();
+		hbCategoriesPanel.getChildren().addAll(vbCategoriesPanel,btnCategoriesPlus);
+		
+		btnMembersPlus = new Button("+");
+		btnMembersPlus.setStyle("-fx-background-color:#00BFFF;-fx-font-size:20pt;-fx-font-weight:bolder;");
+		btnMembersPlus.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnMembersPlus.setMaxWidth(30);	
+		btnMembersPlus.setTextFill(Color.BLACK);
+		btnMembersPlus.setPadding(new Insets(-10,0,0,-30));
+		
+		vbMembersPanel = MembersPanel.vbMembersPanel(false);
+		vbMembersPanel.setMinWidth(290);
+		
+		hbMembersPanel = new HBox();
+		hbMembersPanel.getChildren().addAll(vbMembersPanel,btnMembersPlus);
+		
+		btnSystemManagersPlus = new Button("+");
+		btnSystemManagersPlus.setStyle("-fx-background-color:#00BFFF;-fx-font-size:20pt;-fx-font-weight:bolder;");
+		btnSystemManagersPlus.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnSystemManagersPlus.setMaxWidth(30);	
+		btnSystemManagersPlus.setTextFill(Color.BLACK);
+		btnSystemManagersPlus.setPadding(new Insets(-10,0,0,-30));
+
+		vbSystemManagersPanel = SystemManagersPanel.vbSystemManagersPanel(false);
+		vbSystemManagersPanel.setMinWidth(290);
+
+		hbSystemManagersPanel = new HBox();
+		hbSystemManagersPanel.getChildren().addAll(vbSystemManagersPanel,btnSystemManagersPlus);
+		
+		btnTermsAndConditionsPlus = new Button("+");
+		btnTermsAndConditionsPlus.setStyle("-fx-background-color:#00BFFF;-fx-font-size:20pt;-fx-font-weight:bolder;");
+		btnTermsAndConditionsPlus.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnTermsAndConditionsPlus.setMaxWidth(30);	
+		btnTermsAndConditionsPlus.setTextFill(Color.BLACK);
+		btnTermsAndConditionsPlus.setPadding(new Insets(-10,0,0,-30));
+
+		vbTermsAndConditionsPanel = TermsAndConditionsPanel.vbTermsAndConditionsPanel(false);
+		vbTermsAndConditionsPanel.setMinWidth(290);
+		
+		hbTermsAndConditionsPanel = new HBox();
+		hbTermsAndConditionsPanel.getChildren().addAll(vbTermsAndConditionsPanel,btnTermsAndConditionsPlus);
+		
+		imgGeneralSetting = new Image("setting.png");
+
+		btnGeneralSetting = new Button("General Settings",new ImageView(imgGeneralSetting));
+		btnGeneralSetting.setStyle("-fx-background-color:#00BFFF;");
+		btnGeneralSetting.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnGeneralSetting.setMinWidth(290);	
+		btnGeneralSetting.setTextFill(Color.BLACK);
+		btnGeneralSetting.setAlignment(Pos.CENTER_LEFT);
+		btnGeneralSetting.setPadding(new Insets(7,0,7,20));		
+		
+		vbProfilePanel = ProfilePanel.vbProfilePanel();
+		vbProfilePanel.setMinWidth(290);
+
+		vbMyBookListsPanel = MyBookListsPanel.vbMyBookListsPanel();
+
+		btnNotesPlus = new Button("+");
+		btnNotesPlus.setStyle("-fx-background-color:#00BFFF;-fx-font-size:20pt;-fx-font-weight:bolder;");
+		btnNotesPlus.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnNotesPlus.setMaxWidth(30);	
+		btnNotesPlus.setTextFill(Color.BLACK);
+		btnNotesPlus.setPadding(new Insets(-10,0,0,-30));
+
+		vbNotesPanel = NotesPanel.vbNotesPanel(false);
+		
+		hbNotesPanel = new HBox();
+		hbNotesPanel.getChildren().addAll(vbNotesPanel,btnNotesPlus);
+		
+		vbButtons.getChildren().addAll(hbLogo,btnDashboard,hbBooksPanel,hbBookIssuesPanel,hbCategoriesPanel,hbMembersPanel,hbSystemManagersPanel,hbTermsAndConditionsPanel,btnGeneralSetting,vbProfilePanel,vbMyBookListsPanel,hbNotesPanel);
+		vbButtons.setStyle("-fx-background-color:#00BFFF");
+		
+		btnBooksPlus.setOnAction(e->{
+			isBooksClick = !isBooksClick;
+			isBookIssuesClick = false;
+			isCategoriesClick = false;
+			isMembersClick = false;
+			isNotesClick = false;
+			isSystemManagersClick = false;
+			isTermsAndConditionsClick = false;	
+			
+			hbBooksPanel.getChildren().clear();
+			hbBookIssuesPanel.getChildren().clear();
+			hbCategoriesPanel.getChildren().clear();
+			hbMembersPanel.getChildren().clear();
+			hbSystemManagersPanel.getChildren().clear();
+			hbTermsAndConditionsPanel.getChildren().clear();
+			hbNotesPanel.getChildren().clear();
+			
+			vbBooksPanel = BooksPanel.vbBooksPanel(isBooksClick);
+			hbBooksPanel.getChildren().addAll(vbBooksPanel,btnBooksPlus);
+			
+			vbBookIssuesPanel = BookIssuesPanel.vbBookIssuesPanel(isBookIssuesClick);
+			hbBookIssuesPanel.getChildren().addAll(vbBookIssuesPanel,btnBookIssuesPlus);
+			
+			vbCategoriesPanel = CategoriesPanel.vbCategoryPanel(isCategoriesClick);
+			hbCategoriesPanel.getChildren().addAll(vbCategoriesPanel,btnCategoriesPlus);
+			
+			vbMembersPanel = MembersPanel.vbMembersPanel(isMembersClick);
+			hbMembersPanel.getChildren().addAll(vbMembersPanel,btnMembersPlus);
+			
+			vbSystemManagersPanel = SystemManagersPanel.vbSystemManagersPanel(isSystemManagersClick);
+			hbSystemManagersPanel.getChildren().addAll(vbSystemManagersPanel,btnSystemManagersPlus);
+			
+			vbTermsAndConditionsPanel = TermsAndConditionsPanel.vbTermsAndConditionsPanel(isTermsAndConditionsClick);
+			hbTermsAndConditionsPanel.getChildren().addAll(vbTermsAndConditionsPanel,btnTermsAndConditionsPlus);
+						
+			vbProfilePanel = ProfilePanel.vbProfilePanel();
+			
+			vbMyBookListsPanel = MyBookListsPanel.vbMyBookListsPanel();
+			
+			vbNotesPanel = NotesPanel.vbNotesPanel(isNotesClick);
+			hbNotesPanel.getChildren().addAll(vbNotesPanel,btnNotesPlus);
+
+			vbButtons.getChildren().clear();
+			vbButtons.getChildren().addAll(hbLogo,btnDashboard,hbBooksPanel,hbBookIssuesPanel,hbCategoriesPanel,hbMembersPanel,hbSystemManagersPanel,hbTermsAndConditionsPanel,btnGeneralSetting,vbProfilePanel,vbMyBookListsPanel,hbNotesPanel);
+		});
+		
+		
+		btnBookIssuesPlus.setOnAction(e->{
+			isBooksClick = false;
+			isBookIssuesClick = !isBookIssuesClick;
+			isCategoriesClick = false;
+			isMembersClick = false;
+			isNotesClick = false;
+			isSystemManagersClick = false;
+			isTermsAndConditionsClick = false;	
+			
+			hbBooksPanel.getChildren().clear();
+			hbBookIssuesPanel.getChildren().clear();
+			hbCategoriesPanel.getChildren().clear();
+			hbMembersPanel.getChildren().clear();
+			hbSystemManagersPanel.getChildren().clear();
+			hbTermsAndConditionsPanel.getChildren().clear();
+			hbNotesPanel.getChildren().clear();
+
+			vbBooksPanel = BooksPanel.vbBooksPanel(isBooksClick);
+			hbBooksPanel.getChildren().addAll(vbBooksPanel,btnBooksPlus);
+			
+			vbBookIssuesPanel = BookIssuesPanel.vbBookIssuesPanel(isBookIssuesClick);
+			hbBookIssuesPanel.getChildren().addAll(vbBookIssuesPanel,btnBookIssuesPlus);
+			
+			vbCategoriesPanel = CategoriesPanel.vbCategoryPanel(isCategoriesClick);
+			hbCategoriesPanel.getChildren().addAll(vbCategoriesPanel,btnCategoriesPlus);
+			
+			vbMembersPanel = MembersPanel.vbMembersPanel(isMembersClick);
+			hbMembersPanel.getChildren().addAll(vbMembersPanel,btnMembersPlus);
+			
+			vbSystemManagersPanel = SystemManagersPanel.vbSystemManagersPanel(isSystemManagersClick);
+			hbSystemManagersPanel.getChildren().addAll(vbSystemManagersPanel,btnSystemManagersPlus);
+			
+			vbTermsAndConditionsPanel = TermsAndConditionsPanel.vbTermsAndConditionsPanel(isTermsAndConditionsClick);
+			hbTermsAndConditionsPanel.getChildren().addAll(vbTermsAndConditionsPanel,btnTermsAndConditionsPlus);
+			
+			vbProfilePanel = ProfilePanel.vbProfilePanel();
+			
+			vbMyBookListsPanel = MyBookListsPanel.vbMyBookListsPanel();
+			
+			vbNotesPanel = NotesPanel.vbNotesPanel(isNotesClick);
+			hbNotesPanel.getChildren().addAll(vbNotesPanel,btnNotesPlus);
+
+			vbButtons.getChildren().clear();
+			
+			vbButtons.getChildren().addAll(hbLogo,btnDashboard,hbBooksPanel,hbBookIssuesPanel,hbCategoriesPanel,hbMembersPanel,hbSystemManagersPanel,hbTermsAndConditionsPanel,btnGeneralSetting,vbProfilePanel,vbMyBookListsPanel,hbNotesPanel);
+		});
+		
+		btnCategoriesPlus.setOnAction(e->{
+				isBooksClick = false;
+				isBookIssuesClick = false;
+				isCategoriesClick = !isCategoriesClick;
+				isMembersClick = false;
+				isNotesClick = false;
+				isSystemManagersClick = false;
+				isTermsAndConditionsClick = false;	
+				
+				hbBooksPanel.getChildren().clear();
+				hbBookIssuesPanel.getChildren().clear();
+				hbCategoriesPanel.getChildren().clear();
+				hbMembersPanel.getChildren().clear();
+				hbSystemManagersPanel.getChildren().clear();
+				hbTermsAndConditionsPanel.getChildren().clear();
+				hbNotesPanel.getChildren().clear();
+
+				vbBooksPanel = BooksPanel.vbBooksPanel(isBooksClick);
+				hbBooksPanel.getChildren().addAll(vbBooksPanel,btnBooksPlus);
+				
+				vbBookIssuesPanel = BookIssuesPanel.vbBookIssuesPanel(isBookIssuesClick);
+				hbBookIssuesPanel.getChildren().addAll(vbBookIssuesPanel,btnBookIssuesPlus);
+				
+				vbCategoriesPanel = CategoriesPanel.vbCategoryPanel(isCategoriesClick);
+				hbCategoriesPanel.getChildren().addAll(vbCategoriesPanel,btnCategoriesPlus);
+				
+				vbMembersPanel = MembersPanel.vbMembersPanel(isMembersClick);
+				hbMembersPanel.getChildren().addAll(vbMembersPanel,btnMembersPlus);
+				
+				vbSystemManagersPanel = SystemManagersPanel.vbSystemManagersPanel(isSystemManagersClick);
+				hbSystemManagersPanel.getChildren().addAll(vbSystemManagersPanel,btnSystemManagersPlus);
+				
+				vbTermsAndConditionsPanel = TermsAndConditionsPanel.vbTermsAndConditionsPanel(isTermsAndConditionsClick);
+				hbTermsAndConditionsPanel.getChildren().addAll(vbTermsAndConditionsPanel,btnTermsAndConditionsPlus);
+								
+				vbProfilePanel = ProfilePanel.vbProfilePanel();
+				
+				vbMyBookListsPanel = MyBookListsPanel.vbMyBookListsPanel();
+				
+				vbNotesPanel = NotesPanel.vbNotesPanel(isNotesClick);
+				hbNotesPanel.getChildren().addAll(vbNotesPanel,btnNotesPlus);
+
+				vbButtons.getChildren().clear();
+				vbButtons.getChildren().addAll(hbLogo,btnDashboard,hbBooksPanel,hbBookIssuesPanel,hbCategoriesPanel,hbMembersPanel,hbSystemManagersPanel,hbTermsAndConditionsPanel,btnGeneralSetting,vbProfilePanel,vbMyBookListsPanel,hbNotesPanel);
+			});
+		
+		btnMembersPlus.setOnAction(e->{
+			isBooksClick = false;
+			isBookIssuesClick = false;
+			isCategoriesClick = false;
+			isMembersClick = !isMembersClick;
+			isNotesClick = false;
+			isSystemManagersClick = false;
+			isTermsAndConditionsClick = false;	
+			
+			hbBooksPanel.getChildren().clear();
+			hbBookIssuesPanel.getChildren().clear();
+			hbCategoriesPanel.getChildren().clear();
+			hbMembersPanel.getChildren().clear();
+			hbSystemManagersPanel.getChildren().clear();
+			hbTermsAndConditionsPanel.getChildren().clear();
+			hbNotesPanel.getChildren().clear();
+
+			vbBooksPanel = BooksPanel.vbBooksPanel(isBooksClick);
+			hbBooksPanel.getChildren().addAll(vbBooksPanel,btnBooksPlus);
+			
+			vbBookIssuesPanel = BookIssuesPanel.vbBookIssuesPanel(isBookIssuesClick);
+			hbBookIssuesPanel.getChildren().addAll(vbBookIssuesPanel,btnBookIssuesPlus);
+			
+			vbCategoriesPanel = CategoriesPanel.vbCategoryPanel(isCategoriesClick);
+			hbCategoriesPanel.getChildren().addAll(vbCategoriesPanel,btnCategoriesPlus);
+			
+			vbMembersPanel = MembersPanel.vbMembersPanel(isMembersClick);
+			hbMembersPanel.getChildren().addAll(vbMembersPanel,btnMembersPlus);
+			
+			vbSystemManagersPanel = SystemManagersPanel.vbSystemManagersPanel(isSystemManagersClick);
+			hbSystemManagersPanel.getChildren().addAll(vbSystemManagersPanel,btnSystemManagersPlus);
+			
+			vbTermsAndConditionsPanel = TermsAndConditionsPanel.vbTermsAndConditionsPanel(isTermsAndConditionsClick);
+			hbTermsAndConditionsPanel.getChildren().addAll(vbTermsAndConditionsPanel,btnTermsAndConditionsPlus);
+						
+			vbProfilePanel = ProfilePanel.vbProfilePanel();
+			
+			vbMyBookListsPanel = MyBookListsPanel.vbMyBookListsPanel();
+			
+			vbNotesPanel = NotesPanel.vbNotesPanel(isNotesClick);
+			hbNotesPanel.getChildren().addAll(vbNotesPanel,btnNotesPlus);
+
+			vbButtons.getChildren().clear();
+			vbButtons.getChildren().addAll(hbLogo,btnDashboard,hbBooksPanel,hbBookIssuesPanel,hbCategoriesPanel,hbMembersPanel,hbSystemManagersPanel,hbTermsAndConditionsPanel,btnGeneralSetting,vbProfilePanel,vbMyBookListsPanel,hbNotesPanel);
+	
+			vbWorkSpace = MembersPanel.vbAddMemberView();
+			vbWorkSpace.setPadding(new Insets(0,0,0,30));
+			vbMainSpace.getChildren().clear();
+			vbMainSpace.getChildren().addAll(bpHeader,vbWorkSpace);
+		});
+		
+		btnNotesPlus.setOnAction(e->{
+			isBooksClick = false;
+			isBookIssuesClick = false;
+			isCategoriesClick = false;
+			isMembersClick = false;
+			isNotesClick = !isNotesClick;
+			isSystemManagersClick = false;
+			isTermsAndConditionsClick = false;	
+			
+			hbBooksPanel.getChildren().clear();
+			hbBookIssuesPanel.getChildren().clear();
+			hbCategoriesPanel.getChildren().clear();
+			hbMembersPanel.getChildren().clear();
+			hbSystemManagersPanel.getChildren().clear();
+			hbTermsAndConditionsPanel.getChildren().clear();
+			hbNotesPanel.getChildren().clear();
+
+			vbBooksPanel = BooksPanel.vbBooksPanel(isBooksClick);
+			hbBooksPanel.getChildren().addAll(vbBooksPanel,btnBooksPlus);
+			
+			vbBookIssuesPanel = BookIssuesPanel.vbBookIssuesPanel(isBookIssuesClick);
+			hbBookIssuesPanel.getChildren().addAll(vbBookIssuesPanel,btnBookIssuesPlus);
+			
+			vbCategoriesPanel = CategoriesPanel.vbCategoryPanel(isCategoriesClick);
+			hbCategoriesPanel.getChildren().addAll(vbCategoriesPanel,btnCategoriesPlus);
+			
+			vbMembersPanel = MembersPanel.vbMembersPanel(isMembersClick);
+			hbMembersPanel.getChildren().addAll(vbMembersPanel,btnMembersPlus);
+			
+			vbSystemManagersPanel = SystemManagersPanel.vbSystemManagersPanel(isSystemManagersClick);
+			hbSystemManagersPanel.getChildren().addAll(vbSystemManagersPanel,btnSystemManagersPlus);
+			
+			vbTermsAndConditionsPanel = TermsAndConditionsPanel.vbTermsAndConditionsPanel(isTermsAndConditionsClick);
+			hbTermsAndConditionsPanel.getChildren().addAll(vbTermsAndConditionsPanel,btnTermsAndConditionsPlus);
+						
+			vbProfilePanel = ProfilePanel.vbProfilePanel();
+			
+			vbMyBookListsPanel = MyBookListsPanel.vbMyBookListsPanel();
+			
+			vbNotesPanel = NotesPanel.vbNotesPanel(isNotesClick);
+			hbNotesPanel.getChildren().addAll(vbNotesPanel,btnNotesPlus);
+
+			vbButtons.getChildren().clear();
+
+			vbButtons.getChildren().addAll(hbLogo,btnDashboard,hbBooksPanel,hbBookIssuesPanel,hbCategoriesPanel,hbMembersPanel,hbSystemManagersPanel,hbTermsAndConditionsPanel,btnGeneralSetting,vbProfilePanel,vbMyBookListsPanel,hbNotesPanel);
+		});
+		
+		btnSystemManagersPlus.setOnAction(e->{
+			isBooksClick = false;
+			isBookIssuesClick = false;
+			isCategoriesClick = false;
+			isMembersClick = false;
+			isNotesClick = false;
+			isSystemManagersClick = !isSystemManagersClick;
+			isTermsAndConditionsClick = false;	
+			
+			hbBooksPanel.getChildren().clear();
+			hbBookIssuesPanel.getChildren().clear();
+			hbCategoriesPanel.getChildren().clear();
+			hbMembersPanel.getChildren().clear();
+			hbSystemManagersPanel.getChildren().clear();
+			hbTermsAndConditionsPanel.getChildren().clear();
+			hbNotesPanel.getChildren().clear();
+
+			vbBooksPanel = BooksPanel.vbBooksPanel(isBooksClick);
+			hbBooksPanel.getChildren().addAll(vbBooksPanel,btnBooksPlus);
+			
+			vbBookIssuesPanel = BookIssuesPanel.vbBookIssuesPanel(isBookIssuesClick);
+			hbBookIssuesPanel.getChildren().addAll(vbBookIssuesPanel,btnBookIssuesPlus);
+			
+			vbCategoriesPanel = CategoriesPanel.vbCategoryPanel(isCategoriesClick);
+			hbCategoriesPanel.getChildren().addAll(vbCategoriesPanel,btnCategoriesPlus);
+			
+			vbMembersPanel = MembersPanel.vbMembersPanel(isMembersClick);
+			hbMembersPanel.getChildren().addAll(vbMembersPanel,btnMembersPlus);
+			
+			vbSystemManagersPanel = SystemManagersPanel.vbSystemManagersPanel(isSystemManagersClick);
+			hbSystemManagersPanel.getChildren().addAll(vbSystemManagersPanel,btnSystemManagersPlus);
+			
+			vbTermsAndConditionsPanel = TermsAndConditionsPanel.vbTermsAndConditionsPanel(isTermsAndConditionsClick);
+			hbTermsAndConditionsPanel.getChildren().addAll(vbTermsAndConditionsPanel,btnTermsAndConditionsPlus);
+						
+			vbProfilePanel = ProfilePanel.vbProfilePanel();
+			
+			vbMyBookListsPanel = MyBookListsPanel.vbMyBookListsPanel();
+			
+			vbNotesPanel = NotesPanel.vbNotesPanel(isNotesClick);
+			hbNotesPanel.getChildren().addAll(vbNotesPanel,btnNotesPlus);
+
+			vbButtons.getChildren().clear();
+
+			vbButtons.getChildren().addAll(hbLogo,btnDashboard,hbBooksPanel,hbBookIssuesPanel,hbCategoriesPanel,hbMembersPanel,hbSystemManagersPanel,hbTermsAndConditionsPanel,btnGeneralSetting,vbProfilePanel,vbMyBookListsPanel,hbNotesPanel);
+		});
+		
+		btnTermsAndConditionsPlus.setOnAction(e->{			
+			isBooksClick = false;
+			isBookIssuesClick = false;
+			isCategoriesClick = false;
+			isMembersClick = false;
+			isNotesClick = false;
+			isSystemManagersClick = false;
+			isTermsAndConditionsClick = !isTermsAndConditionsClick;	
+			
+			hbBooksPanel.getChildren().clear();
+			hbBookIssuesPanel.getChildren().clear();
+			hbCategoriesPanel.getChildren().clear();
+			hbMembersPanel.getChildren().clear();
+			hbSystemManagersPanel.getChildren().clear();
+			hbTermsAndConditionsPanel.getChildren().clear();
+			hbNotesPanel.getChildren().clear();
+
+			vbBooksPanel = BooksPanel.vbBooksPanel(isBooksClick);
+			hbBooksPanel.getChildren().addAll(vbBooksPanel,btnBooksPlus);
+			
+			vbBookIssuesPanel = BookIssuesPanel.vbBookIssuesPanel(isBookIssuesClick);
+			hbBookIssuesPanel.getChildren().addAll(vbBookIssuesPanel,btnBookIssuesPlus);
+			
+			vbCategoriesPanel = CategoriesPanel.vbCategoryPanel(isCategoriesClick);
+			hbCategoriesPanel.getChildren().addAll(vbCategoriesPanel,btnCategoriesPlus);
+			
+			vbMembersPanel = MembersPanel.vbMembersPanel(isMembersClick);
+			hbMembersPanel.getChildren().addAll(vbMembersPanel,btnMembersPlus);
+			
+			vbSystemManagersPanel = SystemManagersPanel.vbSystemManagersPanel(isSystemManagersClick);
+			hbSystemManagersPanel.getChildren().addAll(vbSystemManagersPanel,btnSystemManagersPlus);
+			
+			vbTermsAndConditionsPanel = TermsAndConditionsPanel.vbTermsAndConditionsPanel(isTermsAndConditionsClick);
+			hbTermsAndConditionsPanel.getChildren().addAll(vbTermsAndConditionsPanel,btnTermsAndConditionsPlus);
+						
+			vbProfilePanel = ProfilePanel.vbProfilePanel();
+			
+			vbMyBookListsPanel = MyBookListsPanel.vbMyBookListsPanel();
+			
+			vbNotesPanel = NotesPanel.vbNotesPanel(isNotesClick);
+			hbNotesPanel.getChildren().addAll(vbNotesPanel,btnNotesPlus);
+
+			vbButtons.getChildren().clear();
+
+			vbButtons.getChildren().addAll(hbLogo,btnDashboard,hbBooksPanel,hbBookIssuesPanel,hbCategoriesPanel,hbMembersPanel,hbSystemManagersPanel,hbTermsAndConditionsPanel,btnGeneralSetting,vbProfilePanel,vbMyBookListsPanel,hbNotesPanel);
+		});
+		hbMainView.getChildren().addAll(vbButtons,vbMainSpace);
+		return hbMainView;
+	}
+	private static BorderPane bpHeader()
+	{
+		BorderPane bpHeader = new BorderPane();
+		bpHeader.setStyle("-fx-background-color:white");
+		
+		Image imgMenu = new Image("menu.png");
+		Button btnMenu = new Button("",new ImageView(imgMenu));
+		btnMenu.setStyle("-fx-background-color:white;");
+		btnMenu.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,13));
+		btnMenu.setTextFill(Color.BLACK);
+		btnMenu.setAlignment(Pos.CENTER_LEFT);
+		btnMenu.setPadding(new Insets(10,0,0,20));
+		
+		Image imgUser = new Image("user.png");
+		Button btnUser = new Button("admin",new ImageView(imgUser));
+		btnUser.setStyle("-fx-background-color:white;");
+		btnUser.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,13));
+		btnUser.setTextFill(Color.GREEN);
+		btnUser.setPadding(new Insets(10,0,0,0));
+		
+		Image imgMail = new Image("email.png");
+		Button btnMail = new Button("",new ImageView(imgMail));
+		btnMail.setStyle("-fx-background-color:white;");
+		btnMail.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,13));
+		btnMail.setTextFill(Color.GREEN);
+		
+		Label lNoOfMail = new Label("2");
+		lNoOfMail.setTextFill(Color.RED);
+		lNoOfMail.setStyle("-fx-background-color:red;");
+		lNoOfMail.setPadding(new Insets(-5,0,0,-10));
+		
+		HBox hbMail = new HBox();
+		hbMail.getChildren().addAll(btnMail,lNoOfMail);
+		hbMail.setPadding(new Insets(5,0,0,0));
+		
+		Label lUserEmail = new Label("htetpaingwin1999@gmail.com");
+		lUserEmail.setStyle("-fx-background-color:white;");
+		lUserEmail.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,13));
+		lUserEmail.setTextFill(Color.BLACK);
+		lUserEmail.setPadding(new Insets(10,0,0,0));
+
+		Image imgDownArrow = new Image("downarrow.png");
+
+		Menu menuAction = new Menu("",new ImageView(imgDownArrow));
+		MenuItem mLogOut = new MenuItem("Logout");
+		MenuItem mChangePassword = new MenuItem("Change Password");
+		MenuItem mAddAnotherAccount = new MenuItem("Add Another Account");
+		MenuItem mTermsAndPrivacy = new MenuItem("Terms.Privacy");
+
+
+		menuAction.getItems().add(mLogOut);
+		menuAction.getItems().add(mChangePassword);
+		menuAction.getItems().add(mAddAnotherAccount);
+		menuAction.getItems().add(mTermsAndPrivacy);
+
+		MenuBar menubarAction = new MenuBar();
+		menubarAction.getMenus().add(menuAction);
+		menubarAction.setStyle("-fx-background-color:white");
+		menubarAction.setPadding(new Insets(5,0,0,0));
+
+		HBox hbUserPreview = new HBox();
+		hbUserPreview.getChildren().addAll(btnUser,hbMail,lUserEmail,menubarAction);
+		hbUserPreview.setAlignment(Pos.TOP_RIGHT);
+		hbUserPreview.setPadding(new Insets(5,0,0,0));
+		
+		bpHeader.setLeft(btnMenu);
+		bpHeader.setRight(hbUserPreview);
+		
+		bpHeader.setMinWidth(1030);
+		bpHeader.setMinHeight(30);
+		return bpHeader;
+	}
+	private static HBox hbCopyRight(String year,String copyRightServer)
+	{
+		HBox hbCopyRight = new HBox();
+		
+		Label lCopyRight = new Label(year+" By");
+		lCopyRight.setStyle("-fx-background-color:white;");
+		lCopyRight.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,13));
+		lCopyRight.setTextFill(Color.GREY);
+		
+		Label lCopyRightBy = new Label(year+" By");
+
+		lCopyRight.setStyle("-fx-background-color:white;");
+		lCopyRight.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,13));
+		lCopyRight.setTextFill(Color.GREY);
+
+		return hbCopyRight;
+	}
+}

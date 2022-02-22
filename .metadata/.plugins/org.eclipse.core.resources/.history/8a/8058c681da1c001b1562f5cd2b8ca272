@@ -1,0 +1,270 @@
+package View;
+import Lists.FineLists;
+import Tables.FindTable;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class DashboardPanel {
+	private static ObservableList<FineLists> finedata=null ;
+
+	public static VBox vbDashboardPanel()
+	{
+		VBox vbDashboardPanel = new VBox();
+		
+		VBox vbTitle = IndexTitleView.vbWelcomeText("WELCOME TO DASHBOARD");
+		HBox hbLibrianDashboardDataPreview = hbLibrianDashboardDataPreview();
+		
+		TableView tvFineTable = FindTable.tvFineTable();
+		
+		VBox vbTableContainer = new VBox();
+		
+		Image imgFineHistoryTitle = new Image("dollar.png");
+		
+		Label lFineHistoryTitle = new Label("Fine History");
+		lFineHistoryTitle.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		
+		
+		Label lShowBy = new Label("Show By");
+		lShowBy.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+
+		ComboBox cbChooseNo = new ComboBox();
+		cbChooseNo.getItems().addAll("1","2","3","4","5","6","7","8","9","10");
+		
+		HBox hbShowBy = new HBox();
+		hbShowBy.getChildren().addAll(lShowBy,cbChooseNo);
+		hbShowBy.setSpacing(10);
+
+		HBox hbFineHistoryTitle = new HBox();
+		hbFineHistoryTitle.getChildren().addAll(new ImageView(imgFineHistoryTitle),lFineHistoryTitle);
+		hbFineHistoryTitle.setSpacing(20);
+		hbFineHistoryTitle.setStyle("-fx-background-color:#E5E7E9");
+		hbFineHistoryTitle.setMaxWidth(800);
+		hbFineHistoryTitle.setPadding(new Insets(3,3,3,3));
+		
+		BorderPane bpTableTitle = new BorderPane();
+		bpTableTitle.setLeft(hbFineHistoryTitle);
+		bpTableTitle.setRight(hbShowBy);
+		
+		vbTableContainer.getChildren().addAll(bpTableTitle,tvFineTable);
+		vbTableContainer.setPadding(new Insets(10,10,10,10));
+		vbTableContainer.setSpacing(10);
+		vbTableContainer.setMaxWidth(800);
+		vbTableContainer.setStyle("-fx-border-color:#E5E7E9");
+		
+		vbDashboardPanel.getChildren().addAll(vbTitle,hbLibrianDashboardDataPreview,vbTableContainer);
+		vbDashboardPanel.setSpacing(20);
+		
+		return vbDashboardPanel;
+		
+	}
+	public static VBox vbDashboardTitleView()
+	{
+		VBox vbDashboardView = new VBox();
+		
+		Label lTitle = new Label("Welcome to Dashboard");
+		lTitle.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,25));
+		
+		Label lIndex = new Label("Dashboard");
+		lIndex.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		lIndex.setTextFill(Color.GREY);
+		
+		HBox hbIndex = new HBox();
+		hbIndex.getChildren().add(lIndex);
+		
+		VBox vbTitle = new VBox();
+		vbTitle.getChildren().addAll(lTitle,hbIndex);
+		vbTitle.setSpacing(20);
+		
+		vbDashboardView.getChildren().addAll(vbTitle);
+		return vbDashboardView;
+	}
+	public static HBox hbLibrianDashboardDataPreview()
+	{
+		HBox hbDataPreview = new HBox();
+		
+		HBox hbMembersImageTitleNo = new HBox();
+		
+		Label lMemberTitle = new Label("Members");
+		lMemberTitle.setFont(Font.font("Century Gothic",FontWeight.EXTRA_BOLD,FontPosture.REGULAR,15));
+		lMemberTitle.setTextFill(Color.GREEN);	
+		
+		Image imgMembers = new Image("Member64.png");
+
+		Label lMemberNo = new Label("1");
+		lMemberNo.setFont(Font.font("Century Gothic",FontWeight.EXTRA_BOLD,FontPosture.REGULAR,15));
+		lMemberNo.setTextFill(Color.GREEN);	
+		lMemberNo.setPadding(new Insets(0,0,0,30));
+		
+		VBox vbMemberTitleNo = new VBox();
+		vbMemberTitleNo.getChildren().addAll(lMemberTitle,lMemberNo);
+		vbMemberTitleNo.setSpacing(10);
+		
+		hbMembersImageTitleNo.getChildren().addAll(new ImageView(imgMembers),vbMemberTitleNo);
+		hbMembersImageTitleNo.setSpacing(20);
+		hbMembersImageTitleNo.setStyle("-fx-background-color:#FFFFFF");
+		hbMembersImageTitleNo.setPadding(new Insets(20,10,20,10));
+		hbMembersImageTitleNo.setMinWidth(200);
+		
+		Label lAddMembers = new Label("Add Members");
+		lAddMembers.setFont(Font.font("Century Gothic",FontWeight.EXTRA_BOLD,FontPosture.REGULAR,15));
+		lAddMembers.setTextFill(Color.WHITE);
+		lAddMembers.setPadding(new Insets(0,0,0,30));
+		
+		
+		Button btnAddMembersArrow = new Button("",new ImageView(new Image("GColorArrow16.png")));
+		btnAddMembersArrow.setStyle("-fx-background-color:green");
+		btnAddMembersArrow.setPadding(new Insets(0,0,0,30));
+		
+		HBox hbAddMembers = new HBox();
+		hbAddMembers.getChildren().addAll(lAddMembers,btnAddMembersArrow);
+		hbAddMembers.setStyle("-fx-background-color:green");
+		hbAddMembers.setPadding(new Insets(7,0,7,0));
+		
+		VBox vbMemberShowAndAdd = new VBox();
+		vbMemberShowAndAdd.getChildren().addAll(hbMembersImageTitleNo,hbAddMembers);
+		vbMemberShowAndAdd.setStyle("-fx-border-color:green;-fx-border-radius:1px;");
+
+		HBox hbBooksImageTitleNo = new HBox();
+		
+		Label lBooksTitle = new Label("Number of Books");
+		lBooksTitle.setFont(Font.font("Century Gothic",FontWeight.EXTRA_BOLD,FontPosture.REGULAR,15));
+		lBooksTitle.setTextFill(Color.ORANGE);
+		
+		Image imgBooks = new Image("Book64.png");
+
+		Label lBooksNo = new Label("1");
+		lBooksNo.setFont(Font.font("Century Gothic",FontWeight.EXTRA_BOLD,FontPosture.REGULAR,15));
+		lBooksNo.setTextFill(Color.ORANGE);
+		lBooksNo.setPadding(new Insets(0,0,0,60));
+
+		VBox vbBooksTitleNo = new VBox();
+		vbBooksTitleNo.getChildren().addAll(lBooksTitle,lBooksNo);
+		vbBooksTitleNo.setSpacing(10);
+		
+		hbBooksImageTitleNo.getChildren().addAll(new ImageView(imgBooks),vbBooksTitleNo);
+		hbBooksImageTitleNo.setSpacing(20);
+		hbBooksImageTitleNo.setStyle("-fx-background-color:#FFFFFF");
+		hbBooksImageTitleNo.setPadding(new Insets(20,10,20,10));
+		hbBooksImageTitleNo.setMinWidth(200);
+
+		Label lAddBooks = new Label("Add Books");
+		lAddBooks.setFont(Font.font("Century Gothic",FontWeight.EXTRA_BOLD,FontPosture.REGULAR,15));
+		lAddBooks.setTextFill(Color.WHITE);
+		lAddBooks.setPadding(new Insets(0,0,0,30));
+				
+		Button btnAddBooksArrow = new Button("",new ImageView(new Image("OColorArrow16.png")));
+		btnAddBooksArrow.setStyle("-fx-background-color:orange");
+		btnAddBooksArrow.setPadding(new Insets(0,0,0,80));
+		
+		HBox hbAddBooks = new HBox();
+		hbAddBooks.getChildren().addAll(lAddBooks,btnAddBooksArrow);
+		hbAddBooks.setStyle("-fx-background-color:orange");
+		hbAddBooks.setPadding(new Insets(7,0,7,0));
+		
+		VBox vbBooksShowAndAdd = new VBox();
+		vbBooksShowAndAdd.getChildren().addAll(hbBooksImageTitleNo,hbAddBooks);
+		vbBooksShowAndAdd.setStyle("-fx-border-color:orange;-fx-border-radius:1px;");
+		
+		HBox hbUsersImageTitleNo = new HBox();
+		
+		Label lUsersTitle = new Label("Number of User");
+		lUsersTitle.setFont(Font.font("Century Gothic",FontWeight.EXTRA_BOLD,FontPosture.REGULAR,15));
+		lUsersTitle.setTextFill(Color.BLUE);
+		
+		Image imgUsers = new Image("User64.png");
+
+		Label lUsersNo = new Label("1");
+		lUsersNo.setFont(Font.font("Century Gothic",FontWeight.EXTRA_BOLD,FontPosture.REGULAR,15));
+		lUsersNo.setTextFill(Color.BLUE);
+		lUsersNo.setPadding(new Insets(0,0,0,40));
+
+		VBox vbUsersTitleNo = new VBox();
+		vbUsersTitleNo.getChildren().addAll(lUsersTitle,lUsersNo);
+		vbUsersTitleNo.setSpacing(10);
+		
+		hbUsersImageTitleNo.getChildren().addAll(new ImageView(imgUsers),vbUsersTitleNo);
+		hbUsersImageTitleNo.setSpacing(20);
+		hbUsersImageTitleNo.setStyle("-fx-background-color:#FFFFFF");
+		hbUsersImageTitleNo.setPadding(new Insets(20,10,20,10));
+		hbUsersImageTitleNo.setMinWidth(200);
+		
+		Label lAddUsers = new Label("Add Users");
+		lAddUsers.setFont(Font.font("Century Gothic",FontWeight.EXTRA_BOLD,FontPosture.REGULAR,15));
+		lAddUsers.setTextFill(Color.WHITE);
+		lAddUsers.setPadding(new Insets(0,0,0,30));
+		
+		Button btnAddUsersArrow = new Button("",new ImageView(new Image("BColorArrow16.png")));
+		btnAddUsersArrow.setStyle("-fx-background-color:blue");
+		btnAddUsersArrow.setPadding(new Insets(0,0,0,80));
+		
+		HBox hbAddUsers = new HBox();
+		hbAddUsers.getChildren().addAll(lAddUsers,btnAddUsersArrow);
+		hbAddUsers.setStyle("-fx-background-color:blue");
+		hbAddUsers.setPadding(new Insets(7,0,7,0));
+		
+		VBox vbUsersShowAndAdd = new VBox();
+		vbUsersShowAndAdd.getChildren().addAll(hbUsersImageTitleNo,hbAddUsers);
+		vbUsersShowAndAdd.setStyle("-fx-border-color:green;-fx-border-radius:1px;");
+
+		HBox hbReturnBooksImageTitleNo = new HBox();
+		
+		Label lhbReturnBooksTitle = new Label("Non Return Books");
+		lhbReturnBooksTitle.setFont(Font.font("Century Gothic",FontWeight.EXTRA_BOLD,FontPosture.REGULAR,15));
+		lhbReturnBooksTitle.setTextFill(Color.RED);
+		
+		Image imgReturnBooks = new Image("Return64.png");
+
+		Label lReturnBooksNo = new Label("1");
+		lReturnBooksNo.setFont(Font.font("Century Gothic",FontWeight.EXTRA_BOLD,FontPosture.REGULAR,15));
+		lReturnBooksNo.setTextFill(Color.RED);
+		lReturnBooksNo.setPadding(new Insets(0,0,0,60));
+		
+		VBox vbReturnBooksTitleNo = new VBox();
+		vbReturnBooksTitleNo.getChildren().addAll(lhbReturnBooksTitle,lReturnBooksNo);
+		vbReturnBooksTitleNo.setSpacing(10);
+		
+		hbReturnBooksImageTitleNo.getChildren().addAll(new ImageView(imgReturnBooks),vbReturnBooksTitleNo);
+		hbReturnBooksImageTitleNo.setSpacing(20);		
+		hbReturnBooksImageTitleNo.setStyle("-fx-background-color:#FFFFFF");
+		hbReturnBooksImageTitleNo.setPadding(new Insets(20,10,20,10));
+		
+		Label lAddReturnBooks = new Label("Return Book");
+		lAddReturnBooks.setFont(Font.font("Century Gothic",FontWeight.EXTRA_BOLD,FontPosture.REGULAR,15));
+		lAddReturnBooks.setTextFill(Color.WHITE);
+		lAddReturnBooks.setPadding(new Insets(0,0,0,30));
+				
+		Button btnAddReturnBooksArrow = new Button("",new ImageView(new Image("RColorArrow16.png")));
+		btnAddReturnBooksArrow.setStyle("-fx-background-color:red");
+		btnAddReturnBooksArrow.setPadding(new Insets(0,0,0,80));
+		
+		HBox hbAddReturnBooks = new HBox();
+		hbAddReturnBooks.getChildren().addAll(lAddReturnBooks,btnAddReturnBooksArrow);
+		hbAddReturnBooks.setStyle("-fx-background-color:red");
+		hbAddReturnBooks.setPadding(new Insets(7,0,7,0));
+		
+		VBox vbReturnBooksShowAndAdd = new VBox();
+		vbReturnBooksShowAndAdd.getChildren().addAll(hbReturnBooksImageTitleNo,hbAddReturnBooks);
+		vbReturnBooksShowAndAdd.setStyle("-fx-border-color:red;-fx-border-radius:1px;");
+		
+		vbReturnBooksShowAndAdd.setMinWidth(200);
+		
+		hbDataPreview.getChildren().addAll(vbUsersShowAndAdd,vbBooksShowAndAdd,vbMemberShowAndAdd,vbReturnBooksShowAndAdd);
+		hbDataPreview.setSpacing(40);
+		hbDataPreview.setPadding(new Insets(0,15,0,15));
+		return hbDataPreview;
+	}
+}

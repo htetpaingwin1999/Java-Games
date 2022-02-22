@@ -1,0 +1,4 @@
+@charset "ISO-8859-1";
+.table-view .column-header {
+     -fx-background-color: red;
+}

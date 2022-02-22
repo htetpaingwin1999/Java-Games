@@ -1,0 +1,40 @@
+package Table;
+
+import List.IncomeReportLists;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
+
+public class CourseStudentReportTable {
+	private static TableColumn id,qty;
+	public static TableColumn courseName;
+	private static TableView tvReport;
+	public static TableView tvReportLists()
+	{
+		tvReport	= new TableView<IncomeReportLists>();
+		tvReport.setMaxWidth(Region.USE_PREF_SIZE);
+		tvReport.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+
+		id = new TableColumn("No");
+		id.setCellValueFactory(new PropertyValueFactory<>("Id"));
+		id.setMinWidth(200);
+		id.getStyleClass().add("Times New Roman,20");
+
+		
+		qty=new TableColumn("No of Student");
+		qty.setCellValueFactory(new PropertyValueFactory<>("No"));
+		qty.setMinWidth(200);
+        qty.getStyleClass().add("Times New Roman,20");
+        
+        courseName=new TableColumn("Course Name");
+		courseName.setCellValueFactory(new PropertyValueFactory<>("CourseName"));
+		courseName.setMinWidth(200);
+        courseName.getStyleClass().add("Times New Roman,20");
+
+		tvReport.getColumns().addAll(id,courseName,qty);
+		tvReport.setPrefSize(800,300);
+		
+		return tvReport;
+	}
+}

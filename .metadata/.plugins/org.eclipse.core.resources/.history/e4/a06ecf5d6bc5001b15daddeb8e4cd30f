@@ -1,0 +1,95 @@
+package View;
+
+import javafx.scene.layout.VBox;
+import javafx.application.Application;
+import javafx.scene.layout.BorderPane;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class GeneralReportView {
+	private static VBox vbReportView;
+	private static ProgressBar incomeProgresssBar,expenseProgressBar,profitProgressBar,fineProgressBar;
+	private static Label lIncomeProgressTitle,lExpenseProgressTitle,lProfitProgressTitle,lFineProgressTitle;
+	private static VBox vbIncomeProgressContainer,vbExpenseProgressContainer,vbProfitProgressContainer,vbFineProgressContainer;
+	public static VBox vbGeneralReportView(String day,String month,String year)
+	{
+		vbReportView = new VBox();
+		
+		incomeProgresssBar = new ProgressBar(0);
+//		incomeProgresssBar.setStyle("-fx-border-radius:5px;");
+		incomeProgresssBar.setPrefSize(400, 20);
+		
+        incomeProgresssBar.setProgress(0.4);
+        
+        lIncomeProgressTitle = new Label("Income");
+        lIncomeProgressTitle.setTextFill(Color.WHITE);
+        lIncomeProgressTitle.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
+
+        vbIncomeProgressContainer = new VBox();
+        vbIncomeProgressContainer.getChildren().addAll(lIncomeProgressTitle,incomeProgresssBar);
+        vbIncomeProgressContainer.setSpacing(20);
+
+        expenseProgressBar = new ProgressBar(0);
+        expenseProgressBar.setPrefSize(400, 20);
+		
+        expenseProgressBar.setProgress(0.2);
+        
+        lExpenseProgressTitle = new Label("Expense");
+        lExpenseProgressTitle.setTextFill(Color.WHITE);
+        lExpenseProgressTitle.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
+
+        vbExpenseProgressContainer = new VBox();
+        vbExpenseProgressContainer.getChildren().addAll(lExpenseProgressTitle,expenseProgressBar);
+        vbExpenseProgressContainer.setSpacing(20);
+        
+        profitProgressBar = new ProgressBar(0);
+        profitProgressBar.setPrefSize(400, 20);
+		
+        profitProgressBar.setProgress(0.6);
+        
+        lProfitProgressTitle = new Label("Profit");
+        lProfitProgressTitle.setTextFill(Color.WHITE);
+        lProfitProgressTitle.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
+
+        vbProfitProgressContainer = new VBox();
+        vbProfitProgressContainer.getChildren().addAll(lProfitProgressTitle,profitProgressBar);
+        vbProfitProgressContainer.setSpacing(20);
+        
+        fineProgressBar = new ProgressBar(0);
+        fineProgressBar.setPrefSize(400, 20);
+		
+        fineProgressBar.setProgress(0.1);
+        
+        lFineProgressTitle = new Label("Fine");
+        lFineProgressTitle.setTextFill(Color.WHITE);
+        lFineProgressTitle.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
+
+        vbFineProgressContainer = new VBox();
+        vbFineProgressContainer.getChildren().addAll(lFineProgressTitle,fineProgressBar);
+        vbFineProgressContainer.setSpacing(20);
+        
+        
+        vbReportView.getChildren().addAll(vbIncomeProgressContainer,vbExpenseProgressContainer,vbProfitProgressContainer,vbFineProgressContainer);
+        vbReportView.setSpacing(20);
+        vbReportView.setStyle("-fx-background-color:#777;-fx-border-radius: 50px;");
+        vbReportView.setPadding(new Insets(20,10,10,10));
+        vbReportView.setPrefSize(800, 600);
+		return vbReportView;
+	}
+}

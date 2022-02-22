@@ -1,0 +1,38 @@
+package View;
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class LogIn extends Application{
+	private static BorderPane bpMainView;
+
+	public static void main(String[] args) {
+		Application.launch(args);
+	}
+
+	public static BorderPane bpGetBackgroundImage()
+	{
+		BorderPane bpBackgroundImage = new BorderPane();
+		bpBackgroundImage.setStyle("-fx-background-image: url(\"book.jpg\");" + 
+				"    -fx-background-repeat: stretch;" + 
+				"    -fx-background-size: 1350 700;" + 
+				"    -fx-background-position: center center;"); 
+		return bpBackgroundImage;
+	}
+	private static VBox vbLoginForm(String libraryName)
+	{
+		VBox vbLogin = new VBox();
+		return vbLogin;
+	}
+	public void start(Stage arg0) throws Exception {
+		Stage myStage = new Stage();
+		bpMainView = bpGetBackgroundImage();
+		Scene scene = new Scene(bpMainView, 1350, 700);
+	    myStage.setScene(scene);
+		myStage.show();
+	}
+
+}

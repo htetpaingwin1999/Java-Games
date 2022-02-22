@@ -1,0 +1,82 @@
+package View;
+
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class BookIssuesPanel {
+
+	static boolean isBookClick = false;
+	public static VBox vbBookIssuesPanel()
+	{
+		
+		VBox vbBookIssuesPanel = new VBox();
+
+		Image imgBookIssues = new Image("issuessolve.png");
+
+		Button btnBookIssues = new Button("Issued Books",new ImageView(imgBookIssues));
+		btnBookIssues.setStyle("-fx-background-color:#00BFFF;");
+		btnBookIssues.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnBookIssues.setMinWidth(260);	
+		btnBookIssues.setTextFill(Color.BLACK);
+		btnBookIssues.setPadding(new Insets(10,10,10,33));
+		
+		Button btnPlus = new Button("+");
+		btnPlus.setStyle("-fx-background-color:#00BFFF;-fx-font-size:20pt;-fx-font-weight:bolder;");
+		btnPlus.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnPlus.setMaxWidth(30);	
+		btnPlus.setTextFill(Color.BLACK);
+		btnPlus.setPadding(new Insets(0,0,0,75));
+		
+		
+		HBox hbBookIssues = new HBox();
+		hbBookIssues.getChildren().addAll(btnBookIssues,btnPlus);
+		hbBookIssues.setStyle("-fx-background-color:#00BFFF;");
+		hbBookIssues.setPadding(new Insets(2,2,2,-20));
+		
+		//B0E0E6;
+		
+		Image imgAddBookIssues = new Image("add.png");
+		Button btnAddBookIssues = new Button("Add New Book Issues",new ImageView(imgAddBookIssues));
+		btnAddBookIssues.setStyle("-fx-background-color:#87CEFA;");
+		btnAddBookIssues.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddBookIssues.setMaxWidth(400);	
+		btnAddBookIssues.setTextFill(Color.BLACK);
+		btnAddBookIssues.setPadding(new Insets(10,10,10,25));
+		
+		
+		Image imgBookIssuesLists = new Image("list.png");
+		Button btnBookIssuesLists = new Button("Issued Books Lists",new ImageView(imgBookIssuesLists));
+		btnBookIssuesLists.setStyle("-fx-background-color:#87CEFA;");
+		btnBookIssuesLists.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnBookIssuesLists.setMinWidth(400);	
+		btnBookIssuesLists.setTextFill(Color.BLACK);
+		btnBookIssuesLists.setPadding(new Insets(10,10,10,0));
+		
+		
+		vbBookIssuesPanel.getChildren().add(hbBookIssues);
+		int i = 0;
+		final boolean isClick = false;
+		btnPlus.setOnAction(e->{
+			isBookClick = ! (isBookClick);
+			if(isBookClick == true)
+			{
+				vbBookIssuesPanel.getChildren().clear();
+				vbBookIssuesPanel.getChildren().addAll(hbBookIssues,btnAddBookIssues,btnBookIssuesLists);
+			}
+			else
+			{
+				vbBookIssuesPanel.getChildren().clear();
+				vbBookIssuesPanel.getChildren().addAll(hbBookIssues);	
+			}
+		});
+		return vbBookIssuesPanel;		
+	}
+}

@@ -1,0 +1,46 @@
+package Tables;
+
+import Lists.FineLists;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
+
+public class FindTable {
+
+	public static TableView tvFineTable()
+	{
+		TableView tvFineTable = new TableView<FineLists>();
+		tvFineTable.setMaxHeight(480);
+		tvFineTable.setMaxWidth(Region.USE_PREF_SIZE);
+		tvFineTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+		
+		TableColumn memberID=new TableColumn("Member ID");
+		memberID.setCellValueFactory(new PropertyValueFactory<>("MemberId"));
+		memberID.setMinWidth(80);
+		
+		TableColumn memberName=new TableColumn("Member Name");
+		memberName.setCellValueFactory(new PropertyValueFactory<>("MemberName"));
+		memberName.setMinWidth(80);
+		
+		TableColumn bookCode=new TableColumn("Book Code");
+		bookCode.setCellValueFactory(new PropertyValueFactory<>("BookCode"));
+		bookCode.setMinWidth(80);
+		
+		TableColumn bookName=new TableColumn("Book Name");
+		bookName.setCellValueFactory(new PropertyValueFactory<>("BookName"));
+		bookName.setMinWidth(80);
+		
+		TableColumn dayPassed=new TableColumn("Day Passed");
+		dayPassed.setCellValueFactory(new PropertyValueFactory<>("DayPassed"));
+		dayPassed.setMinWidth(80);
+		
+		TableColumn money=new TableColumn("Money");
+		money.setCellValueFactory(new PropertyValueFactory<>("Money"));
+		money.setMinWidth(80);
+		
+		tvFineTable.getColumns().addAll(memberID,memberName,bookCode,bookName,dayPassed,money);
+		
+		return null;
+	}
+}

@@ -1,0 +1,362 @@
+package View;
+
+import java.awt.Desktop;
+import java.util.Date;
+
+import Handler.AdminHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+
+public class AUDAdminView {
+	private static VBox vbAddAdminView;
+	private static Label lTitle;
+	private static HBox hbTitleCon;
+	private static Label lSubTitle;
+	private static Label lAdminID;
+	public static TextField tAdminID;
+	private static Label lAdminName;
+	public static TextField tAdminName;
+	private static Label lAdminNameError;
+	private static VBox vbAdminNameError;
+	private static Label lPassword;
+	private static TextField tPassword;
+	private static Label lPasswordError;
+	private static VBox vbPasswordError;
+	private static Label lGender;
+	public static RadioButton rbMale;
+	private static RadioButton rbFemale;
+	private static HBox hbGenderCon;
+	private static Label lDoB;
+	public static DatePicker dpDoB;
+	private static Label lDoBError;
+	private static VBox vbDoBError;
+	private static Label lPhoto;
+	private Desktop desktop;
+	private static FileChooser fcImage;
+	private static Button btnOpenImage;
+	public static Label lChooseImagePath;
+	private static HBox hbImageCon;
+	private static Label lPhoneNo;
+	public static TextField tPhoneNo;
+	private static Label lPhoneNoError;
+	private static VBox vbPhoneNoError;
+	private static Label lPresentAddress;
+	public static TextArea taPresentAddress;
+	private static Label lPresentAddressError;
+	private static VBox vbPresentAddressError;
+	private static Label lJoinDate;
+	public static DatePicker dpJoinDate;
+	private static Label lJoinDateError;
+	private static VBox vbJoinDateError;
+	public static GridPane gp;
+	private static Button btnSave;
+	private static Button btnCancel;
+	private static Button btnUpdate;
+	private static Button btnDelete;
+	public static HBox hbBtnCon;
+	public static VBox vbAddAdminView(String id,String name,String joinDate,String gender,String doB,String phoneNo,String presentAddress,String password,int action)
+	{
+		vbAddAdminView = new VBox();
+				
+		lTitle = new Label("Add New Admin");
+		lTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,20));
+		
+		hbTitleCon = new HBox();
+		hbTitleCon.setPadding(new Insets(15,50,15,50));
+		hbTitleCon.setPrefSize(1080,50);
+		hbTitleCon.setStyle("-fx-background-color:white");
+		hbTitleCon.getChildren().add(lTitle);
+		
+		btnSave = new Button("Save");
+		btnSave.setTextFill(Color.WHITE);
+		btnSave.setPadding(new Insets(10,10,10,10));
+		btnSave.setStyle("-fx-background-color:green");
+		btnSave.setPrefSize(100,30);
+		btnSave.setFont(Font.font("Times New Roman", 15));
+
+		btnCancel = new Button("Clear");
+		btnCancel.setTextFill(Color.GREY);
+		btnCancel.setPadding(new Insets(10,10,10,10));
+		btnCancel.setStyle("-fx-background-color:#f2f2f2");
+		btnCancel.setPrefSize(100,30);
+		btnCancel.setFont(Font.font("Times New Roman", 15));
+		
+		btnUpdate = new Button("Update");
+		btnUpdate.setTextFill(Color.WHITE);
+		btnUpdate.setPadding(new Insets(10,10,10,10));
+		btnUpdate.setStyle("-fx-background-color:blue");
+		btnUpdate.setPrefSize(100,30);
+		btnUpdate.setFont(Font.font("Times New Roman", 15));
+		
+		hbBtnCon = new HBox();
+		if(action==1)
+		{
+			hbBtnCon.getChildren().addAll(btnSave,btnCancel);
+			hbBtnCon.setSpacing(10);
+		}
+		if(action == 2)
+		{
+			hbBtnCon.getChildren().addAll(btnUpdate,btnCancel);
+			hbBtnCon.setSpacing(10);
+		}
+		
+		lAdminID = new Label("Admin ID");
+		lAdminID.setFont(Font.font("Times New Roman",15));
+		lAdminID.setTextFill(Color.GREY);
+
+		tAdminID = new TextField();
+		tAdminID.setPrefWidth(470);
+		tAdminID.setEditable(false);
+		
+		if(id.equals("-1"))
+		{
+			tAdminID.setText(AdminHandler.GetNewID()+"");
+		}
+		else
+		{
+			tAdminID.setText(id);
+		}
+		lAdminName = new Label("Admin Name");
+		lAdminName.setFont(Font.font("Times New Roman", 15));
+		lAdminName.setTextFill(Color.GREY);
+		
+		tAdminName = new TextField();
+		tAdminName.setPrefWidth(470);
+		tAdminName.setText(name);
+		
+		lAdminNameError = new Label("Eroor");
+		lAdminNameError.setTextFill(Color.RED);
+		lAdminNameError.setFont(Font.font("Times New Roman",15));
+
+		vbAdminNameError = new VBox();
+		vbAdminNameError.getChildren().addAll(tAdminName);
+		vbAdminNameError.setSpacing(3);
+		
+		tAdminName.setOnKeyReleased(e->{
+			vbAdminNameError.getChildren().remove(lAdminNameError);
+			if(!Validation.checkName(tAdminName.getText()))
+			{
+				vbAdminNameError.getChildren().add(lAdminNameError);
+				lAdminNameError.setText("Use 'letters of the alphabet' not 'alphabets'; rather than 'characters");
+			}
+		});
+		
+		lPassword = new Label("Password");
+		lPassword.setFont(Font.font("Times New Roman", 15));
+		lPassword.setTextFill(Color.GREY);
+		
+		tPassword = new TextField();
+		tPassword.setPrefWidth(470);
+		tPassword.setText(password);
+		
+		lPasswordError = new Label("Eroor");
+		lPasswordError.setTextFill(Color.RED);
+		lPasswordError.setFont(Font.font("Times New Roman",15));
+
+		vbPasswordError = new VBox();
+		vbPasswordError.getChildren().addAll(tPassword);
+		vbPasswordError.setSpacing(3);
+		
+		tPassword.setOnKeyReleased(e->{
+			vbPasswordError.getChildren().remove(lPasswordError);
+			if(!Validation.checkPassword(tPassword.getText()))
+			{
+				vbPasswordError.getChildren().add(lPasswordError);
+				lPasswordError.setText("at least n characters\r\n" + 
+						"combination of upper- and lower-case characters(*)\r\n" + 
+						"one or more digits(*)\r\n" + 
+						"not related to other user data (name, address, username, ...)\r\n" + 
+						"not a dictionary word");
+			}		
+		});
+		
+		lGender = new Label("Gender");
+		lGender.setFont(Font.font("Times New Roman", 15));
+		lGender.setTextFill(Color.GREY);
+	
+		rbMale = new RadioButton("Male");
+		rbMale.setFont(Font.font("Times New Roman", 15));
+		rbMale.selectedProperty().set(true);
+		
+		rbFemale = new RadioButton("Female");
+		rbFemale.setFont(Font.font("Times New Roman",15));
+		
+		if(gender.equals("Male"))
+		{
+			rbMale.selectedProperty().set(true);
+			rbFemale.selectedProperty().set(false);	
+		}
+		else if(gender.equals("Male"))
+		{
+			rbMale.selectedProperty().set(false);
+			rbFemale.selectedProperty().set(true);
+		}
+		
+		rbFemale.setOnAction(e->{
+			rbMale.selectedProperty().set(false);
+			rbFemale.selectedProperty().set(true);
+		});
+		rbMale.setOnAction(e->{
+			rbMale.selectedProperty().set(true);
+			rbFemale.selectedProperty().set(false);
+		});
+		
+		hbGenderCon = new HBox();
+		hbGenderCon.getChildren().addAll(rbMale,rbFemale);
+		hbGenderCon.setSpacing(10);
+		
+		lDoB = new Label("Date of Birth");
+		lDoB.setFont(Font.font("Times New Roman",15));
+		lDoB.setTextFill(Color.GREY);
+
+		dpDoB = new DatePicker();
+		dpDoB.setPrefWidth(470);
+		dpDoB.setPromptText(doB);
+		dpDoB.setEditable(false);
+
+		lDoBError = new Label("Eroor");
+		lDoBError.setTextFill(Color.RED);
+		lDoBError.setFont(Font.font("Times New Roman",15));
+
+		vbDoBError = new VBox();
+		vbDoBError.getChildren().addAll(dpDoB);
+		vbDoBError.setSpacing(3);
+		
+		lPhoto = new Label("Upload Photo");
+		lPhoto.setFont(Font.font("Times New Roman",15));
+		lPhoto.setTextFill(Color.GREY);
+
+		btnOpenImage = new Button("Open Image");
+		btnOpenImage.setPrefWidth(100);
+		
+		lChooseImagePath = new Label("No File Choosen");
+		lChooseImagePath.setFont(Font.font("Times New Roman",15));
+		lChooseImagePath.setTextFill(Color.GREY);
+
+		hbImageCon = new HBox();
+		hbImageCon.getChildren().addAll(btnOpenImage,lChooseImagePath);
+		hbImageCon.setSpacing(5);
+		hbImageCon.setPrefWidth(470);
+		
+		lPhoneNo = new Label("Phone No");
+		lPhoneNo.setFont(Font.font("Times New Roman",15));
+		lPhoneNo.setTextFill(Color.GREY);
+
+		tPhoneNo = new TextField();
+		tPhoneNo.setPrefWidth(470);
+		tPhoneNo.setText(phoneNo);
+		 
+		lPhoneNoError = new Label("Eroor");
+		lPhoneNoError.setTextFill(Color.RED);
+		lPhoneNoError.setFont(Font.font("Times New Roman",15));
+
+		vbPhoneNoError = new VBox();
+		vbPhoneNoError.getChildren().addAll(tPhoneNo);
+		vbPhoneNoError.setSpacing(3);
+		
+		tPhoneNo.setOnKeyReleased(e->{
+			vbPhoneNoError.getChildren().remove(lPhoneNoError);
+			if(!Validation.checkName(tPhoneNo.getText()))
+			{
+				vbPhoneNoError.getChildren().add(lPhoneNoError);
+				lPhoneNoError.setText("09-********* or 02-****** or 09-******");
+			}				
+		});
+		
+		lPresentAddress = new Label("Present Address");
+		lPresentAddress.setFont(Font.font("Times New Roman",15));
+		lPresentAddress.setTextFill(Color.GREY);
+
+		taPresentAddress = new TextArea();
+		taPresentAddress.setPrefWidth(470);
+		taPresentAddress.setPrefHeight(100);
+		taPresentAddress.setText(presentAddress);
+				
+		lPresentAddressError = new Label("Eroor");
+		lPresentAddressError.setTextFill(Color.RED);
+		lPresentAddressError.setFont(Font.font("Times New Roman",15));
+
+		vbPresentAddressError = new VBox();
+		vbPresentAddressError.getChildren().addAll(taPresentAddress);
+		vbPresentAddressError.setSpacing(3);
+		
+		taPresentAddress.setOnKeyReleased(e->{
+			vbPresentAddressError.getChildren().remove(lPresentAddressError);
+			if(!Validation.checkName(taPresentAddress.getText()))
+			{
+				vbPresentAddressError.getChildren().add(lPresentAddressError);
+				lPresentAddressError.setText("Use 'letters of the alphabet' not 'alphabets'; rather than 'characters and Type 3 character at least");
+			}			
+		});
+		lJoinDate = new Label("Join Date");
+		lJoinDate.setFont(Font.font("Times New Roman",15));
+		lJoinDate.setTextFill(Color.GREY);
+
+		dpJoinDate = new DatePicker();
+		dpJoinDate.setPrefWidth(470);
+		dpJoinDate.setPromptText(joinDate);
+		dpJoinDate.setEditable(false);
+		
+		lJoinDateError = new Label("Eroor");
+		lJoinDateError.setFont(Font.font("Times New Roman",15));
+		lJoinDateError.setTextFill(Color.RED);
+	
+		vbJoinDateError = new VBox();
+		vbJoinDateError.getChildren().addAll(dpJoinDate);
+		vbJoinDateError.setSpacing(3);
+		
+		gp = new GridPane();
+		gp.setStyle("-fx-background-color:white");
+		gp.setPadding(new Insets(10,10,10,10));
+		gp.add(lAdminID, 0, 0);
+		gp.add(lAdminName, 1, 0);
+		gp.add(tAdminID, 0, 1);
+		gp.add(vbAdminNameError, 1, 1);
+		gp.add(lJoinDate, 0, 2);
+		gp.add(lGender, 1, 2);
+		gp.add(vbJoinDateError, 0, 3);
+		gp.add(hbGenderCon, 1, 3);
+		gp.add(lDoB, 0, 4);
+		gp.add(lPhoneNo, 1, 4);
+		gp.add(vbDoBError, 0, 5);
+		gp.add(vbPhoneNoError, 1, 5);
+		gp.add(lPassword, 0, 6);
+		gp.add(vbPasswordError, 0, 7);
+		gp.add(lPresentAddress, 0,8);
+		gp.add(vbPresentAddressError,0,9);
+		gp.add(hbBtnCon, 0, 10);
+		gp.setHgap(20);
+		gp.setVgap(10);
+		
+		
+		btnSave.setOnAction(e->{
+			if(Validation.checkName(tAdminName.getText()) && !(dpJoinDate.getValue().toString().isEmpty())) {
+				AdminHandler.AddNewAdmin(tAdminName.getText(), dpJoinDate.getValue().toString(), gender, dpDoB.getValue().toString(), tPhoneNo.getText(), taPresentAddress.getText(), tPassword.getText());
+			}
+		});
+		
+		vbAddAdminView.getChildren().addAll(hbTitleCon,gp);
+		vbAddAdminView.setStyle("-fx-background-color:#f2f2f2");
+		vbAddAdminView.setSpacing(5);
+		vbAddAdminView.setPadding(new Insets(10,0,10,0));
+		return vbAddAdminView;
+		}
+}
+

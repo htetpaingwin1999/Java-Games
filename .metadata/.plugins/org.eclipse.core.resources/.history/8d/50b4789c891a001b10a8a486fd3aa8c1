@@ -1,0 +1,60 @@
+package View;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class TermsAndConditionsPanel {
+	public static VBox vbTermsAndConditionsPanel(boolean isClick)
+	{
+		
+		VBox vbTermsAndContionsPanel = new VBox();
+
+		Image imgTermsAndContidions = new Image("handshake.png");
+
+		Button btnTermsAndContidions = new Button("Terms And Conditions",new ImageView(imgTermsAndContidions));
+		btnTermsAndContidions.setStyle("-fx-background-color:red");
+		btnTermsAndContidions.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnTermsAndContidions.setTextFill(Color.BLACK);
+		btnTermsAndContidions.setMinWidth(320);
+		btnTermsAndContidions.setAlignment(Pos.CENTER_LEFT);
+		btnTermsAndContidions.setPadding(new Insets(7,0,7,20));	
+		
+		Image imgAddTermsAndContidions = new Image("add.png");
+
+		Button btnAddTermsAndContidions = new Button("  Add New Terms\n   Condition",new ImageView(imgAddTermsAndContidions));
+		btnAddTermsAndContidions.setStyle("-fx-background-color:#87CEFA;");
+		btnAddTermsAndContidions.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddTermsAndContidions.setTextFill(Color.BLACK);
+		btnAddTermsAndContidions.setMinWidth(320);
+		btnAddTermsAndContidions.setAlignment(Pos.CENTER_LEFT);
+		btnAddTermsAndContidions.setPadding(new Insets(7,0,7,50));
+		btnAddTermsAndContidions.setMinHeight(50);
+		
+		Image imgTermsAndContidionsLists = new Image("list.png");
+		Button btnTermsAndContidionsLists = new Button("Terms And Conditions\n   Lists",new ImageView(imgTermsAndContidionsLists));
+		btnTermsAndContidionsLists.setStyle("-fx-background-color:#87CEFA;");
+		btnTermsAndContidionsLists.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnTermsAndContidionsLists.setTextFill(Color.BLACK);
+		btnTermsAndContidionsLists.setMinWidth(320);
+		btnTermsAndContidionsLists.setAlignment(Pos.CENTER_LEFT);
+		btnTermsAndContidionsLists.setPadding(new Insets(7,0,7,50));
+		btnTermsAndContidionsLists.setMinHeight(50);
+		vbTermsAndContionsPanel.getChildren().add(btnTermsAndContidions);
+
+			if(isClick == true)
+			{
+				vbTermsAndContionsPanel.getChildren().clear();
+				vbTermsAndContionsPanel.getChildren().addAll(btnTermsAndContidions,btnAddTermsAndContidions,btnTermsAndContidionsLists);
+			}
+		return vbTermsAndContionsPanel;		
+	}
+}

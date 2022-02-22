@@ -1,0 +1,112 @@
+package Handler;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+
+import List.StudentList;
+
+public class IncomeReportHandler {
+	public static int  Day(String day,String month,String year)
+	{
+		int money = 0;
+
+			try {
+				Connection con = DBConnection.openConnection();
+				String q= "Select sum(PayAmount) from studentpay where day(AddDate)=? and month(AddDate)=? and year(AddDate)=? and studentpay.Dt=? group by day(AddDate)";
+				
+				PreparedStatement ps = con.prepareStatement(q);
+				ps.setString(1,day);
+				ps.setString(2, month);
+				ps.setString(3, year);
+				ps.setInt(4, 0);
+				
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+					money =rs.getInt(1);
+					return money;
+					}
+				con.close();
+			} catch (SQLException e) {
+			}
+		
+		return money;
+	}
+	
+	public static int  Month(String month,String year)
+	{
+		int money = 0;
+
+			try {
+				Connection con = DBConnection.openConnection();
+				String q= "Select sum(PayAmount) from studentpay where month(AddDate)=? and year(AddDate)=? and studentpay.Dt=? group by day(AddDate)";
+				
+				PreparedStatement ps = con.prepareStatement(q);
+				ps.setString(1, month);
+				ps.setString(2, year);
+				ps.setInt(3,0);
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+					money =rs.getInt(1);
+					return money;
+					}
+				con.close();
+			} catch (SQLException e) {
+			}
+		
+		return money;
+	}
+	
+	public static int  Year(String year)
+	{
+		int money = 0;
+
+			try {
+				Connection con = DBConnection.openConnection();
+				String q= "Select sum(PayAmount) from studentpay where year(AddDate)=? and studentpay.Dt=? group by day(AddDate)";
+				PreparedStatement ps = con.prepareStatement(q);
+				ps.setString(1, year);
+				ps.setInt(2, 0);
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+					money =rs.getInt(1);
+					return money;
+					}
+				con.close();
+			} catch (SQLException e) {
+			}
+		
+		return money;
+	}
+	public static ArrayList<StudentList> GetStudentIncomeByDate(String day,String month,String year)
+	{
+		ArrayList<StudentList> studentList = new ArrayList<StudentList>();	
+		try {
+			Connection con = DBConnection.openConnection();
+			String q = "select st.StudentID,st.StudentName,st.StudentPhoneNo,sp.StudentSectionID,"
+					+ "c.CourseName,s.OpenTime,sp.PayAmount from student as st join course as c "
+					+ "join section as s join studentsection as ss join studentpay as sp where "
+					+ "st.StudentID=sp.StudentID and s.CourseID=c.CourseID and ss.SectionID=s.SectionID"
+					+ " and ss.StudentSectionID=sp.StudentSectionID and day(sp.AddDate)=? and month(sp.AddDate)=?"
+					+ " and year(sp.AddDate)=? and sp.Dt=?";
+			
+			PreparedStatement ps = con.prepareStatement(q);
+		ps.setString(1, day);
+		ps.setString(2,month);
+		ps.setString(3,year);
+	    ps.setInt(4, 0);
+
+		ResultSet rs = ps.executeQuery();
+		while (rs.next()) {	
+			StudentList st = new StudentList(rs.getInt(1),rs.getString(2),rs.getString(3),rs.getInt(4),rs.getString(5),rs.getString(6),rs.getInt(7));
+			System.out.println(st.getStudentName());
+			studentList.add(st);
+		}
+		con.close();
+		} catch (SQLException e) {
+		}
+		return studentList;
+	}
+}

@@ -1,0 +1,401 @@
+package View;
+
+import java.awt.Desktop;
+import java.util.ArrayList;
+import java.util.Date;
+import Handler.Validation;
+import List.CourseLists;
+import List.FineCategoryLists;
+import List.StaffLists;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+
+public class AUDSectionView {
+	private static VBox vbAddSectionView;
+	private static Label lTitle;
+	private static HBox hbTitleCon;
+	private static Label lSubTitle;
+	private static Label lSectionID;
+	public static TextField tSectionID;
+	private static Label lSectionIDError;
+	private static VBox vbSectionIDError;//a to a shay ma nyi lox
+	private static Label lCourseName;
+	public static ComboBox cbCourseName;
+	private static Label lCourseNameError;
+	private static VBox vbCourseNameError;
+	private static Label lFee;
+	private static TextField tFee;
+	private static Label lFeeError;
+	private static VBox vbFeeError;
+	
+	private static Label lStaffName;
+	public static ComboBox cbStaffName;
+	private static Label lStaffNameError;
+	private static VBox vbStaffNameError;
+	
+	private static Label lStartDate;
+	public static DatePicker dpStartDate;
+	private static Label lStartDateError;
+	private static VBox vbStartDateError;
+	
+	private static Label lEndDate;
+	public static DatePicker dpEndDate;
+	private static Label lEndDateError;
+	private static VBox vbEndDateError;
+	
+	private static Label lFirstDay;
+	public static ComboBox cbFirstDay;
+	private static Label lFirstDayError;
+	private static VBox vbFirstDayError;
+	
+	private static Label lFirstTime;
+	public static TextField tFirstTime;
+	private static Label lFirstTimeError;
+	private static VBox vbFirstTimeError;
+	
+	private static Label lSecondDay;
+	public static ComboBox cbSecondDay;
+	private static Label lSecondDayError;
+	private static VBox vbSecondDayError;
+	
+	private static Label lSecondTime;
+	public static TextField tSecondTime;
+	private static Label lSecondTimeError;
+	private static VBox vbSecondTimeError;
+	
+	public static GridPane gp;
+	private static Button btnSave;
+	private static Button btnCancel;
+	private static Button btnUpdate;
+	private static Button btnDelete;
+	public static HBox hbBtnCon;
+	
+	public static VBox vbAddSectionView(int sectionID,String courseName,String staffName,String startDate,String endDate,String firstDay,String firstTime,String secondDay,String secondTime,int action)
+	{
+		MainView.lIndex.setOnMouseClicked(e->{
+			MainView.vbWorkSpaceCon.getChildren().remove(MainView.vbWorkSpace);
+			MainView.vbWorkSpace = CourseListsView.vbCourseListsView();
+			MainView.vbWorkSpaceCon.getChildren().add(MainView.vbWorkSpace);
+			MainView.lIndex.setText("Staff Lists");
+			MainView.lIndex.setTextFill(Color.BLACK);
+			MainView.lIndex1.setText("");
+		});
+		
+		vbAddSectionView = new VBox();
+		
+		ArrayList<CourseLists> courseLists = Handler.CourseHandler.GetAllCourse();
+		ArrayList<StaffLists> staffLists = Handler.StaffHandler.GetAllStaff();
+				
+		lTitle = new Label("Add New Section");
+		lTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,20));
+		
+		hbTitleCon = new HBox();
+		hbTitleCon.setPadding(new Insets(15,50,15,50));
+		hbTitleCon.setPrefSize(1080,50);
+		hbTitleCon.setStyle("-fx-background-color:white");
+		hbTitleCon.getChildren().add(lTitle);
+		
+		btnSave = new Button("Save");
+		btnSave.setTextFill(Color.WHITE);
+		btnSave.setPadding(new Insets(10,10,10,10));
+		btnSave.setStyle("-fx-background-color:green");
+		btnSave.setPrefSize(100,30);
+		btnSave.setFont(Font.font("Times New Roman", 15));
+
+		btnCancel = new Button("Clear");
+		btnCancel.setTextFill(Color.GREY);
+		btnCancel.setPadding(new Insets(10,10,10,10));
+		btnCancel.setStyle("-fx-background-color:#f2f2f2");
+		btnCancel.setPrefSize(100,30);
+		btnCancel.setFont(Font.font("Times New Roman", 15));
+		
+		btnUpdate = new Button("Update");
+		btnUpdate.setTextFill(Color.WHITE);
+		btnUpdate.setPadding(new Insets(10,10,10,10));
+		btnUpdate.setStyle("-fx-background-color:blue");
+		btnUpdate.setPrefSize(100,30);
+		btnUpdate.setFont(Font.font("Times New Roman", 15));
+		
+		hbBtnCon = new HBox();
+		
+		lSectionID = new Label("lSectionID");
+		lSectionID.setFont(Font.font("Times New Roman",15));
+		lSectionID.setTextFill(Color.GREY);
+
+		tSectionID = new TextField();
+		tSectionID.setPrefWidth(470);
+
+		lSectionIDError = new Label("");
+		lSectionIDError.setTextFill(Color.WHITE);
+		lSectionIDError.setFont(Font.font("Times New Roman",15));
+
+		vbSectionIDError = new VBox();
+		vbSectionIDError.getChildren().addAll(tSectionID);
+		vbSectionIDError.setSpacing(3);
+		
+		lCourseName = new Label("Course Name");
+		lCourseName.setFont(Font.font("Times New Roman",15));
+		lCourseName.setTextFill(Color.GREY);
+
+		cbCourseName = new ComboBox();
+		cbCourseName.setPrefWidth(470);
+
+		lCourseNameError = new Label("");
+		lCourseNameError.setTextFill(Color.WHITE);
+		lCourseNameError.setFont(Font.font("Times New Roman",15));
+
+		vbCourseNameError = new VBox();
+		vbCourseNameError.getChildren().addAll(cbCourseName);
+		vbCourseNameError.setSpacing(3);
+		
+		lFee = new Label("Fee");
+		lFee.setFont(Font.font("Times New Roman",15));
+		lFee.setTextFill(Color.GREY);
+
+		tFee = new TextField();
+		tFee.setPrefWidth(470);
+
+		lFeeError = new Label("");
+		lFeeError.setTextFill(Color.WHITE);
+		lFeeError.setFont(Font.font("Times New Roman",15));
+
+		vbFeeError = new VBox();
+		vbFeeError.getChildren().addAll(tFee);
+		vbFeeError.setSpacing(3);
+		
+		lStaffName = new Label("Staff Name");
+		lStaffName.setFont(Font.font("Times New Roman",15));
+		lStaffName.setTextFill(Color.GREY);
+
+		cbStaffName = new ComboBox();
+		cbStaffName.setPrefWidth(470);
+
+		lStaffNameError = new Label("");
+		lStaffNameError.setTextFill(Color.WHITE);
+		lStaffNameError.setFont(Font.font("Times New Roman",15));
+
+		vbStaffNameError = new VBox();
+		vbStaffNameError.getChildren().addAll(cbStaffName);
+		vbStaffNameError.setSpacing(3);
+		
+		lStartDate = new Label("Start Date");
+		lStartDate.setFont(Font.font("Times New Roman",15));
+		lStartDate.setTextFill(Color.GREY);
+
+		dpStartDate = new DatePicker();
+		dpStartDate.setPrefWidth(470);
+		
+		lStartDateError = new Label("");
+		lStartDateError.setTextFill(Color.WHITE);
+		lStartDateError.setFont(Font.font("Times New Roman",15));
+
+		vbStartDateError = new VBox();
+		vbStartDateError.getChildren().addAll(dpStartDate);
+		vbStartDateError.setSpacing(3);
+		
+		lEndDate = new Label("End Date");
+		lEndDate.setFont(Font.font("Times New Roman",15));
+		lEndDate.setTextFill(Color.GREY);
+
+		dpEndDate = new DatePicker();
+		dpEndDate.setPrefWidth(470);
+		
+		lEndDateError = new Label("");
+		lEndDateError.setTextFill(Color.WHITE);
+		lEndDateError.setFont(Font.font("Times New Roman",15));
+
+		vbEndDateError = new VBox();
+		vbEndDateError.getChildren().addAll(dpEndDate);
+		vbEndDateError.setSpacing(3);
+			
+		lFirstDay = new Label("First Day");
+		lFirstDay.setFont(Font.font("Times New Roman",15));
+		lFirstDay.setTextFill(Color.GREY);
+
+		cbFirstDay = new ComboBox();
+		cbFirstDay.setPrefWidth(470);
+
+		lFirstDayError = new Label("");
+		lFirstDayError.setTextFill(Color.WHITE);
+		lFirstDayError.setFont(Font.font("Times New Roman",15));
+
+		vbFirstDayError = new VBox();
+		vbFirstDayError.getChildren().addAll(cbFirstDay);
+		vbFirstDayError.setSpacing(3);
+		
+		lFirstTime = new Label("First Time");
+		lFirstTime.setFont(Font.font("Times New Roman",15));
+		lFirstTime.setTextFill(Color.GREY);
+
+		tFirstTime = new TextField();
+		tFirstTime.setPrefWidth(470);
+
+		lFirstTimeError = new Label("");
+		lFirstTimeError.setTextFill(Color.WHITE);
+		lFirstTimeError.setFont(Font.font("Times New Roman",15));
+
+		vbFirstTimeError = new VBox();
+		vbFirstTimeError.getChildren().addAll(tFirstTime);
+		vbFirstTimeError.setSpacing(3);
+		
+		lSecondDay = new Label("Second Day");
+		lSecondDay.setFont(Font.font("Times New Roman",15));
+		lSecondDay.setTextFill(Color.GREY);
+
+		cbSecondDay = new ComboBox();
+		cbSecondDay.setPrefWidth(470);
+
+		lSecondDayError = new Label("");
+		lSecondDayError.setTextFill(Color.WHITE);
+		lSecondDayError.setFont(Font.font("Times New Roman",15));
+
+		vbSecondDayError = new VBox();
+		vbSecondDayError.getChildren().addAll(cbSecondDay);
+		vbSecondDayError.setSpacing(3);
+		
+		lSecondTime = new Label("Second Time");
+		lSecondTime.setFont(Font.font("Times New Roman",15));
+		lSecondTime.setTextFill(Color.GREY);
+
+		tSecondTime = new TextField();
+		tSecondTime.setPrefWidth(470);
+
+		lSecondTimeError = new Label("");
+		lSecondTimeError.setTextFill(Color.WHITE);
+		lSecondTimeError.setFont(Font.font("Times New Roman",15));
+
+		vbSecondTimeError = new VBox();
+		vbSecondTimeError.getChildren().addAll(tSecondTime);
+		vbSecondTimeError.setSpacing(3);
+		
+		
+		if(action==1)
+		{
+			hbBtnCon.getChildren().addAll(btnSave,btnCancel);
+			hbBtnCon.setSpacing(10);
+			vbCourseNameError.getChildren().remove(lCourseNameError);
+			vbStaffNameError.getChildren().remove(lStaffNameError);
+			if(courseLists.size() ==0)
+			{
+				lCourseNameError.setText("No Course is provided");
+				vbCourseNameError.getChildren().add(lCourseNameError);			
+			}
+			if(courseLists.size()>0)
+			{
+				for(CourseLists c:courseLists)
+				{
+					cbCourseName.getItems().add(c.getCourseName());
+				}
+				cbCourseName.getSelectionModel().select(0);
+				tFee.setText(Handler.CourseHandler.GetUpdatedCourseFee(cbCourseName.getValue().toString())+"");	
+			}
+			if(staffLists.size() ==0)
+			{
+				lStaffNameError.setText("No Staff is employed");
+				vbCourseNameError.getChildren().add(lCourseNameError);
+			}
+			if(staffLists.size()>0)
+			{
+				for(StaffLists c:staffLists)
+				{
+					cbStaffName.getItems().add(c.getStaffName());
+				}
+				cbStaffName.getSelectionModel().select(0);
+			}
+			cbFirstDay.getItems().addAll("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturaday");
+		}
+		if(action == 2)
+		{
+			vbCourseNameError.getChildren().remove(lCourseNameError);
+			vbStaffNameError.getChildren().remove(lStaffNameError);
+			
+			hbBtnCon.getChildren().addAll(btnUpdate,btnCancel);
+			hbBtnCon.setSpacing(10);
+			lTitle.setText("Update Section");
+			
+			if(courseLists.size() ==0)
+			{
+				lCourseNameError.setText("No Course is provided");
+				vbCourseNameError.getChildren().add(lCourseNameError);
+			}
+			if(staffLists.size() ==0)
+			{
+				lStaffNameError.setText("No Staff is employed");
+				vbCourseNameError.getChildren().add(lCourseNameError);
+			}
+		}
+		
+		gp = new GridPane();
+		gp.setStyle("-fx-background-color:white");
+		gp.setPadding(new Insets(10,10,10,10));
+		gp.add(lSectionID, 0, 0);
+		gp.add(vbSectionIDError, 0, 1);
+		gp.add(lCourseName, 1, 0);
+		gp.add(vbCourseNameError, 1, 1);
+		
+		gp.add(lFee, 0, 2);
+		gp.add(lStaffName, 1, 2);
+		gp.add(vbFeeError, 0, 3);		
+		gp.add(vbStaffNameError, 1, 3);
+		
+		gp.add(lStartDate, 0, 4);
+		gp.add(lEndDate, 1, 4);
+		gp.add(vbStartDateError, 0, 5);
+		gp.add(vbEndDateError, 1, 5);
+		
+		gp.add(lFirstDay, 0, 6);
+		gp.add(lFirstTime, 1, 6);
+		gp.add(vbFirstDayError,0,7);
+		gp.add(vbFirstTimeError, 1, 7);
+		
+		gp.add(lSecondDay, 0, 8);
+		gp.add(lSecondTime, 1, 8);	
+		gp.add(vbSecondDayError, 0, 9);
+		gp.add(vbSecondTimeError, 1, 9);
+		
+		gp.add(hbBtnCon, 0, 10);
+		gp.setHgap(20);
+		gp.setVgap(10);
+		
+		
+		btnSave.setOnAction(e->{
+			Alert al = new Alert(AlertType.INFORMATION,"Are you sure toadd",ButtonType.YES,ButtonType.NO,ButtonType.CANCEL);
+			al.showAndWait();
+			
+			
+			
+			if(al.getResult() == ButtonType.YES)
+			{
+			
+			}		
+		});
+		
+		vbAddSectionView.getChildren().addAll(hbTitleCon,gp);
+		vbAddSectionView.setStyle("-fx-background-color:#f2f2f2");
+		vbAddSectionView.setSpacing(5);
+		vbAddSectionView.setPadding(new Insets(10,0,10,0));
+		return vbAddSectionView;
+		}
+}
+

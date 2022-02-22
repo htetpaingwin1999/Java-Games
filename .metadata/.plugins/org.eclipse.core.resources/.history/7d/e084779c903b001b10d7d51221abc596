@@ -1,0 +1,211 @@
+package View;
+
+import java.time.LocalDate;
+
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+
+public class RegisterNewSection {
+	private static VBox vbRegisterNewSectionView;
+	private static Label lIndexTitle;
+	private static VBox vbBody;
+	private static Button btnSubmit;
+	private static Button btnCancel;
+	private static Label lSectionID,lFee,lCourseName;
+	private static ComboBox cbCourseName;
+	private static TextField tSectionID,tFee;
+	private static Label lTeacherName;
+	private static TextField tTeacherName;
+	private static Label lDay1,lTime1,lDay2,lTime2,lStartDate,lEndDate;
+	private static HBox hbTime1Container,hbTime2Container;
+	private static ComboBox cbHour1,cbMin1;
+	private static ComboBox cbHour2,cbMin2;
+	private static ComboBox cbDay1,cbDay2;
+	private static GridPane gpSectionInfo;
+	private static DatePicker dpStartDate,dpEndDate;
+	private static Stage myStage;
+	private static HBox hbSubmitNCancel;
+	private static RadioButton rbtnRepeater;
+	
+	// sectionid,ccourseName,cfee,teacher,2time,2day,startdate,endate
+
+	public static VBox vbRegisterNewSectionView()
+	{
+		vbRegisterNewSectionView = new VBox();
+		
+		lIndexTitle = new Label("Register New Section");
+		lIndexTitle.setTextFill(Color.BLUE);
+		lIndexTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,FontPosture.REGULAR,25));
+		
+		vbBody = new VBox();
+		
+		btnSubmit = new Button("Save");
+		btnSubmit.setTextFill(Color.WHITE);
+		btnSubmit.setPadding(new Insets(10,10,10,10));
+		btnSubmit.setStyle("-fx-background-color:green");
+		btnSubmit.setPrefSize(100,30);
+		btnSubmit.setFont(Font.font("Times New Roman", 15));
+
+		btnCancel = new Button("Clear");
+		btnCancel.setTextFill(Color.GREY);
+		btnCancel.setPadding(new Insets(10,10,10,10));
+		btnCancel.setStyle("-fx-background-color:#f2f2f2");
+		btnCancel.setPrefSize(100,30);
+		btnCancel.setFont(Font.font("Times New Roman", 15));
+		
+		hbSubmitNCancel = new HBox();
+		hbSubmitNCancel.getChildren().addAll(btnSubmit,btnCancel);
+		hbSubmitNCancel.setSpacing(10);
+		
+		gpSectionInfo = new GridPane();
+		
+		lSectionID = new Label("Section ID");
+		lSectionID.setFont(Font.font("Times New Roman", 15));
+		lSectionID.setTextFill(Color.GREY);
+		
+		lCourseName = new Label("Course Name");
+		lCourseName.setFont(Font.font("Times New Roman", 15));
+		lCourseName.setTextFill(Color.GREY);
+		
+		lFee = new Label("Fee");
+		lFee.setFont(Font.font("Times New Roman", 15));
+		lFee.setTextFill(Color.GREY);
+		
+		lTeacherName = new Label("Teacher Name");
+		lTeacherName.setFont(Font.font("Times New Roman", 15));
+		lTeacherName.setTextFill(Color.GREY);
+		
+		lDay1 = new Label("Day");
+		lDay1.setFont(Font.font("Times New Roman", 15));
+		lDay1.setTextFill(Color.GREY);
+		
+		lTime1 = new Label("Time ");
+		lTime1.setFont(Font.font("Times New Roman", 15));
+		lTime1.setTextFill(Color.GREY);
+		
+		lDay2 = new Label("Day");
+		lDay2.setFont(Font.font("Times New Roman", 15));
+		lDay2.setTextFill(Color.GREY);
+		
+		lTime2 = new Label("Time ");
+		lTime2.setFont(Font.font("Times New Roman", 15));
+		lTime2.setTextFill(Color.GREY);
+		
+		tSectionID = new TextField();
+		tSectionID.setPrefWidth(530);
+//		tFee.setStyle("-fx-border: 2px solid grey;");
+		
+		cbCourseName = new ComboBox();
+		cbCourseName.setPrefWidth(530);
+
+		tTeacherName = new TextField();
+		
+		tFee = new TextField();
+		
+		cbDay1 = new ComboBox();
+		cbDay1.setPrefWidth(530);
+
+		cbDay2 = new ComboBox();
+		cbDay2.setPrefWidth(530);
+
+		cbHour1 = new ComboBox();
+		cbHour1.setPrefWidth(260);
+		for(int i = 0 ; i < 24; i++)
+		{
+			cbHour1.getItems().add(i+1+ "");
+		}
+		
+		cbMin1 = new ComboBox();
+		cbMin1.setPrefWidth(260);
+		for(int i = 0 ; i <= 60; i= i + 10)
+		{
+			cbMin1.getItems().add(i+10+ "");
+		}
+		
+		hbTime1Container = new HBox();
+		hbTime1Container.getChildren().addAll(cbHour1,cbMin1);
+		hbTime1Container.setSpacing(10);		
+		
+		cbHour2 = new ComboBox();
+		cbHour2.setPrefWidth(260);
+		
+		for(int i = 0 ; i < 24; i++)
+		{
+			cbHour2.getItems().add(i+1+ "");
+		}
+		
+		cbMin2 = new ComboBox();
+		cbMin2.setPrefWidth(260);
+		for(int i = 0 ; i <= 60; i= i + 10)
+		{
+			cbMin2.getItems().add(i+10+ "");
+		}
+		
+		hbTime2Container = new HBox();
+		hbTime2Container.getChildren().addAll(cbHour2,cbMin2);
+		hbTime2Container.setSpacing(10);
+		
+		lStartDate = new Label("Start Date ");
+		lStartDate.setFont(Font.font("Times New Roman", 15));
+		lStartDate.setTextFill(Color.GREY);
+		
+		dpStartDate = new DatePicker();
+		dpStartDate.setPrefWidth(530);
+		dpStartDate.setValue(LocalDate.now());
+
+		lEndDate = new Label("End Date ");
+		lEndDate.setFont(Font.font("Times New Roman", 15));
+		lEndDate.setTextFill(Color.GREY);
+		
+		dpEndDate = new DatePicker();
+		dpEndDate.setPrefWidth(530);
+		
+		gpSectionInfo.add(lSectionID, 0, 0);
+		gpSectionInfo.add(lCourseName, 1, 0);
+		gpSectionInfo.add(tSectionID, 0, 1);
+		gpSectionInfo.add(cbCourseName, 1, 1);
+		gpSectionInfo.add(lFee, 0, 2);
+		gpSectionInfo.add(lTeacherName, 1, 2);
+		gpSectionInfo.add(tFee, 0, 3);
+		gpSectionInfo.add(tTeacherName, 1, 3);
+		gpSectionInfo.add(lDay1, 0, 4);
+		gpSectionInfo.add(lTime1, 1, 4);
+		gpSectionInfo.add(cbDay1, 0, 5);
+		gpSectionInfo.add(hbTime1Container, 1, 5);
+		gpSectionInfo.add(lDay2, 0, 6);
+		gpSectionInfo.add(lTime2, 1, 6);
+		gpSectionInfo.add(cbDay2, 0, 7);
+		gpSectionInfo.add(hbTime2Container, 1, 7);
+		gpSectionInfo.add(lStartDate, 0, 8);
+		gpSectionInfo.add(lEndDate, 1, 8);
+		gpSectionInfo.add(dpStartDate, 0, 9);
+		gpSectionInfo.add(dpEndDate, 1, 9);
+		gpSectionInfo.add(hbSubmitNCancel, 0, 10);
+
+		gpSectionInfo.setHgap(20);
+		gpSectionInfo.setVgap(20);
+		
+		vbBody.setPrefHeight(580);
+		vbBody.setPadding(new Insets(20,40,20,40));
+		vbBody.setSpacing(20);
+		vbBody.getChildren().add(gpSectionInfo);
+		
+		vbRegisterNewSectionView.getChildren().addAll(lIndexTitle,vbBody);
+		vbRegisterNewSectionView.setStyle("-fx-background-color:#FFFFFF");
+
+		return vbRegisterNewSectionView;
+	}
+}

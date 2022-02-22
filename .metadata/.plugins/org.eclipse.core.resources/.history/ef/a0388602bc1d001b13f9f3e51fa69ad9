@@ -1,0 +1,64 @@
+package Tables;
+
+import java.sql.Date;
+
+import Lists.FineLists;
+import javafx.geometry.Insets;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.Region;
+
+public class MemberTable {
+	public static TableView tvMemberTable;
+
+	private int hashNo;
+	private String memberId,memberName;
+	private Date dob;
+	private String phoneNo;
+	private String address;
+	private String password;
+	private String email;
+	private Date joinDate;
+	private Date banDate;
+	private String banTime;
+	
+	public static TableView tvMemberTable()
+	{
+		tvMemberTable = new TableView<FineLists>();
+		tvMemberTable.setMaxWidth(Region.USE_PREF_SIZE);
+		tvMemberTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+//		tvMemberTable.setStyle("-fx-background-color:red;");
+		tvMemberTable.setPadding(new Insets(10,15,10,15));
+		
+		tvMemberTable.getStyleClass().add("TableDecoration.css");
+
+		TableColumn hashNo=new TableColumn("#");
+		hashNo.setCellValueFactory(new PropertyValueFactory<>("HashNo"));
+		hashNo.setMinWidth(120);
+		
+		TableColumn memberID=new TableColumn("Member ID");
+		memberID.setCellValueFactory(new PropertyValueFactory<>("MemberId"));
+		memberID.setMinWidth(120);
+		
+		TableColumn memberName=new TableColumn("Member Name");
+		memberName.setCellValueFactory(new PropertyValueFactory<>("MemberName"));
+		memberName.setMinWidth(120);
+		
+		TableColumn dob=new TableColumn("Date of Birth");
+		dob.setCellValueFactory(new PropertyValueFactory<>("Dob"));
+		dob.setMinWidth(120);
+		
+		TableColumn phoneNo=new TableColumn("Phone No");
+		phoneNo.setCellValueFactory(new PropertyValueFactory<>("Dob"));
+		phoneNo.setMinWidth(120);
+		
+		TableColumn address=new TableColumn("Phone No");
+		phoneNo.setCellValueFactory(new PropertyValueFactory<>("Dob"));
+		phoneNo.setMinWidth(120);
+		
+		tvMemberTable.getColumns().addAll(hashNo,memberID,memberName,dob,phoneNo,address,email,password,joinDate,banDate,banTime);
+
+		return tvMemberTable;
+	}
+}

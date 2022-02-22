@@ -1,0 +1,492 @@
+package View;
+
+import java.awt.Desktop;
+import java.sql.Date;
+
+import Handler.StaffHandler;
+import List.StaffLists;
+import Table.StaffTable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+
+public class StaffDataView {
+	private static VBox vbStaffDataView;
+	private static Label lTitle;
+	private static HBox hbTitleCon;
+	private static Label lSubTitle;
+	private static Label lStaffID;
+	public static TextField tStaffID;
+	private static Label lStaffName;
+	public static TextField tStaffName;
+	private static Label lPassword;
+	private static TextField tPassword;
+	private static Label lGender;
+	public static RadioButton rbMale;
+	private static RadioButton rbFemale;
+	private static HBox hbGenderCon;
+	private static Label lDoB;
+	public static DatePicker dpDoB;
+	private static Label lNrc;
+	public static TextField tNrc;
+	private static Label lReligion;
+	public static ComboBox cbReligion;
+	private static Label lEmail;
+	public static TextField tEmail;
+	private static Label lPhoto;
+	private Desktop desktop;
+	private static FileChooser fcImage;
+	private static Button btnOpenImage;
+	public static Label lChooseImagePath;
+	private static HBox hbImageCon;
+	private static Label lFatherName;
+	public static TextField tFatherName;
+	private static Label lMotherName;
+	public static TextField tMotherName;
+	private static Label lFatherOccupation;
+	public static TextField tFatherOccupation;
+	private static Label lMotherOccupation;
+	public static TextField tMotherOccupation;
+	private static Label lPhoneNo;
+	public static TextField tPhoneNo;
+	private static Label lNationality;
+	public static TextField tNationality;
+	private static Label lPresentAddress;
+	public static TextArea taPresentAddress;
+	private static Label lPermanentAddress;
+	public static TextArea taPermanentAddress;
+	private static Label lJoinDate;
+	public static DatePicker dpJoinDate;
+	public static GridPane gpPersonalInfo;
+	public static GridPane gpParentsAndContactInfo;
+	public static GridPane gpJobInfo;
+	private static Button btnUpdate;
+	private static Button btnDelete;
+	public static HBox hbBtnCon;
+	public static Button btnNext1;
+	public static Button btnPrevious1;
+	public static Button btnNext2;
+	public static Button btnPrevious2;
+	public static BorderPane bpNext;
+	public static HBox hbNextCon;
+	public static VBox vbWorkSpace;
+	private static String gender;
+	public static VBox vbStaffDataView(int adminID)
+	{
+		
+		StaffLists stl = StaffHandler.GetStaffData(adminID);
+		vbStaffDataView = new VBox();
+				
+		lTitle = new Label("Update Staff Data");
+		lTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,20));
+		
+		hbTitleCon = new HBox();
+		hbTitleCon.setPadding(new Insets(15,50,15,50));
+		hbTitleCon.setPrefSize(1080,50);
+		hbTitleCon.setStyle("-fx-background-color:white");
+		hbTitleCon.getChildren().add(lTitle);
+		
+		btnUpdate = new Button("Update");
+		btnUpdate.setTextFill(Color.WHITE);
+		btnUpdate.setPadding(new Insets(10,10,10,10));
+		btnUpdate.setStyle("-fx-background-color:blue");
+		btnUpdate.setPrefSize(100,30);
+		btnUpdate.setFont(Font.font("Times New Roman", 15));
+
+		btnDelete = new Button("Delete");
+		btnDelete.setTextFill(Color.WHITE);
+		btnDelete.setPadding(new Insets(10,10,10,10));
+		btnDelete.setStyle("-fx-background-color:red");
+		btnDelete.setPrefSize(100,30);
+		btnDelete.setFont(Font.font("Times New Roman", 15));
+		
+		hbBtnCon = new HBox();
+		hbBtnCon.getChildren().addAll(btnUpdate,btnDelete);
+		hbBtnCon.setSpacing(10);
+		
+		lStaffName = new Label("Staff Name");
+		lStaffName.setFont(Font.font("Times New Roman", 15));
+		lStaffName.setTextFill(Color.GREY);
+		
+		tStaffName = new TextField();
+		tStaffName.setPrefWidth(470);
+		tStaffName.setText(stl.getStaffName());
+		
+		lPassword = new Label("Password");
+		lPassword.setFont(Font.font("Times New Roman", 15));
+		lPassword.setTextFill(Color.GREY);
+		
+		tPassword = new TextField();
+		tPassword.setPrefWidth(470);
+		tPassword.setText(stl.getPassword());
+		
+		lGender = new Label("Gender");
+		lGender.setFont(Font.font("Times New Roman", 15));
+		lGender.setTextFill(Color.GREY);
+	
+		rbMale = new RadioButton("Male");
+		rbMale.setFont(Font.font("Times New Roman", 15));
+		rbMale.selectedProperty().set(true);
+		
+		rbFemale = new RadioButton("Female");
+		rbFemale.setFont(Font.font("Times New Roman",15));
+		
+		gender = stl.getGender();
+		
+	    if(gender.equals("Male"))
+	    {
+	    	rbMale.setSelected(true);
+	    	rbFemale.setSelected(false);
+	    }
+	    else
+	    {
+	    	rbMale.setSelected(false);
+	    	rbFemale.setSelected(true);
+	    }
+				
+		rbFemale.setOnAction(e->{
+			rbMale.selectedProperty().set(false);
+			rbFemale.selectedProperty().set(true);
+			gender = "Female";
+		});
+		rbMale.setOnAction(e->{
+			rbMale.selectedProperty().set(true);
+			rbFemale.selectedProperty().set(false);
+			gender = "Male";
+		});
+		
+		hbGenderCon = new HBox();
+		hbGenderCon.getChildren().addAll(rbMale,rbFemale);
+		hbGenderCon.setSpacing(10);
+		
+		lDoB = new Label("Date of Birth");
+		lDoB.setFont(Font.font("Times New Roman",15));
+		lDoB.setTextFill(Color.GREY);
+
+		dpDoB = new DatePicker();
+		dpDoB.setPrefWidth(470);
+		dpDoB.setPromptText(stl.getDateofBirth()+"");
+		
+		lNrc = new Label("NRC No");
+		lNrc.setFont(Font.font("Times New Roman",15));
+		lNrc.setTextFill(Color.GREY);
+
+		tNrc = new TextField();
+		tNrc.setPrefWidth(470);
+		tNrc.setText(stl.getNrcNo());
+
+		lReligion =new Label("Religion");
+		lReligion.setFont(Font.font("Times New Roman",15));
+		lReligion.setTextFill(Color.GREY);
+		
+		cbReligion = new ComboBox();
+		cbReligion.getItems().addAll("Buddhism","Christian","Hinduism","Musalism");
+		cbReligion.getSelectionModel().select(0);
+		cbReligion.setPrefWidth(200);
+		
+		if(stl.getReligon().equals("Buddhism"))
+		{
+			cbReligion.getSelectionModel().select(0);
+		}
+		if(stl.getReligon().equals("Christian"))
+		{
+			cbReligion.getSelectionModel().select(1);
+		}
+		if(stl.getReligon().equals("Hinduism"))
+		{
+			cbReligion.getSelectionModel().select(2);
+		}
+		if(stl.getReligon().equals("Musalism"))
+		{
+			cbReligion.getSelectionModel().select(3);
+		}
+		
+		lEmail = new Label("Email");
+		lEmail.setFont(Font.font("Times New Roman",15));
+		lEmail.setTextFill(Color.GREY);
+
+		tEmail = new TextField();
+		tEmail.setPrefWidth(470);
+		tEmail.setText(stl.getEmail());
+		
+		lPhoto = new Label("Upload Photo");
+		lPhoto.setFont(Font.font("Times New Roman",15));
+		lPhoto.setTextFill(Color.GREY);
+
+		btnOpenImage = new Button("Open Image");
+		btnOpenImage.setPrefWidth(100);
+		
+		lChooseImagePath = new Label("No File Choosen");
+		lChooseImagePath.setFont(Font.font("Times New Roman",15));
+		lChooseImagePath.setTextFill(Color.GREY);
+
+		hbImageCon = new HBox();
+		hbImageCon.getChildren().addAll(btnOpenImage,lChooseImagePath);
+		hbImageCon.setSpacing(5);
+		hbImageCon.setPrefWidth(470);
+
+		gpPersonalInfo = new GridPane();
+		gpPersonalInfo.setVgap(20);
+		gpPersonalInfo.add(lStaffName, 0, 0);
+		gpPersonalInfo.add(lDoB, 1, 0);
+		gpPersonalInfo.add(tStaffName, 0, 1);
+		gpPersonalInfo.add(dpDoB, 1, 1);
+		gpPersonalInfo.add(lEmail, 0, 2);
+		gpPersonalInfo.add(lNrc, 1, 2);
+		gpPersonalInfo.add(tEmail, 0, 3);
+		gpPersonalInfo.add(tNrc, 1, 3);
+		gpPersonalInfo.add(lReligion, 0, 4);
+		gpPersonalInfo.add(lGender, 1, 4);
+		gpPersonalInfo.add(cbReligion, 0, 5);
+		gpPersonalInfo.add(hbGenderCon, 1, 5);
+		gpPersonalInfo.add(lPhoto, 0, 6);
+		gpPersonalInfo.add(hbImageCon, 0,7);
+		gpPersonalInfo.setHgap(20);
+		gpPersonalInfo.setVgap(20);
+		
+		gpParentsAndContactInfo = new GridPane();
+				
+		lFatherName = new Label("Father Name");
+		lFatherName.setFont(Font.font("Times New Roman",15));
+		lFatherName.setTextFill(Color.GREY);
+
+		tFatherName = new TextField();
+		tFatherName.setPrefWidth(470);
+		tFatherName.setText(stl.getFatherName());
+						
+		lMotherName = new Label("Mother Name");
+		lMotherName.setFont(Font.font("Times New Roman",15));
+		lMotherName.setTextFill(Color.GREY);
+
+		tMotherName = new TextField();
+		tMotherName.setPrefWidth(470);
+		tMotherName.setText(stl.getMotherName());
+
+		lFatherOccupation = new Label("Father Occupation");
+		lFatherOccupation.setFont(Font.font("Times New Roman",15));
+		lFatherOccupation.setTextFill(Color.GREY);
+
+		tFatherOccupation = new TextField();
+		tFatherOccupation.setPrefWidth(470);
+		tFatherOccupation.setText(stl.getFatherOccupation());
+		
+		lMotherOccupation = new Label("Mother Occupation");
+		lMotherOccupation.setFont(Font.font("Times New Roman",15));
+		lMotherOccupation.setTextFill(Color.GREY);
+
+		tMotherOccupation = new TextField();
+		tMotherOccupation.setPrefWidth(470);
+		tMotherOccupation.setText(stl.getMotherOccupation());
+		
+		lPhoneNo = new Label("Phone No");
+		lPhoneNo.setFont(Font.font("Times New Roman",15));
+		lPhoneNo.setTextFill(Color.GREY);
+
+		tPhoneNo = new TextField();
+		tPhoneNo.setPrefWidth(470);
+		tPhoneNo.setText(stl.getPhoneNo());
+		
+		lNationality = new Label("Nationality");
+		lNationality.setFont(Font.font("Times New Roman",15));
+		lNationality.setTextFill(Color.GREY);
+
+		tNationality = new TextField();
+		tNationality.setPrefWidth(470);
+		tNationality.setText(stl.getNationality());
+		
+		lPresentAddress = new Label("Present Address");
+		lPresentAddress.setFont(Font.font("Times New Roman",15));
+		lPresentAddress.setTextFill(Color.GREY);
+
+		taPresentAddress = new TextArea();
+		taPresentAddress.setPrefWidth(470);
+		taPresentAddress.setText(stl.getPresentAddress());
+
+		lPermanentAddress = new Label("Permanent Address");
+		lPermanentAddress.setFont(Font.font("Times New Roman",15));
+		lPermanentAddress.setTextFill(Color.GREY);
+
+		taPermanentAddress = new TextArea();
+		taPermanentAddress.setPrefWidth(470);
+		taPermanentAddress.setText(stl.getPresentAddress());
+
+		gpParentsAndContactInfo.add(lFatherName, 0, 0);
+		gpParentsAndContactInfo.add(lMotherName, 1, 0);
+		gpParentsAndContactInfo.add(tFatherName, 0, 1);
+		gpParentsAndContactInfo.add(tMotherName, 1, 1);
+		gpParentsAndContactInfo.add(lFatherOccupation, 0, 2);
+		gpParentsAndContactInfo.add(lMotherOccupation, 1, 2);
+		gpParentsAndContactInfo.add(tFatherOccupation, 0, 3);
+		gpParentsAndContactInfo.add(tMotherOccupation, 1, 3);
+		gpParentsAndContactInfo.add(lPhoneNo, 0, 4);
+		gpParentsAndContactInfo.add(lNationality, 1, 4);
+		gpParentsAndContactInfo.add(tPhoneNo, 0, 5);
+		gpParentsAndContactInfo.add(tNationality, 1, 5);
+		gpParentsAndContactInfo.add(lPresentAddress, 0, 6);
+		gpParentsAndContactInfo.add(lPermanentAddress, 1, 6);
+		gpParentsAndContactInfo.add(taPresentAddress, 0, 7);
+		gpParentsAndContactInfo.add(taPermanentAddress, 1, 7);
+		gpParentsAndContactInfo.setHgap(20);
+		gpParentsAndContactInfo.setVgap(20);
+		
+		gpJobInfo = new GridPane();
+		
+		lStaffID = new Label("Staff ID");
+		lStaffID.setFont(Font.font("Times New Roman",15));
+		lStaffID.setTextFill(Color.GREY);
+
+		tStaffID = new TextField();
+		tStaffID.setPrefWidth(470);
+		tStaffID.setEditable(false);
+		tStaffID.setText(stl.getStaffID()+"");
+		
+		lJoinDate = new Label("Join Date");
+		lJoinDate.setFont(Font.font("Times New Roman",15));
+		lJoinDate.setTextFill(Color.GREY);
+
+		dpJoinDate = new DatePicker();
+		dpJoinDate.setPrefWidth(470);
+		dpJoinDate.setPromptText(stl.getJoinDate()+"");
+		
+		gpJobInfo.add(lStaffID, 0, 0);
+		gpJobInfo.add(lJoinDate, 1, 0);
+		gpJobInfo.add(tStaffID, 0, 1);
+		gpJobInfo.add(dpJoinDate, 1, 1);
+		gpJobInfo.add(lPassword, 0, 2);
+		gpJobInfo.add(tPassword, 0,3);
+		gpJobInfo.add(hbBtnCon, 0, 4);
+		gpJobInfo.setHgap(20);
+		gpJobInfo.setVgap(20);
+		
+		btnNext1 = new Button("Next");
+		btnNext1.setTextFill(Color.WHITE);
+		btnNext1.setStyle("-fx-background-color:BLUE");
+		btnNext1.setFont(Font.font("Times New Roman", 18));
+		
+		btnPrevious1 = new Button("Previous");
+		btnPrevious1.setTextFill(Color.BLUE);
+		btnPrevious1.setStyle("-fx-background-color:white;-fx-border-color:BLUE");
+		btnPrevious1.setFont(Font.font("Times New Roman", 18));
+		
+		btnNext2 = new Button("Next");
+		btnNext2.setTextFill(Color.WHITE);
+		btnNext2.setStyle("-fx-background-color:BLUE");
+		btnNext2.setFont(Font.font("Times New Roman", 18));
+		
+		btnPrevious2 = new Button("Previous");
+		btnPrevious2.setTextFill(Color.BLUE);
+		btnPrevious2.setStyle("-fx-background-color:white;-fx-border-color:BLUE");
+		btnPrevious2.setFont(Font.font("Times New Roman", 18));
+		
+		hbNextCon = new HBox();
+		hbNextCon.getChildren().addAll(btnNext1);
+		hbNextCon.setSpacing(10);
+		
+		bpNext = new BorderPane();
+		bpNext.setRight(hbNextCon);
+		
+		vbWorkSpace = new VBox();
+		vbWorkSpace.setPadding(new Insets(20,50,20,50));
+		vbWorkSpace.setPrefWidth(1080);
+		vbWorkSpace.setStyle("-fx-background-color:white;");
+		vbWorkSpace.setSpacing(20);
+		
+		lSubTitle = new Label("Personal Information");
+		lSubTitle.setFont(Font.font("Times New Roman", FontWeight.BOLD, 20));
+		lSubTitle.setAlignment(Pos.CENTER);
+		lSubTitle.setUnderline(true);
+		
+		vbWorkSpace.getChildren().addAll(lSubTitle,gpPersonalInfo,bpNext);
+		
+		btnNext1.setOnAction(e->{
+			vbWorkSpace.getChildren().clear();
+			lSubTitle.setText("Parents And Contact Information");
+			bpNext.getChildren().clear();
+			hbNextCon.getChildren().clear();
+			hbNextCon.getChildren().addAll(btnPrevious1,btnNext2);
+			bpNext.setRight(hbNextCon);
+			vbWorkSpace.getChildren().addAll(lSubTitle,gpParentsAndContactInfo,bpNext);
+		});
+		btnNext2.setOnAction(e->{
+			vbWorkSpace.getChildren().clear();
+			lSubTitle.setText("Job Information");
+			bpNext.getChildren().clear();
+			hbNextCon.getChildren().clear();
+			hbNextCon.getChildren().addAll(btnPrevious2);
+			bpNext.setRight(hbNextCon);
+			vbWorkSpace.getChildren().addAll(lSubTitle,gpJobInfo,bpNext);
+		});
+		btnPrevious1.setOnAction(e->{
+			vbWorkSpace.getChildren().clear();
+			lSubTitle.setText("Personal Information");
+			bpNext.getChildren().clear();
+			hbNextCon.getChildren().clear();
+			hbNextCon.getChildren().addAll(btnNext1);
+			bpNext.setRight(hbNextCon);
+			vbWorkSpace.getChildren().addAll(lSubTitle,gpPersonalInfo,bpNext);
+		});
+		btnPrevious2.setOnAction(e->{
+			vbWorkSpace.getChildren().clear();
+			lSubTitle.setText("Parents And Contact Information");
+			bpNext.getChildren().clear();
+			hbNextCon.getChildren().clear();
+			hbNextCon.getChildren().addAll(btnPrevious1,btnNext2);
+			bpNext.setRight(hbNextCon);
+			vbWorkSpace.getChildren().addAll(lSubTitle,gpParentsAndContactInfo,bpNext);
+		});
+		
+		btnUpdate.setOnAction(e->{
+			Alert alert = new Alert(AlertType.CONFIRMATION, "Are you sure to add? ", ButtonType.YES, ButtonType.NO, ButtonType.CANCEL);
+			alert.showAndWait();
+
+			if (alert.getResult() == ButtonType.YES)
+			{
+//				StaffHandler.AddNewStaff(tStaffName.getText(), Date.valueOf(dpJoinDate.getValue().toString()), gender, Date.valueOf(dpDoB.getValue().toString()), tNrc.getText(), cbReligion.getValue().toString(), tEmail.getText(), tFatherName.getText(), tMotherName.getText(), tFatherOccupation.getText(), tMotherOccupation.getText(), tPhoneNo.getText(), tNationality.getText(), taPresentAddress.getText(), taPermanentAddress.getText(),tPassword.getText());
+				tStaffID.clear();
+				tStaffName.clear();
+				dpJoinDate.setValue(null);
+				dpDoB.setValue(null);
+				rbMale.selectedProperty().set(true);
+				rbFemale.selectedProperty().set(false);
+				tNrc.setText(null);
+				cbReligion.getSelectionModel().select(0);
+				tEmail.setText(null);
+				tPhoneNo.setText(null);
+				tFatherName.setText(null);
+				tMotherName.setText(null);
+				tFatherOccupation.setText(null);
+				tMotherOccupation.setText(null);
+				tNationality.setText(null);
+				taPresentAddress.setText(null);
+				taPermanentAddress.setText(null);
+			}
+		});
+		vbStaffDataView.getChildren().addAll(hbTitleCon,vbWorkSpace);
+		vbStaffDataView.setStyle("-fx-background-color:#f2f2f2");
+		vbStaffDataView.setSpacing(5);
+		vbStaffDataView.setPadding(new Insets(10,0,10,0));
+		return vbStaffDataView;
+		}
+}

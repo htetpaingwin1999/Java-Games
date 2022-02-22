@@ -1,0 +1,211 @@
+package View;
+
+import java.time.LocalDate;
+
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+
+public class StudentSectionView {
+	private static VBox vbStudentSectionView;
+	private static Label lIndexTitle;
+	private static VBox vbBody;
+	private static Button btnSubmit;
+	private static Button btnCancel;
+	private static Label lSectionID,lFee,lCourseName;
+	private static TextField tCourseName;
+	private static TextField tSectionID,tFee;
+	private static Label lTeacherName;
+	private static TextField tTeacherName;
+	private static Label lDay1,lTime1,lDay2,lTime2,lStartDate,lEndDate,lStudentID,lStudentName;
+	private static HBox hbTime1Container,hbTime2Container;
+	private static TextField tHour1,tMin1;
+	private static TextField tHour2,tMin2;
+	private static TextField tDay1,tDay2,tStudentID,tStudentName;
+	private static GridPane gpStudentSectionInfo;
+	private static DatePicker dpStartDate,dpEndDate;
+	public static Stage myStage;
+	private static HBox hbSubmitNCancel;
+	
+	public static VBox vbStudentSectionView()
+	{
+		myStage = new Stage();
+		vbStudentSectionView = new VBox();
+		
+		lIndexTitle = new Label("Register Student to Course");
+		lIndexTitle.setTextFill(Color.BLUE);
+		lIndexTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,FontPosture.REGULAR,25));
+		lIndexTitle.setPadding(new Insets(20,40,20,40));
+
+		vbBody = new VBox();
+		
+		btnSubmit = new Button("Save");
+		btnSubmit.setTextFill(Color.WHITE);
+		btnSubmit.setPadding(new Insets(10,10,10,10));
+		btnSubmit.setStyle("-fx-background-color:green");
+		btnSubmit.setPrefSize(100,30);
+		btnSubmit.setFont(Font.font("Times New Roman", 15));
+
+		btnCancel = new Button("Clear");
+		btnCancel.setTextFill(Color.GREY);
+		btnCancel.setPadding(new Insets(10,10,10,10));
+		btnCancel.setStyle("-fx-background-color:#f2f2f2");
+		btnCancel.setPrefSize(100,30);
+		btnCancel.setFont(Font.font("Times New Roman", 15));
+		
+		hbSubmitNCancel = new HBox();
+		hbSubmitNCancel.getChildren().addAll(btnSubmit,btnCancel);
+		hbSubmitNCancel.setSpacing(10);
+		
+		gpStudentSectionInfo = new GridPane();
+		
+		lSectionID = new Label("Section ID");
+		lSectionID.setFont(Font.font("Times New Roman", 15));
+		lSectionID.setTextFill(Color.GREY);
+		
+		tSectionID = new TextField();
+		tSectionID.setPrefWidth(530);
+		
+		lCourseName = new Label("Course Name");
+		lCourseName.setFont(Font.font("Times New Roman", 15));
+		lCourseName.setTextFill(Color.GREY);
+		
+		tCourseName = new TextField();
+		tCourseName.setPrefWidth(530);
+
+		lFee = new Label("Fee");
+		lFee.setFont(Font.font("Times New Roman", 15));
+		lFee.setTextFill(Color.GREY);
+		
+		tFee = new TextField();
+		
+		lTeacherName = new Label("Teacher Name");
+		lTeacherName.setFont(Font.font("Times New Roman", 15));
+		lTeacherName.setTextFill(Color.GREY);
+		
+		tTeacherName = new TextField();
+		
+		lDay1 = new Label("Day");
+		lDay1.setFont(Font.font("Times New Roman", 15));
+		lDay1.setTextFill(Color.GREY);
+		
+		tDay1 = new TextField();
+		tDay1.setPrefWidth(530);
+
+		lTime1 = new Label("Time ");
+		lTime1.setFont(Font.font("Times New Roman", 15));
+		lTime1.setTextFill(Color.GREY);
+		
+		tHour1 = new TextField();
+		tHour1.setPrefWidth(260);
+		
+		tMin1 = new TextField();
+		tMin1.setPrefWidth(260);
+		
+		lDay2 = new Label("Day");
+		lDay2.setFont(Font.font("Times New Roman", 15));
+		lDay2.setTextFill(Color.GREY);
+		
+		tDay2 = new TextField();
+		tDay2.setPrefWidth(530);
+
+		lTime2 = new Label("Time ");
+		lTime2.setFont(Font.font("Times New Roman", 15));
+		lTime2.setTextFill(Color.GREY);
+		
+		hbTime1Container = new HBox();
+		hbTime1Container.getChildren().addAll(tHour1,tMin1);
+		hbTime1Container.setSpacing(10);		
+		
+		tHour2 = new TextField();
+		tHour2.setPrefWidth(260);
+
+		tMin2 = new TextField();
+		tMin2.setPrefWidth(260);
+
+		hbTime2Container = new HBox();
+		hbTime2Container.getChildren().addAll(tHour2,tMin2);
+		hbTime2Container.setSpacing(10);
+		
+		lStartDate = new Label("Start Date ");
+		lStartDate.setFont(Font.font("Times New Roman", 15));
+		lStartDate.setTextFill(Color.GREY);
+		
+		dpStartDate = new DatePicker();
+		dpStartDate.setPrefWidth(530);
+		dpStartDate.setValue(LocalDate.now());
+		
+		lEndDate = new Label("End Date ");
+		lEndDate.setFont(Font.font("Times New Roman", 15));
+		lEndDate.setTextFill(Color.GREY);
+		
+		dpEndDate = new DatePicker();
+		dpEndDate.setPrefWidth(530);
+		
+		lStudentID = new Label("Student ID");
+		lStudentID.setFont(Font.font("Times New Roman", 15));
+		lStudentID.setTextFill(Color.GREY);
+		
+		tStudentID = new TextField();
+		tStudentID.setPrefWidth(530);
+
+		lStudentName = new Label("Student Name");
+		lStudentName.setFont(Font.font("Times New Roman", 15));
+		lStudentName.setTextFill(Color.GREY);
+		
+		tStudentName = new TextField();
+		tStudentName.setPrefWidth(530);
+
+		gpStudentSectionInfo.add(lSectionID, 0, 0);
+		gpStudentSectionInfo.add(lCourseName, 1, 0);
+		gpStudentSectionInfo.add(tSectionID, 0, 1);
+		gpStudentSectionInfo.add(tCourseName, 1, 1);
+		gpStudentSectionInfo.add(lFee, 0, 2);
+		gpStudentSectionInfo.add(lTeacherName, 1, 2);
+		gpStudentSectionInfo.add(tFee, 0, 3);
+		gpStudentSectionInfo.add(tTeacherName, 1, 3);
+		gpStudentSectionInfo.add(lDay1, 0, 4);
+		gpStudentSectionInfo.add(lTime1, 1, 4);
+		gpStudentSectionInfo.add(tDay1, 0, 5);
+		gpStudentSectionInfo.add(hbTime1Container, 1, 5);
+		gpStudentSectionInfo.add(lDay2, 0, 6);
+		gpStudentSectionInfo.add(lTime2, 1, 6);
+		gpStudentSectionInfo.add(tDay2, 0, 7);
+		gpStudentSectionInfo.add(hbTime2Container, 1, 7);
+		gpStudentSectionInfo.add(lStartDate, 0, 8);
+		gpStudentSectionInfo.add(lEndDate, 1, 8);
+		gpStudentSectionInfo.add(dpStartDate, 0, 9);
+		gpStudentSectionInfo.add(dpEndDate, 1, 9);
+		gpStudentSectionInfo.add(lStudentID, 0, 10);
+		gpStudentSectionInfo.add(lStudentName, 1, 10);
+		gpStudentSectionInfo.add(tStudentID, 0, 11);
+		gpStudentSectionInfo.add(tStudentName, 1, 11);
+		gpStudentSectionInfo.add(hbSubmitNCancel, 0, 12);
+
+		gpStudentSectionInfo.setHgap(20);
+		gpStudentSectionInfo.setVgap(20);
+		
+		vbBody.setPrefHeight(580);
+		vbBody.setPadding(new Insets(20,40,20,40));
+		vbBody.setSpacing(20);
+		vbBody.getChildren().add(gpStudentSectionInfo);
+		
+		vbStudentSectionView.getChildren().addAll(lIndexTitle,vbBody);
+		vbStudentSectionView.setStyle("-fx-background-color:#FFFFFF");
+		myStage.setScene(new Scene(vbStudentSectionView,1100,650));
+
+		return vbStudentSectionView;
+	}
+}

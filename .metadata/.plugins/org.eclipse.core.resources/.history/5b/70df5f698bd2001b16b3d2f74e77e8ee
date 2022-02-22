@@ -1,0 +1,266 @@
+package View;
+import javafx.application.Application;
+import javafx.scene.layout.BorderPane;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.PasswordField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+public class ChangePasswordView {
+	private static VBox vbChangePasswordView;
+	private static Label lTitle;
+	private static Label lSubTitle;
+	private static VBox vbTitleCon;
+	private static Label lCurrent;
+	private static PasswordField pCurrent;
+	private static Label lCurrentError;
+	private static VBox vbCurrent;
+
+	private static Label lNew1;
+	private static PasswordField pNew1;
+	private static Label lNew1Error;
+	private static VBox vbNew1;
+	
+	private static Label lNew2;
+	private static PasswordField pNew2;
+	private static Label lNew2Error;
+	private static VBox vbNew2;
+
+	
+	private static GridPane gp;
+	private static Button btnSave;
+	private static Button btnCancel;
+	private static HBox hbBtnCon;
+	public static VBox vbChangePasswordView(String id)
+	{
+		vbChangePasswordView = new VBox();
+		lTitle = new Label("Change Password");
+		lTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,20));
+		
+		lSubTitle = new Label("It is a good idea that you are not using anyone else");
+		lSubTitle.setFont(Font.font("Times New Roman",15));
+		lSubTitle.setTextFill(Color.GREY);
+		
+		vbTitleCon = new VBox();
+		vbTitleCon.setPrefSize(1080,80);
+		vbTitleCon.getChildren().addAll(lTitle,lSubTitle);		
+		Login.VBoxFillColorAndSizeAndPadding(vbTitleCon, "white", 15, 50, 5);
+		
+		lCurrent = new Label("Current Password");
+		Login.LabelFillColorAndSize(lCurrent, "grey", 15);
+		
+
+		pCurrent = new PasswordField();
+		pCurrent.setPrefWidth(490);
+		pCurrent.setText("");
+		
+		vbCurrent = new VBox();
+		vbCurrent.getChildren().add(pCurrent);
+		
+		lNew1 = new Label("New Password");
+		Login.LabelFillColorAndSize(lNew1, "grey", 15);
+
+		lNew1Error = new Label("");
+		Login.LabelFillColorAndSize(lNew1Error, "red", 15);
+
+		pNew1 = new PasswordField();
+		pNew1.setPrefWidth(490);
+		pNew1.setText("");
+		
+		vbNew1 = new VBox();
+		vbNew1.getChildren().add(pNew1);
+		
+
+		lNew2 = new Label("Confirm Password");
+		Login.LabelFillColorAndSize(lNew2, "grey", 15);
+
+		pNew2 = new PasswordField();
+		pNew2.setPrefWidth(490);
+		pNew2.setText("");
+		
+		lNew2Error = new Label("");
+		Login.LabelFillColorAndSize(lNew2Error, "red", 15);
+
+		vbNew2 = new VBox();
+		vbNew2.getChildren().add(pNew2);
+		
+		btnSave = new Button("Save Changes");
+		Login.ButtonSave(btnSave);
+		btnSave.setDisable(true);
+		btnSave.setPrefWidth(150);
+		
+		btnCancel = new Button("Clear");
+		Login.ButtonCancel(btnCancel);
+		
+		hbBtnCon = new HBox();
+		hbBtnCon.getChildren().addAll(btnSave,btnCancel);
+		hbBtnCon.setSpacing(10);
+		
+		gp = new GridPane();
+		gp.add(lCurrent, 0, 0);
+		gp.add(vbCurrent, 0, 1);
+		gp.add(lNew1, 0, 2);
+		gp.add(vbNew1, 0, 3);
+		gp.add(lNew2, 0, 4);
+		gp.add(vbNew2, 0, 5);
+		gp.add(hbBtnCon, 0, 6);
+		gp.setVgap(20);
+		Login.GpFillColorAndSizeAndPadding(gp, 20, 245, 0, 20, "white");
+		gp.setPrefWidth(1080);
+		
+		pCurrent.setOnKeyReleased(e->{
+			btnSave.setDisable(true);
+			lCurrentError.setText("");
+			if(Validation.checkPassword(pNew1.getText()) && pNew1.getText().equals(pNew2.getText()))
+			{
+				btnSave.setDisable(false);
+			}
+		});
+		
+		pNew1.setOnKeyReleased(e->{
+			btnSave.setDisable(true);
+			vbNew1.getChildren().remove(lNew1Error);
+			if(!Handler.Validation.checkPassword(pNew1.getText()))
+			{	lNew1Error.setText(Handler.Validation.passwordError);
+				vbNew1.getChildren().add(lNew1Error);
+			}
+			else
+			{
+				lNew1Error.setText("");
+				if(Validation.checkPassword(pCurrent.getText()) && pNew1.getText().equals(pNew2.getText()))
+				{
+					btnSave.setDisable(false);
+				}
+
+			}
+		});
+		
+		pNew2.setOnKeyReleased(e->{
+			btnSave.setDisable(true);
+			vbNew2.getChildren().remove(lNew2Error);
+			if(!pNew2.getText().equals(pNew1.getText()))
+			{	
+				lNew2Error.setText("Passwords do not match");
+				vbNew2.getChildren().add(lNew2Error);
+			}
+			else
+			{
+				lNew2Error.setText("");
+				if(Validation.checkPassword(pCurrent.getText()))
+				{
+					btnSave.setDisable(false);
+				}
+			}
+			
+		});
+		
+		btnSave.setOnAction(e->{
+			vbCurrent.getChildren().remove(lCurrentError);
+			vbNew1.getChildren().remove(lNew1Error);
+			vbNew2.getChildren().remove(lNew1Error);
+
+			if(!pCurrent.getText().equals("") && !pNew1.getText().equals("") && !pNew2.getText().equals(""))
+			{
+				if(Validation.checkPassword(pNew1.getText()) && pNew1.getText().equals(pNew2.getText()))
+				{
+					if(Login.userpos.equals("1"))
+					{
+						System.out.println("Hey Admin password"+pCurrent.getText());
+						if(Handler.AccountHandler.IsAdmin(Login.email, pCurrent.getText()))
+						{
+							Handler.AccountHandler.UpdateAdminPassword(id, pNew1.getText());
+							Alert alsus = new Alert(AlertType.INFORMATION,"Change Password Successfully");
+							alsus.showAndWait();
+							Alert al = new Alert(AlertType.INFORMATION,"Session Expired");
+							al.show();
+							pNew1.setText("");
+							pCurrent.setText("");
+							pNew2.setText("");
+							
+							Login.myStage.setScene(new Scene(Login.BpLogin(),850,500));
+							Login.myStage.centerOnScreen();
+							Login.myStage.show();
+							Login.myStage.setResizable(false);
+						}
+						else
+						{
+							Alert al = new Alert(AlertType.ERROR,"Incorrect Password");
+							al.showAndWait();
+						}
+					}
+					if(Login.userpos.equals("2"))
+					{
+						System.out.println("Hey Staff password"+pCurrent.getText());
+						if(Handler.AccountHandler.IsStaff(id, pCurrent.getText()))
+						{
+							Handler.AccountHandler.UpdateStaffPassword(Login.email, pNew1.getText());
+							Alert alsus = new Alert(AlertType.INFORMATION,"Change Password Successfully");
+							alsus.showAndWait();
+							Alert al = new Alert(AlertType.INFORMATION,"Session Expired");
+							al.show();
+							pNew1.setText("");
+							pCurrent.setText("");
+							pNew2.setText("");
+							Login.myStage.setScene(new Scene(Login.BpLogin(),850,500));
+							Login.myStage.centerOnScreen();
+							Login.myStage.show();
+							Login.myStage.setResizable(false);
+						}
+						else
+						{
+							Alert al = new Alert(AlertType.ERROR,"Incorrect Password");
+							al.showAndWait();
+						}
+					}
+				}
+				
+			}
+			else
+			{
+				Fill(pNew1,lNew1Error,vbNew1,"Fill Password to change");
+				Fill(pNew2,lNew2Error,vbNew2,"Fill Confirm to change");				
+			}
+			
+		});
+		
+		btnCancel.setOnAction(e->{
+
+			vbNew1.getChildren().remove(lNew1Error);
+			vbNew2.getChildren().remove(lNew1Error);
+			pCurrent.setText("");
+			pNew1.setText("");
+			pNew2.setText("");
+		});
+		
+		vbChangePasswordView.getChildren().addAll(vbTitleCon,gp);
+		Login.VBoxFillColorAndSizeAndPadding(vbChangePasswordView, "#f2f2f2", 10, 0, 5);
+		return vbChangePasswordView;	
+	}
+	public static void Fill(PasswordField p,Label l,VBox vb,String text)
+	{
+		if(p.getText().equals(""))
+		{
+			l.setText(text);
+			vb.getChildren().add(l);
+		}
+	}
+}

@@ -1,0 +1,349 @@
+package View;
+
+import java.awt.Desktop;
+import java.util.ArrayList;
+import java.util.Date;
+
+import Handler.ExpenseHandler;
+import Handler.Validation;
+import List.ExpenseCategoryLists;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+
+public class AUDExpenseView {
+	private static VBox vbAddExpenseView;
+	private static Label lTitle;
+	private static HBox hbTitleCon;
+	private static Label lSubTitle;
+	private static Label lExpenseID;
+	public static TextField tExpenseID;
+	private static Label lExpenseIDError;
+	private static VBox vbExpenseIDError;//a to a shay ma nyi lox
+	private static Label lexpenseCategoryName;
+	private static ComboBox cbexpenseCategoryName;
+	private static Label lexpenseCategoryNameError;
+	private static VBox vbexpenseCategoryNameError;
+	private static Label lAmount;
+	public static TextField tAmount;
+	private static Label lAmountError;
+	private static VBox vbAmountError;
+	private static Label lNote;
+	public static TextField tNote;
+	private static Label lNoteError;
+	private static VBox vbNoteError;
+	public static GridPane gp;
+	private static Button btnSave;
+	private static Button btnCancel;
+	private static Button btnUpdate;
+	private static Button btnDelete;
+	public static HBox hbBtnCon;
+	public static VBox vbAddExpenseView(int designationID,String designationName,int maxSalary,int minSalary,int departmentID,String departmentName,int adminID,int action)
+	{
+		MainView.lIndex.setOnMouseClicked(e->{
+			MainView.vbWorkSpaceCon.getChildren().remove(MainView.vbWorkSpace);
+			MainView.vbWorkSpace = ExpenseListsView.vbExpenseListsView();
+			MainView.vbWorkSpaceCon.getChildren().add(MainView.vbWorkSpace);
+			MainView.lIndex.setText("Staff Lists");
+			MainView.lIndex.setTextFill(Color.BLACK);
+			MainView.lIndex1.setText("");
+		});
+		
+		vbAddExpenseView = new VBox();
+		ArrayList<ExpenseCategoryLists> expenseLists = Handler.ExpenseCategoryHandler.GetAllExpenseCategory();
+				
+		lTitle = new Label("Add New Expense");
+		lTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,20));
+		
+		hbTitleCon = new HBox();
+		hbTitleCon.setPadding(new Insets(15,50,15,50));
+		hbTitleCon.setPrefSize(1080,50);
+		hbTitleCon.setStyle("-fx-background-color:white");
+		hbTitleCon.getChildren().add(lTitle);
+		
+		btnSave = new Button("Save");
+		btnSave.setTextFill(Color.WHITE);
+		btnSave.setPadding(new Insets(10,10,10,10));
+		btnSave.setStyle("-fx-background-color:green");
+		btnSave.setPrefSize(100,30);
+		btnSave.setFont(Font.font("Times New Roman", 15));
+
+		btnCancel = new Button("Clear");
+		btnCancel.setTextFill(Color.GREY);
+		btnCancel.setPadding(new Insets(10,10,10,10));
+		btnCancel.setStyle("-fx-background-color:#f2f2f2");
+		btnCancel.setPrefSize(100,30);
+		btnCancel.setFont(Font.font("Times New Roman", 15));
+		
+		btnUpdate = new Button("Update");
+		btnUpdate.setTextFill(Color.WHITE);
+		btnUpdate.setPadding(new Insets(10,10,10,10));
+		btnUpdate.setStyle("-fx-background-color:blue");
+		btnUpdate.setPrefSize(100,30);
+		btnUpdate.setFont(Font.font("Times New Roman", 15));
+		
+		hbBtnCon = new HBox();
+		if(action==1)
+		{
+			hbBtnCon.getChildren().addAll(btnSave,btnCancel);
+			hbBtnCon.setSpacing(10);
+		}
+		if(action == 2)
+		{
+			hbBtnCon.getChildren().addAll(btnUpdate,btnCancel);
+			hbBtnCon.setSpacing(10);
+			lTitle.setText("Update Expense");
+		}
+		
+		lExpenseID = new Label("Expense ID");
+		lExpenseID.setFont(Font.font("Times New Roman",15));
+		lExpenseID.setTextFill(Color.GREY);
+
+		tExpenseID = new TextField();
+		tExpenseID.setPrefWidth(470);
+		tExpenseID.setEditable(false);
+		
+		lExpenseIDError = new Label("");
+		lExpenseIDError.setTextFill(Color.WHITE);
+		lExpenseIDError.setFont(Font.font("Times New Roman",15));
+
+		vbExpenseIDError = new VBox();
+		vbExpenseIDError.getChildren().addAll(tExpenseID);
+		vbExpenseIDError.setSpacing(3);
+		
+		if(action == 1)
+		{
+			tExpenseID.setText(ExpenseHandler.GetNewID()+"");
+		}
+		else
+		{
+			tExpenseID.setText(designationID+"");
+		}
+		
+		
+		lexpenseCategoryName = new Label("Expense Name");
+		lexpenseCategoryName.setFont(Font.font("Times New Roman", 15));
+		lexpenseCategoryName.setTextFill(Color.GREY);
+		
+		cbexpenseCategoryName = new ComboBox();
+		cbexpenseCategoryName.setPrefWidth(470);
+		
+		lexpenseCategoryNameError = new Label("No expenseCategory provided");
+		lexpenseCategoryNameError.setTextFill(Color.RED);
+		lexpenseCategoryNameError.setFont(Font.font("Times New Roman",15));
+
+		vbexpenseCategoryNameError = new VBox();
+		vbexpenseCategoryNameError.getChildren().addAll(cbexpenseCategoryName);
+		vbexpenseCategoryNameError.setSpacing(3);
+		
+		if(action == 1)
+		{
+			if(expenseLists.size() >0)
+			{
+				for(ExpenseCategoryLists d:expenseLists)
+				{
+					cbexpenseCategoryName.getItems().add(d.getExpenseCategoryID());	
+				}
+				cbexpenseCategoryName.getSelectionModel().select(0);
+			}
+			else
+			{
+				vbexpenseCategoryNameError.getChildren().remove(lexpenseCategoryNameError);
+				vbexpenseCategoryNameError.getChildren().add(lexpenseCategoryNameError);
+			}
+		}
+		else
+		{
+			int selectIndex = 0;
+			int counter = 0;
+			for(ExpenseCategoryLists d:expenseLists)
+			{
+				cbexpenseCategoryName.getItems().add(d.getExpenseCategoryName());	
+				if(departmentID ==d.getExpenseCategoryID())
+				{
+					selectIndex = counter;
+				}
+				counter++;
+			}
+			cbexpenseCategoryName.getSelectionModel().select(selectIndex);
+		}
+		
+		lAmount = new Label("Maximum Salary");
+		lAmount.setFont(Font.font("Times New Roman", 15));
+		lAmount.setTextFill(Color.GREY);
+		
+		tAmount = new TextField();
+		tAmount.setPrefWidth(470);
+		tAmount.setText(designationName);
+		
+		lAmountError = new Label("");
+		lAmountError.setTextFill(Color.RED);
+		lAmountError.setFont(Font.font("Times New Roman",15));
+		lAmountError.setText("Max Salary must be number");
+
+		vbAmountError = new VBox();
+		vbAmountError.getChildren().addAll(tAmount);
+		vbAmountError.setSpacing(3);
+		
+		lNote = new Label("Minimum Salary");
+		lNote.setFont(Font.font("Times New Roman", 15));
+		lNote.setTextFill(Color.GREY);
+		
+		tNote = new TextField();
+		tNote.setPrefWidth(470);
+		tNote.setText(designationName);
+		
+		lNoteError = new Label("");
+		lNoteError.setTextFill(Color.RED);
+		lNoteError.setFont(Font.font("Times New Roman",15));
+		lNoteError.setText("Max Salary must be number");
+
+		vbNoteError = new VBox();
+		vbNoteError.getChildren().addAll(tNote);
+		vbNoteError.setSpacing(3);
+		
+		tAmount.setOnKeyReleased(e->{
+			vbAmountError.getChildren().remove(lAmountError);
+			vbNoteError.getChildren().remove(lNoteError);
+			if(!Validation.checkMoney(tAmount.getText()))
+			{
+				vbAmountError.getChildren().add(lAmountError);
+				lAmountError.setText("Type Number");
+				lNoteError.setText("");			}
+		});
+		
+		tNote.setOnKeyReleased(e->{
+			vbAmountError.getChildren().remove(lAmountError);
+			vbNoteError.getChildren().remove(lNoteError);
+			if(!Validation.checkMoney(tNote.getText()))
+			{
+				
+				vbAmountError.getChildren().add(lAmountError);
+				vbNoteError.getChildren().add(lNoteError);
+				lAmountError.setText("");
+				lNoteError.setText("Type Number");
+			}
+		});
+		gp = new GridPane();
+		gp.setStyle("-fx-background-color:white");
+		gp.setPadding(new Insets(10,10,10,10));
+		gp.add(lExpenseID, 0, 0);
+		gp.add(vbExpenseIDError, 0, 1);
+		gp.add(lexpenseCategoryName, 0, 2);
+		gp.add(cbexpenseCategoryName, 0, 3);
+		gp.add(lAmount, 0, 4);
+		gp.add(lNote, 1, 4);
+		gp.add(vbAmountError, 0, 5);
+		gp.add(vbNoteError, 1, 5);
+		gp.add(hbBtnCon, 0, 6);
+		gp.setHgap(20);
+		gp.setVgap(10);
+		
+		btnSave.setOnAction(e->{
+			Alert al = new Alert(AlertType.INFORMATION,"Are you sure toadd",ButtonType.YES,ButtonType.NO,ButtonType.CANCEL);
+			al.showAndWait();
+			
+			
+			
+			if(al.getResult() == ButtonType.YES)
+			{
+			
+				if(expenseLists.size()!=0 && !tAmount.getText().equals(""))
+				{
+				    if( Validation.checkMoney(tAmount.getText())
+				    {
+				    	if(Integer.parseInt(tAmount.getText()) > Integer.parseInt(tNote.getText()))
+				    	{
+				    		int ecid = Handler.ExpenseCategoryHandler.GetID(cbexpenseCategoryName.getValue().toString());
+							ExpenseHandler.	AddNewExpense(Integer.parseInt(tAmount.getText()),ecid,tNote.getText(),1);
+							tExpenseID.setText(ExpenseHandler.GetNewID()+"");
+							cbexpenseCategoryName.getSelectionModel().select(0);
+							tAmount.setText("");
+							tNote.setText("");
+				    	}
+				    	else
+				    	{
+							vbAmountError.getChildren().remove(lAmountError);
+							vbNoteError.getChildren().remove(lNoteError);
+							vbAmountError.getChildren().add(lAmountError);
+							vbNoteError.getChildren().add(lNoteError);
+							lAmountError.setText("Minimum Salary should be less than Maximum Salary");
+							lNoteError.setText("Minimum Salary should be less than Maximum Salary");
+						}
+				    }
+			  }
+				    
+			else
+			{
+				if(!Validation.checkMoney(tAmount.getText()))
+			    {
+					vbAmountError.getChildren().remove(lAmountError);
+					vbNoteError.getChildren().remove(lNoteError);
+					vbAmountError.getChildren().add(lAmountError);
+					vbNoteError.getChildren().add(lNoteError);
+					lAmountError.setText("Salary must be number");
+					lNoteError.setText("");
+					
+			    }
+				if(!Validation.checkMoney(tNote.getText()))
+			    {
+					vbAmountError.getChildren().remove(lAmountError);
+					vbNoteError.getChildren().remove(lNoteError);
+					vbAmountError.getChildren().add(lAmountError);
+					vbNoteError.getChildren().add(lNoteError);
+					lAmountError.setText("Salary must be number");
+					lNoteError.setText("");
+					
+			    }
+				if(!Validation.checkName(tExpenseName.getText()))
+			    {
+					vbExpenseNameError.getChildren().remove(lExpenseNameError);
+					vbExpenseIDError.getChildren().remove(lExpenseIDError);
+					vbExpenseNameError.getChildren().add(lExpenseNameError);
+					vbExpenseIDError.getChildren().add(lExpenseIDError);
+			    }
+			} 
+		}	
+		else
+		{
+			
+			if(tAmount.getText().equals(""))
+			{
+				vbAmountError.getChildren().remove(lAmountError);
+				vbNoteError.getChildren().remove(lNoteError);
+				vbAmountError.getChildren().add(lAmountError);
+				vbNoteError.getChildren().add(lNoteError);
+				lAmount.setText("Type Number");
+				lNote.setText("");
+			}
+			
+		}		
+		});
+		
+		vbAddExpenseView.getChildren().addAll(hbTitleCon,gp);
+		vbAddExpenseView.setStyle("-fx-background-color:#f2f2f2");
+		vbAddExpenseView.setSpacing(5);
+		vbAddExpenseView.setPadding(new Insets(10,0,10,0));
+		return vbAddExpenseView;
+		}
+}
+

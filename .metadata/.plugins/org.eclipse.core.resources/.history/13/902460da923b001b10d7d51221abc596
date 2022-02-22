@@ -1,0 +1,135 @@
+package View;
+
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+
+public class RegisterNewPayment {
+	private static VBox vbRegisterNewPayment;
+	private static Label lIndexTitle;
+	private static VBox vbBody;
+	private static Button btnSubmit;
+	private static Button btnCancel;
+	private static Label lCourseID,lCourseName;
+	private static TextField tCourseID,tCourseName;
+	private static Label lTeacher,lAddmisionDate,lFee,lDescription;
+	private static ComboBox cbCourseName;
+	private static TextField tFee;
+	private static TextArea tDescription;
+	private static GridPane gpCourseInfo;
+	private static DatePicker dp;
+	private static VBox vbDateContainer;
+	private static Stage myStage;
+	private static HBox hbSubmitNCancel;
+	public static VBox vbRegisterNewPayment()
+	{
+		vbRegisterNewPayment = new VBox();
+		
+		lIndexTitle = new Label("Register New Course");
+		lIndexTitle.setTextFill(Color.BLUE);
+		lIndexTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,FontPosture.REGULAR,25));
+		
+		vbBody = new VBox();
+		
+		btnSubmit = new Button("Save");
+		btnSubmit.setTextFill(Color.WHITE);
+		btnSubmit.setPadding(new Insets(10,10,10,10));
+		btnSubmit.setStyle("-fx-background-color:green");
+		btnSubmit.setPrefSize(100,30);
+		btnSubmit.setFont(Font.font("Times New Roman", 15));
+
+		btnCancel = new Button("Clear");
+		btnCancel.setTextFill(Color.GREY);
+		btnCancel.setPadding(new Insets(10,10,10,10));
+		btnCancel.setStyle("-fx-background-color:#f2f2f2");
+		btnCancel.setPrefSize(100,30);
+		btnCancel.setFont(Font.font("Times New Roman", 15));
+		
+		hbSubmitNCancel = new HBox();
+		hbSubmitNCancel.getChildren().addAll(btnSubmit,btnCancel);
+		hbSubmitNCancel.setSpacing(10);
+		
+		gpCourseInfo = new GridPane();
+		
+		lCourseID = new Label("Course ID");
+		lCourseID.setFont(Font.font("Times New Roman", 15));
+		lCourseID.setTextFill(Color.GREY);
+		
+		lCourseName = new Label("Course Name");
+		lCourseName.setFont(Font.font("Times New Roman", 15));
+		lCourseName.setTextFill(Color.GREY);
+		
+		lFee = new Label("Fee");
+		lFee.setFont(Font.font("Times New Roman", 15));
+		lFee.setTextFill(Color.GREY);
+		
+		lTeacher = new Label("Teacher");
+		lTeacher.setFont(Font.font("Times New Roman", 15));
+		lTeacher.setTextFill(Color.GREY);
+		
+		lDescription = new Label("Description");
+		lDescription.setFont(Font.font("Times New Roman", 15));
+		lDescription.setTextFill(Color.GREY);
+		
+		lAddmisionDate = new Label("Registration Date");
+		lAddmisionDate.setFont(Font.font("Times New Roman", 15));
+		lAddmisionDate.setTextFill(Color.GREY);
+		
+		tCourseID = new TextField();
+		tCourseID.setPrefWidth(530);
+//		tCourseID.setStyle("-fx-border: 2px solid grey;");
+		tCourseName = new TextField();
+		tCourseName.setPrefWidth(530);
+
+		cbCourseName = new ComboBox();
+		cbCourseName.setPrefWidth(530);
+
+		tFee = new TextField();
+		
+		tDescription = new TextArea();
+		
+		dp = new DatePicker();
+		dp.setPrefWidth(530);
+
+		vbDateContainer = new VBox();
+		vbDateContainer.getChildren().addAll(dp);
+		
+		
+		gpCourseInfo.add(lCourseName, 0, 0);
+		gpCourseInfo.add(cbCourseName, 0, 1);
+		gpCourseInfo.add(lFee, 1, 0);
+		gpCourseInfo.add(tFee, 1,1);
+		gpCourseInfo.add(tFee, 0, 3);
+		gpCourseInfo.add(tTeacher, 1, 3);
+		gpCourseInfo.add(lDescription, 0, 4);
+		gpCourseInfo.add(lAddmisionDate, 1, 4);
+		gpCourseInfo.add(tDescription, 0, 5);
+		gpCourseInfo.add(vbDateContainer, 1, 5);
+		gpCourseInfo.add(hbSubmitNCancel, 0, 6);
+
+		gpCourseInfo.setHgap(20);
+		gpCourseInfo.setVgap(20);
+		
+		vbBody.setPrefHeight(580);
+		vbBody.setPadding(new Insets(20,40,20,40));
+		vbBody.setSpacing(20);
+		vbBody.getChildren().add(gpCourseInfo);
+		
+		vbRegisterNewPayment.getChildren().addAll(lIndexTitle,vbBody);
+		vbRegisterNewPayment.setStyle("-fx-background-color:#FFFFFF");
+
+		return vbRegisterNewPayment;
+	}
+}

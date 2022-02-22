@@ -1,0 +1,202 @@
+package View;
+
+import javax.print.DocFlavor.URL;
+
+import Lists.FineLists;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+
+public class LogIn extends Application{
+	public static Stage myStage;
+	public static Scene sc;
+
+	public static void main(String[] args) {
+		Application.launch(args);
+	}
+
+	public static VBox vbLoginView()
+	{
+		VBox vbLoginView = new VBox();
+		vbLoginView.setStyle(" -fx-background-image: url(\"book.jpg\");" + 
+				"    -fx-background-repeat: stretch;" + 
+				"    -fx-background-size: 1350 720;" );
+		
+		VBox vbLoginDesign = new VBox();
+		
+		VBox vbLoginForm = vbLoginForm();
+		vbLoginForm.setPadding(new Insets(20,0,20,0));
+		vbLoginForm.setStyle("-fx-background-color:white;");
+		vbLoginForm.setAlignment(Pos.CENTER);
+
+		vbLoginDesign.getChildren().add(vbLoginForm);
+		vbLoginDesign.setStyle("-fx-border-radius:10px;-fx-border-color:white;-fx-border-width:10px;");
+
+		vbLoginView.getChildren().add(vbLoginDesign);
+		vbLoginView.setPadding(new Insets(400,400,10,400));
+		return vbLoginView;
+	}
+	
+	private static VBox vbLoginForm()
+	{
+		VBox vbLoginForm = new VBox();
+		vbLoginForm.setMaxWidth(600);
+		
+		TextField tid = new TextField();
+		tid.setFont(Font.font("Lucida Fax",FontWeight.BOLD,FontPosture.REGULAR,15));
+		tid.setPromptText("Type your identity number");
+		tid.setStyle("-fx-background-color:white");
+		tid.setStyle("-fx-bottom-border-color:grey");
+		tid.setMaxWidth(450);
+		tid.setOnMouseClicked(e->{
+			tid.setStyle("-fx-bottom-border-color:blue");
+		});
+		tid.setOnMouseDragExited(e->{
+			tid.setStyle("-fx-background-color:grey");
+		});
+		
+		PasswordField ppassword = new PasswordField();
+		ppassword.setFont(Font.font("Lucida Fax",FontWeight.BOLD,FontPosture.REGULAR,15));
+		ppassword.setPromptText("Type Password");
+		ppassword.setStyle("-fx-background-color:white");
+		ppassword.setStyle("-fx-bottom-border-color:grey");
+		ppassword.setMaxWidth(450);
+		
+		ppassword.setOnMouseClicked(e->{
+			tid.setStyle("-fx-bottom-border-color:blue");
+		});
+		ppassword.setOnMouseDragExited(e->{
+			tid.setStyle("-fx-background-color:grey");
+		});
+		
+		Button btnLogin = new Button("Login");
+		btnLogin.setFont(Font.font("Lucida Fax",FontWeight.BOLD,FontPosture.REGULAR,15));
+		btnLogin.setTextFill(Color.WHITE);
+		btnLogin.setStyle("-fx-background-color:orange;");
+		btnLogin.setPrefWidth(450);
+		
+		btnLogin.setOnAction(e->{
+			//Alert al = new Alert(AlertType.WARNING,"Please input miss match");
+		//	al.showAndWait();
+			myStage.setScene(new Scene(MainView.hbMainView(), 1350, 700));
+			myStage.show();
+		});
+		
+		Label lOr = new Label("Or");
+		lOr.setFont(Font.font("Lucida Fax",FontWeight.BOLD,FontPosture.REGULAR,15));
+		lOr.setAlignment(Pos.CENTER);
+
+		Button btnCreate = new Button("Login");
+		btnCreate.setFont(Font.font("Lucida Fax",FontWeight.BOLD,FontPosture.REGULAR,15));
+		btnCreate.setTextFill(Color.WHITE);
+		btnCreate.setStyle("-fx-background-color:green;");
+		btnCreate.setPrefWidth(450);
+		
+		
+		vbLoginForm.getChildren().addAll(tid,ppassword,btnLogin);
+		vbLoginForm.setSpacing(20);
+		return vbLoginForm;
+	}
+	
+	private static VBox vbLoginForm(String libraryName)
+	{
+		VBox vbLoginForm = new VBox();
+		//vbLoginForm.setStyle("-fx-background-image: url(\"bookicon.jpg\");-fx-background-repeat:no-repeat");
+		//vbLoginForm.getStyleClass().add("bgTest");
+		return vbLoginForm;
+	}
+	public void start(Stage arg0) throws Exception {
+		
+		FineLists f = new FineLists(0, "1", "1", "1", "1", 1, 1);
+		FineLists f2 = new FineLists(0, "1", "1", "1", "1", 1, 1);
+
+		ObservableList<FineLists> lists = FXCollections.observableArrayList();
+	    lists.add(list);
+	    lists.add(list2);
+	    
+		TableView tvMemberTable = new TableView<FineLists>();
+		tvMemberTable.setMaxWidth(Region.USE_PREF_SIZE);
+		tvMemberTable.setColumnResizePolicy(TableView.UNCONSTRAINED_RESIZE_POLICY);
+		tvMemberTable.setPadding(new Insets(10,15,10,15));
+		
+		TableColumn hashNo=new TableColumn("#");
+		hashNo.setCellValueFactory(new PropertyValueFactory<>("HashNo"));
+		hashNo.setMinWidth(120);
+		
+		TableColumn memberID=new TableColumn("Member ID");
+		memberID.setCellValueFactory(new PropertyValueFactory<>("MemberId"));
+		memberID.setMinWidth(120);
+		
+		TableColumn memberName=new TableColumn("Member Name");
+		memberName.setCellValueFactory(new PropertyValueFactory<>("MemberName"));
+		memberName.setMinWidth(120);
+		
+		TableColumn dob=new TableColumn("Date of Birth");
+		dob.setCellValueFactory(new PropertyValueFactory<>("Dob"));
+		dob.setMinWidth(120);
+		
+		TableColumn phoneNo=new TableColumn("Phone No");
+		phoneNo.setCellValueFactory(new PropertyValueFactory<>("Dob"));
+		phoneNo.setMinWidth(120);
+		
+		TableColumn address=new TableColumn("Address");
+		address.setCellValueFactory(new PropertyValueFactory<>("Address"));
+		address.setMinWidth(120);
+		
+		TableColumn email=new TableColumn("Email");
+		email.setCellValueFactory(new PropertyValueFactory<>("Email"));
+		email.setMinWidth(120);
+		
+		TableColumn password=new TableColumn("Password");
+		password.setCellValueFactory(new PropertyValueFactory<>("Password"));
+		password.setMinWidth(120);
+		
+		TableColumn joinDate=new TableColumn("joinDate");
+		password.setCellValueFactory(new PropertyValueFactory<>("JoinDate"));
+		password.setMinWidth(120);
+		
+		
+		TableColumn banDate=new TableColumn("BanDate");
+		password.setCellValueFactory(new PropertyValueFactory<>("BanDate"));
+		password.setMinWidth(120);
+		
+		TableColumn banTime=new TableColumn("Ban Time");
+		banTime.setCellValueFactory(new PropertyValueFactory<>("BanTime"));
+		banTime.setMinWidth(120);
+		
+		tvMemberTable.getColumns().addAll(hashNo,memberID,memberName,dob,phoneNo,address,email,password,joinDate,banDate,banTime);
+		myStage = new Stage();
+		sc = new Scene(tvMemberTable,1350,700);
+		sc.getStylesheets().add("MainStyler.css");
+		myStage.setScene(sc);
+		myStage.show();
+		myStage.setResizable(true);
+		myStage.setFullScreen(false);
+	}
+	
+
+}

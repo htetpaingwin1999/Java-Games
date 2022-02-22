@@ -1,0 +1,58 @@
+package View;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class CategoriesPanel {
+	public static VBox vbCategoryPanel(boolean isClick)
+	{
+		
+		VBox vbCategoryPanel = new VBox();
+
+		Image imgHome = new Image("category.png");
+
+		Button btnCategories = new Button("Categories",new ImageView(imgHome));
+		btnCategories.setStyle("-fx-background-color:#00BFFF;");
+		btnCategories.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnCategories.setMinWidth(320);	
+		btnCategories.setTextFill(Color.BLACK);
+		btnCategories.setAlignment(Pos.CENTER_LEFT);
+		btnCategories.setPadding(new Insets(5,0,5,40));					
+		
+		Image imgAddCategory = new Image("add.png");
+		Button btnAddNewCategory = new Button("Add New Category",new ImageView(imgAddCategory));
+		btnAddNewCategory.setStyle("-fx-background-color:#87CEFA;");
+		btnAddNewCategory.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddNewCategory.setMaxWidth(320);	
+		btnAddNewCategory.setTextFill(Color.BLACK);
+		btnCategories.setAlignment(Pos.CENTER_LEFT);
+		btnCategories.setPadding(new Insets(5,0,5,60));		
+		
+		Image imgCategoryLists = new Image("list.png");
+		Button btnCategoryLists = new Button("Category List",new ImageView(imgCategoryLists));
+		btnCategoryLists.setStyle("-fx-background-color:#87CEFA;");
+		btnCategoryLists.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnCategoryLists.setMinWidth(320);	
+		btnCategoryLists.setTextFill(Color.BLACK);
+		btnCategoryLists.setAlignment(Pos.CENTER_LEFT);
+		btnCategoryLists.setPadding(new Insets(5,0,5,60));		
+
+		vbCategoryPanel.getChildren().add(btnCategories);
+		
+			if(isClick == true)
+			{
+			    vbCategoryPanel.getChildren().clear();
+			    vbCategoryPanel.getChildren().addAll(btnCategories,btnAddNewCategory,btnCategoryLists);
+			}
+		return vbCategoryPanel;		
+	}
+}

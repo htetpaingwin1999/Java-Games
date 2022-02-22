@@ -1,0 +1,14 @@
+package Lists;
+
+import java.sql.Date;
+
+public class MemberLists {
+	private int hashNo;
+	private String memberId,memberName;
+	private Date dob;
+	private String phoneNo;
+	private String address;
+	private String bookCode;
+	private String bookName;
+	private int dayPassed,money;
+}

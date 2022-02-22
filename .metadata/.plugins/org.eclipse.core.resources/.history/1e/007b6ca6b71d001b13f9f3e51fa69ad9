@@ -1,0 +1,10 @@
+package Lists;
+
+public class MemberLists {
+	private int hashNo;
+	private String memberId,memberName;
+	private Date dob;
+	private String bookCode;
+	private String bookName;
+	private int dayPassed,money;
+}

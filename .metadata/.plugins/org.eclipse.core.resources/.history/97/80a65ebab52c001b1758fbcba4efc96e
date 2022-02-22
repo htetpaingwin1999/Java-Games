@@ -1,0 +1,349 @@
+package View;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+public class BookLists {
+	private static VBox vbBookLists;
+	private static VBox vbHeader;
+	private static BorderPane bpBookLists;
+	private static Label lTitle;
+	private static Button btnAddBooks;
+	private static Button btnAddCategories;
+	private static HBox hbTitleNButtonContainer;
+	private static Label lShow;
+	private static ComboBox cbEntriesNo;
+	private static Label lEntries;
+	private static HBox hbEntriesContainer;
+	private static Label lSearch;
+	private static TextField tSearch;
+	private static HBox hbSearch;
+	private static BorderPane bpEntriesNSearchContainer;
+	private static Label lImage;
+	private static Label lBook;
+	private static Label lCategories;
+	private static Label lQty;
+	private static Label lAvailable;
+	private static Label lPrice;
+	private static Label lRead;
+	private static Label lActions;
+	private static HBox hbBookAttributesContainer;
+	private static VBox vbBookInformations;
+	private static BorderPane bpFooter;
+	private static Label lShowingEntriesInfo;
+	private static Button btnPrevious;
+	private static Button btnIndex;
+	private static Button btnNext;
+	private static HBox hbButtonContainer;
+	public static VBox vbBookLists()
+	{
+		vbBookLists = new VBox();
+		vbBookLists.setPrefHeight(580);
+		vbBookLists.setSpacing(10);
+		
+		hbTitleNButtonContainer = new HBox();
+		hbTitleNButtonContainer.setSpacing(20);
+		
+		lTitle = new Label("Books Listings");
+		lTitle.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,25));
+		
+		btnAddBooks = new Button("Add Books");
+		btnAddBooks.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		btnAddBooks.setStyle("-fx-background-color:#7f7fff");
+		btnAddBooks.setPadding(new Insets(10,10,10,10));
+		btnAddBooks.setTextFill(Color.WHITE);
+		
+		btnAddCategories = new Button("Add Categories");
+		btnAddCategories.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		btnAddCategories.setStyle("-fx-background-color:#7f7fff");
+		btnAddCategories.setPadding(new Insets(10,10,10,10));
+		btnAddCategories.setTextFill(Color.WHITE);
+
+		hbTitleNButtonContainer.getChildren().addAll(lTitle,btnAddBooks,btnAddCategories);
+		
+		bpEntriesNSearchContainer = new BorderPane();
+		
+		lShow = new Label("Show");
+		lShow.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		
+		lEntries = new Label("Entries");
+		lEntries.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		cbEntriesNo = new ComboBox();
+		cbEntriesNo.getItems().addAll("5","4","3","2","1");
+		cbEntriesNo.getSelectionModel().select(0);
+	
+		hbEntriesContainer = new HBox();
+		hbEntriesContainer.getChildren().addAll(lShow,cbEntriesNo,lEntries);
+		hbEntriesContainer.setSpacing(10); 
+		
+		lSearch = new Label("Search");
+		lSearch.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		tSearch = new TextField();
+		
+		hbSearch = new HBox();
+		hbSearch.getChildren().addAll(lSearch,tSearch);
+		hbSearch.setSpacing(10);
+		
+		bpEntriesNSearchContainer.setLeft(hbEntriesContainer);
+		bpEntriesNSearchContainer.setRight(hbSearch);
+		
+		hbBookAttributesContainer = new HBox();
+		
+		lImage = new Label("Images");
+		lImage.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		lImage.setPrefWidth(110);
+		
+		lTitle = new Label("Title");
+		lTitle.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		lTitle.setPrefWidth(375);
+		
+		lCategories = new Label("Categories");
+		lCategories.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		lCategories.setPrefWidth(80);
+		
+		lQty = new Label("Qty");
+		lQty.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		lQty.setPrefWidth(80);
+		
+		lAvailable = new Label("Available");
+		lAvailable.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		lAvailable.setPrefWidth(100);
+		
+		lPrice = new Label("Price");
+		lPrice.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		lPrice.setPrefWidth(80);
+		
+		lRead = new Label("Read");
+		lRead.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		lRead.setPrefWidth(80);
+		
+		lActions = new Label("Actions");
+		lActions.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		lActions.setPrefWidth(100);
+		
+		hbBookAttributesContainer.getChildren().addAll(lImage,lTitle,lCategories,lQty,lAvailable,lPrice,lRead,lActions);
+		
+		vbBookInformations = vbBookListsPanel(5);
+		
+		bpFooter = new BorderPane();
+		
+		hbButtonContainer = new HBox();
+		hbButtonContainer.setSpacing(10);
+		
+		lShowingEntriesInfo = new Label("Showing Entries");
+		lShowingEntriesInfo.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		
+		btnIndex = new Button("1");
+		btnIndex.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+
+		btnPrevious = new Button("Previous");
+		btnPrevious.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		btnPrevious.setTextFill(Color.WHITE);
+		btnPrevious.setStyle("-fx-background-color:#7f7fff");
+		
+		btnNext = new Button("Next");
+		btnNext.setFont(Font.font(("Times New Roman"),FontWeight.BOLD,FontPosture.REGULAR,15));
+		btnNext.setTextFill(Color.WHITE);
+		btnNext.setStyle("-fx-background-color:#7f7fff");
+		
+		hbButtonContainer.getChildren().addAll(btnPrevious,btnIndex,btnNext);
+		
+		bpFooter = new BorderPane();
+		bpFooter.setLeft(lShowingEntriesInfo);
+		bpFooter.setRight(hbButtonContainer);
+		
+		vbBookLists.getChildren().addAll(hbTitleNButtonContainer,bpEntriesNSearchContainer,hbBookAttributesContainer,vbBookInformations,bpFooter);
+		//total width 1050
+		
+		return vbBookLists;
+	}
+	private static VBox vbBookListsPanel(int index)
+	{
+		VBox vbBookListPanel = new VBox();
+		vbBookListPanel.setPrefHeight(400);
+		HBox hbBookLists[] ;
+		
+		HBox hbImageLists[];
+		ImageView imgList[];
+		String imgPath[];
+		
+		Label lTitleLists[];
+		Label lPublisherLists[];
+		Label lAuthorLists[];
+		VBox vbBookDetailLists[];
+		
+		HBox hbCategoryLists[];
+		Label lCategoryLists[];
+		
+		HBox hbQtyLists[];
+		Label lQtyLists[];
+		
+		HBox hbAvailableLists[];
+		Label lAvailableLists[];
+		
+		HBox hbPriceLists[];
+		Label lPriceLists[];
+		
+		HBox hbReadLists[];
+		Label lReadLists[];
+		
+		VBox vbActionLists[];
+		Button btnEditLists[];
+		Button btnDeleteLists[];
+		
+		if(index > 0)
+		{
+			hbBookLists	= new HBox[index];
+			
+			hbImageLists = new HBox[index];
+			imgList = new ImageView[index];
+			imgPath  = new String[index];
+			imgPath[0] = "Icon/B1.jpg";
+			imgPath[1] = "Icon/B2.jpg";
+			imgPath[2] = "Icon/B3.jpg";
+			imgPath[3] = "Icon/B4.jpg";
+			imgPath[4] = "Icon/B5.jpg";
+			
+			// can change
+			lTitleLists = new Label[index];
+			lPublisherLists = new Label[index];
+			lAuthorLists = new Label[index];
+			vbBookDetailLists = new VBox[index];
+			hbCategoryLists = new HBox[index];
+			lCategoryLists = new Label[index];
+			hbQtyLists = new HBox[index];
+			lQtyLists = new Label[index];
+			hbAvailableLists = new HBox[index];
+			lAvailableLists = new Label[index];
+			hbPriceLists = new HBox[index];
+			lPriceLists = new Label[index];
+			hbReadLists = new HBox[index];
+			lReadLists = new Label[index];
+			vbActionLists = new VBox[index];
+			btnEditLists = new Button[index];
+			btnDeleteLists = new Button[index];
+			
+			for(int i = 0; i < index; i++)
+			{
+				hbBookLists[i] = new HBox();
+				
+				hbImageLists[i] = new HBox();
+				hbImageLists[i].setPrefWidth(110);
+				
+				imgList[i] = new ImageView(new Image(imgPath[i]));
+				hbImageLists[i].getChildren().add(imgList[i]);
+				hbImageLists[i].setPadding(new Insets(0,0,0,0));
+				
+				vbBookDetailLists[i] = new VBox();
+				vbBookDetailLists[i].setPrefWidth(375);
+				vbBookDetailLists[i].setSpacing(7);
+				
+				lTitleLists[i] = new Label("Title" + i+1);
+				lTitleLists[i].setFont(Font.font("Times New Roman", FontWeight.NORMAL, FontPosture.REGULAR, 15));
+				
+				lPublisherLists[i] = new Label("Publishers" + i+1);
+				lPublisherLists[i].setFont(Font.font("Times New Roman", FontWeight.NORMAL, FontPosture.REGULAR, 15));
+				
+				lAuthorLists[i] = new Label("Authors" + i+1);
+				lAuthorLists[i].setFont(Font.font("Times New Roman", FontWeight.NORMAL, FontPosture.REGULAR, 15));
+				
+				vbBookDetailLists[i].getChildren().addAll(lTitleLists[i],lPublisherLists[i],lAuthorLists[i]);
+				
+				hbCategoryLists[i] = new HBox();
+				hbCategoryLists[i].setPrefWidth(80);
+				hbCategoryLists[i].setPadding(new Insets(30,0,0,0));
+
+				lCategoryLists[i] = new Label("Fiction");
+				lCategoryLists[i].setFont(Font.font("Times New Roman", FontWeight.NORMAL, FontPosture.REGULAR, 15));
+				lCategoryLists[i].setPrefWidth(80);
+				
+				hbCategoryLists[i].getChildren().add(lCategoryLists[i]);
+				hbCategoryLists[i].setPadding(new Insets(30,0,0,0));
+
+				hbQtyLists[i] = new HBox();
+				hbQtyLists[i].setPrefWidth(80);
+				
+				lQtyLists[i] = new Label(""+i+1);
+				lQtyLists[i].setFont(Font.font("Times New Roman", FontWeight.NORMAL, FontPosture.REGULAR, 15));
+				lQtyLists[i].setPrefWidth(80);
+				
+				hbQtyLists[i].getChildren().add(lQtyLists[i]);
+				hbQtyLists[i].setPadding(new Insets(30,0,0,0));
+
+				hbAvailableLists[i] = new HBox();
+				hbAvailableLists[i].setPrefWidth(100);
+				
+				lAvailableLists[i] = new Label("Not Available");
+				lAvailableLists[i].setFont(Font.font("Times New Roman", FontWeight.NORMAL, FontPosture.REGULAR, 15));
+				lAvailableLists[i].setPrefWidth(100);
+
+				hbAvailableLists[i].getChildren().add(lAvailableLists[i]);
+				hbAvailableLists[i].setPadding(new Insets(30,0,0,0));
+
+				hbPriceLists[i] = new HBox();
+				hbPriceLists[i].setPrefWidth(80);
+				
+				lPriceLists[i] = new Label("46Ks");
+				lPriceLists[i].setFont(Font.font("Times New Roman", FontWeight.NORMAL, FontPosture.REGULAR, 15));
+				lPriceLists[i].setPrefWidth(80);
+
+				hbPriceLists[i].getChildren().add(lPriceLists[i]);
+				hbPriceLists[i].setPadding(new Insets(30,0,0,0));
+
+				hbReadLists[i] = new HBox();
+				hbReadLists[i].setPrefWidth(80);
+				
+				lReadLists[i] = new Label("Read");
+				lReadLists[i].setFont(Font.font("Times New Roman", FontWeight.NORMAL, FontPosture.REGULAR, 15));
+				lReadLists[i].setPrefWidth(80);
+				
+				hbReadLists[i].getChildren().add(lReadLists[i]);
+				hbReadLists[i].setPadding(new Insets(30,0,0,0));
+
+				vbActionLists[i] = new VBox();
+				vbActionLists[i].setPrefWidth(100);
+				
+				btnEditLists[i] = new Button("Edit",new ImageView(new Image("Icon/Edit.png")));
+				btnEditLists[i].setPrefWidth(100);
+				btnEditLists[i].setStyle("-fx-background-color:blue;");
+				btnEditLists[i].setTextFill(Color.WHITE);
+				
+				btnDeleteLists[i] = new Button("Delte",new ImageView(new Image("Icon/Delete.png")));
+				btnDeleteLists[i].setPrefWidth(100);
+				btnDeleteLists[i].setStyle("-fx-background-color:blue;");
+				btnDeleteLists[i].setTextFill(Color.WHITE);
+				
+				vbActionLists[i].getChildren().addAll(btnEditLists[i],btnDeleteLists[i]);
+//				vbActionLists[i].setPadding(new Insets(30,0,0,0));
+				
+				hbBookLists[i].getChildren().addAll(hbImageLists[i],vbBookDetailLists[i],hbCategoryLists[i],hbQtyLists[i],hbAvailableLists[i],hbPriceLists[i],hbReadLists[i],vbActionLists[i]);
+				hbBookLists[i].setStyle("-fx-border-color:#f2f2f2;-fx-border-width:2px;-fx-border-style:solid;");
+				hbBookLists[i].setPrefWidth(1050);
+				hbBookLists[i].setPrefHeight(80);
+
+				vbBookListPanel.getChildren().addAll(hbBookLists[i]);
+			}
+		}
+		return vbBookListPanel;
+	}
+}

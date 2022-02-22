@@ -1,0 +1,37 @@
+1592108222588	Delete element
+1592108431556	Delete element
+1592111323517	Rename package 'StudentPay'
+1592122243954	Rename package 'Student'
+1592196148220	Rename package 'Course'
+1592197090166	Rename package 'Section'
+1592203442971	Rename package 'Admin'
+1592228944761	Rename package 'Staff'
+1592315212852	Rename package 'ExpenseCategory'
+1592317837071	Rename package 'Expense'
+1592353727936	Rename package 'ExpenseReport'
+1592353951734	Rename type 'ExpenseReport'
+1592353992106	Rename type 'Report'
+1592354027302	Rename type 'IncomeReport'
+1592354041264	Rename type 'Expense'
+1592354054253	Rename type 'AdminReport'
+1592354065403	Rename type 'AdminView'
+1592354075344	Rename type 'Admin'
+1592354085186	Rename type 'Course'
+1592354096042	Rename type 'DashBoard'
+1592354105163	Rename type 'ExpenseCategory'
+1592354112930	Rename type 'PasswordSetting'
+1592354121348	Rename type 'Section'
+1592354130502	Rename type 'SocialLinkSetting'
+1592354138152	Rename type 'Staff'
+1592354148161	Rename type 'Student'
+1592354163542	Rename type 'StudentPayment'
+1592354175478	Rename type 'StudentReport'
+1592376693377	Delete element
+1592380002226	Delete element
+1592381530245	Rename package 'ClassDetail'
+1592387396637	Delete element
+1592400011368	Delete element
+1592401174304	Delete element
+1592401473619	Rename package 'Account'
+1592401496864	Rename package 'AccountAndPassword'
+1592401507314	Rename package 'AccountSetting'

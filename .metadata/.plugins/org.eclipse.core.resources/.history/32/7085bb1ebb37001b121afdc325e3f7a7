@@ -1,0 +1,112 @@
+package View;
+import Table.StudentTable;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class StudentListView {
+	private static VBox vbStudentListView;
+	private static Label lIndexTitle;
+	private static Label lDashboard;
+	private static Label lStudent;
+	private static Label lStudentList;
+	private static HBox hbIndexContainer;
+	private static BorderPane bpHeader;
+	private static ScrollPane sp;
+	private static HBox hbSearch;
+	private static VBox vbBody;
+	private static TableView tvStudentLists;
+	private static Button btnSearch;
+	private static TextField tSearch;
+	private static BorderPane bpBodyHeader;
+	private static ComboBox cbFilterType;
+	private static Button btnAddStudent;
+	public static VBox vbStudentListView()
+	{
+		vbStudentListView = new VBox();
+		
+		lIndexTitle = new Label("All Student");
+		lIndexTitle.setTextFill(Color.BLUE);
+		lIndexTitle.setFont(Font.font("Times New Roman",21));
+		
+		lDashboard = new Label("Dashboard >");
+		lDashboard.setFont(Font.font("Times New Roman", 21));
+		lDashboard.setTextFill(Color.GREY);
+
+		lStudent = new Label(" Student >");
+		lStudent.setFont(Font.font("Times New Roman", 21));
+		lStudent.setTextFill(Color.GREY);
+
+		lStudentList = new Label(" Student List");
+		lStudentList.setFont(Font.font("Times New Roman", 21));
+		lStudentList.setTextFill(Color.GREY);
+	
+		hbIndexContainer = new HBox();
+		hbIndexContainer.getChildren().addAll(lDashboard,lStudent,lStudentList);
+		
+		bpHeader = new BorderPane();
+		bpHeader.setLeft(lIndexTitle);
+		bpHeader.setRight(hbIndexContainer);
+		bpHeader.setPadding(new Insets(20,20,20,20));
+		bpHeader.setStyle("-fx-background-color:#FFFFFF");
+		
+		vbBody = new VBox();
+		
+		bpBodyHeader = new BorderPane();
+		bpBodyHeader.setPadding(new Insets(10,10,10,10));
+		
+		btnSearch = new Button("Filter");
+		btnSearch.setTextFill(Color.WHITE);
+		btnSearch.setPadding(new Insets(10,10,10,10));
+		btnSearch.setStyle("-fx-background-color:blue");
+		btnSearch.setPrefSize(100,30);
+		btnSearch.setFont(Font.font("Times New Roman", 21));
+
+		btnAddStudent = new Button("Add New Student");
+		btnAddStudent.setTextFill(Color.WHITE);
+		btnAddStudent.setPadding(new Insets(10,10,10,10));
+		btnAddStudent.setStyle("-fx-background-color:orange");
+		btnAddStudent.setPrefSize(130,30);
+		
+		tSearch = new TextField();
+		tSearch.setPromptText("Type Keyword");
+		tSearch.setPrefHeight(30);
+		
+		cbFilterType = new ComboBox();
+		cbFilterType.getItems().addAll("ID","Name","Email");
+		cbFilterType.getSelectionModel().select(0);
+		cbFilterType.setPrefHeight(30);
+		
+		hbSearch = new HBox();
+		hbSearch.getChildren().addAll(tSearch,cbFilterType,btnSearch,btnAddStudent);
+		hbSearch.setSpacing(20);
+		
+		bpBodyHeader.setRight(hbSearch);
+		
+		StudentTable.tvStudentLists();
+		tvStudentLists = StudentTable.tvStudentLists();
+		
+		vbBody.getChildren().addAll(bpBodyHeader,tvStudentLists);
+		vbBody.setStyle("-fx-background-color:#FFFFFF");
+		vbBody.setPrefHeight(600);
+		vbBody.setPadding(new Insets(20,40,20,40));
+		
+		vbStudentListView.getChildren().addAll(bpHeader,vbBody);
+		return vbStudentListView;
+	}
+}

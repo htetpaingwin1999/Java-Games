@@ -1,0 +1,158 @@
+package View;
+import java.util.ArrayList;
+
+import Handler.AdminHandler;
+import Handler.DesignationHandler;
+import Handler.IncomeReportHandler;
+import List.AdminLists;
+import List.CourseLists;
+import List.DesignationLists;
+import List.ExpenseReportLists;
+import List.IncomeReportLists;
+import Table.DesignationTable;
+import Table.ExpenseReportTable;
+import Table.IncomeReportTable;
+import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.layout.BorderPane;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Accordion;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TitledPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+import javafx.stage.Stage;
+public class ReportView {
+	private static VBox vbReportListsView;
+	
+	private static Button btnCalculate;
+	private static TextField tInput;
+	private static HBox hbInputContainer;
+	private static ComboBox cbOption;
+	private static Label lReport;
+	private static VBox vbContentContainer;
+	private static HBox hbFooterContainer;
+	private static Label lTotal;
+	private static Label lTotalAmount;
+	private static VBox vbReportContainer;
+	private static ObservableList<ExpenseReportLists> data;
+	private static ExpenseReportLists expl;
+	private static TableView tvExpenseReport;
+	
+	
+
+	public static VBox vbReportListsView()
+	{
+		
+		cbOption = new ComboBox();
+		cbOption.getItems().addAll("Expense","Income","Profit","Student","Fine");
+		cbOption.getSelectionModel().select(0);
+		cbOption.setPrefSize(100, 40);
+//		cbOption.setStyle("-fx-background-color:black;-fx-color:white;-fx-border-radius:10px");
+
+		tInput = new TextField();
+		tInput.setPrefSize(600, 40);
+		tInput.setPromptText("dd-mm-yyyy");
+		
+		btnCalculate = new Button("Calculate");
+		btnCalculate.setStyle("-fx-background-color:blue");
+		btnCalculate.setTextFill(Color.WHITE);
+		btnCalculate.setPrefSize(100, 40);
+
+		hbInputContainer = new HBox();
+		hbInputContainer.getChildren().addAll(tInput,cbOption,btnCalculate);
+		hbInputContainer.setSpacing(20);
+		hbInputContainer.setPadding(new Insets(10,10,10,10));
+		
+		lReport = new Label("");
+		lReport.setFont(Font.font("Times New Roman",FontWeight.BOLD,FontPosture.ITALIC,25));
+		
+		vbContentContainer = new VBox();
+		vbContentContainer.setPrefHeight(620);
+		
+		lTotal = new Label("Total");
+		lTotal.setFont(Font.font("Times New Roman",FontWeight.BOLD,FontPosture.REGULAR,25));
+		lTotal.setTextFill(Color.WHITE);
+		
+		lTotalAmount = new Label("2500Ks");
+		lTotalAmount.setFont(Font.font("Times New Roman",FontWeight.BOLD,FontPosture.REGULAR,25));
+		lTotalAmount.setTextFill(Color.GOLD);
+		
+		hbFooterContainer = new HBox();
+		hbFooterContainer.getChildren().addAll(lTotal,lTotalAmount);
+		hbFooterContainer.setAlignment(Pos.CENTER);
+		hbFooterContainer.setStyle("-fx-background-color:black");
+		hbFooterContainer.setSpacing(20);
+		
+		vbReportListsView = new VBox();
+		vbReportListsView.getChildren().addAll(hbInputContainer,vbContentContainer,hbFooterContainer);
+		vbReportListsView.setSpacing(5);
+		vbReportListsView.setStyle("-fx-background-color:white");
+		vbReportListsView.setPadding(new Insets(10,0,10,0));
+
+		
+		btnCalculate.setOnAction(e->{
+			String day,month,year;
+			boolean chart;
+			day = "";
+			month = "";
+			year = "";
+			chart = false;
+			String [] arr = tInput.getText().split("-");
+			switch(arr.length) {
+			case 1: year = arr[0];
+					chart = false;
+					break;
+					
+			
+			case 2:	month = arr[0];
+					year = arr[1];
+					chart = false;
+					break;
+					
+			case 3:	day = arr[0];
+					month = arr[1];
+					year = arr[2];
+					chart = false;
+					break;	
+					
+			case 4: day = arr[0];
+					month = arr[1];
+					year = arr[2];
+					chart = true;
+					break;
+			}			
+		});
+		
+		cbOption.setOnMouseExited(e->{
+			lTotal.setText("Exit");
+			Table.ExpenseReportTable.tvReportLists();
+			tvExpenseReport = ExpenseReportTable.tvReportLists();
+			data = FXCollections.observableArrayList(Handler.ExpenseReportHandler.GetExpense(day, month, year)));
+			tvDesignation.setItems(data);
+			
+		});
+		
+		return vbReportListsView;
+	}
+}

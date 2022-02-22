@@ -1,0 +1,78 @@
+package View;
+
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class NotesPanel {
+	static boolean isBookClick = false;
+	public static VBox vbNotesPanel()
+	{
+		
+		VBox vbNotesPanel = new VBox();
+
+		Image imgNotes = new Image("notes.png");
+
+		Button btnNotes = new Button("Notes",new ImageView(imgNotes));
+		btnNotes.setStyle("-fx-background-color:#00BFFF;");
+		btnNotes.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnNotes.setMinWidth(240);	
+		btnNotes.setTextFill(Color.BLACK);
+		
+		Image imgPlus = new Image("add.png");
+		Button btnPlus = new Button("",new ImageView(imgPlus));
+		btnPlus.setStyle("-fx-background-color:#00BFFF;");
+		btnPlus.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnPlus.setMaxWidth(30);	
+		btnPlus.setTextFill(Color.BLACK);
+		
+		HBox hbNotes = new HBox();
+		hbNotes.getChildren().addAll(btnNotes,btnPlus);
+		hbNotes.setStyle("-fx-background-color:#00BFFF;");
+		hbNotes.setPadding(new Insets(2,2,2,-32));
+		
+		//B0E0E6;
+		
+		Image imgAddNotes = new Image("add.png");
+		Button btnAddNotes = new Button("Add New Note",new ImageView(imgAddNotes));
+		btnAddNotes.setStyle("-fx-background-color:#87CEFA;");
+		btnAddNotes.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddNotes.setMaxWidth(290);	
+		btnAddNotes.setTextFill(Color.BLACK);
+		btnAddNotes.setPadding(new Insets(10,10,10,-45));
+		
+		Image imgNoteLists = new Image("list.png");
+		Button btnNoteLists = new Button("Notes List",new ImageView(imgNoteLists));
+		btnNoteLists.setStyle("-fx-background-color:#87CEFA;");
+		btnNoteLists.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnNoteLists.setMinWidth(290);	
+		btnNoteLists.setTextFill(Color.BLACK);
+		btnNoteLists.setPadding(new Insets(10,10,10,-3));
+		
+	
+		vbNotesPanel.getChildren().add(hbNotes);
+		int i = 0;
+		final boolean isClick = false;
+		btnPlus.setOnAction(e->{
+			isBookClick = ! (isBookClick);
+			if(isBookClick == true)
+			{
+			vbNotesPanel.getChildren().clear();
+			vbNotesPanel.getChildren().addAll(hbNotes,btnAddNotes,btnNoteLists);
+			}
+			else
+			{
+				vbNotesPanel.getChildren().clear();
+				vbNotesPanel.getChildren().addAll(hbNotes);	
+			}
+		});
+		return vbNotesPanel;		
+	}
+}

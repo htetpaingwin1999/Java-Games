@@ -1,0 +1,59 @@
+package Lists;
+
+public class FineLists {
+	private int hashNo;
+	private String memberId,memberName;
+	private String bookCode;
+	private String bookName;
+	private int dayPassed,money;
+	
+	public FineLists(int hashNo,String memberId, String memberName, String bookCode, String bookName, int dayPassed, int money) {
+		super();
+		this.hashNo = hasNo;
+		this.memberId = memberId;
+		this.memberName = memberName;
+		this.bookCode = bookCode;
+		this.bookName = bookName;
+		this.dayPassed = dayPassed;
+		this.money = money;
+	}
+	
+	public String getBookName() {
+		return bookName;
+	}
+
+	public void setBookName(String bookName) {
+		this.bookName = bookName;
+	}
+
+	public String getMemberId() {
+		return memberId;
+	}
+	public void setMemberId(String memberId) {
+		this.memberId = memberId;
+	}
+	public String getMemberName() {
+		return memberName;
+	}
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
+	}
+	public String getBookCode() {
+		return bookCode;
+	}
+	public void setBookCode(String bookCode) {
+		this.bookCode = bookCode;
+	}
+	public int getDayPassed() {
+		return dayPassed;
+	}
+	public void setDayPassed(int dayPassed) {
+		this.dayPassed = dayPassed;
+	}
+	public int getMoney() {
+		return money;
+	}
+	public void setMoney(int money) {
+		this.money = money;
+	}
+}

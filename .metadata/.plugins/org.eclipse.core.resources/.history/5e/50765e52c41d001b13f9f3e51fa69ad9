@@ -1,0 +1,33 @@
+.bgTest
+{
+	-fx-background-color:red;
+}
+.my-rect {
+    -fx-fill: yellow;
+    -fx-stroke: green;
+    -fx-stroke-width: 5;
+    -fx-stroke-dash-array: 12 2 4 2;
+    -fx-stroke-dash-offset: 6;
+    -fx-stroke-line-cap: butt;
+}
+.table-view .column-header {
+    -fx-background-color: black;
+}
+.table-view .table-cell{
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+}
+.table-row-cell: hover {
+    -fx-background-color: #93f9b911;
+    -fx-text-background-color: red;
+}
+.table-row-cell: odd{
+    -fx-background-color: #93f9b911;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}
+.table-row-cell: even{
+    -fx-background-color: #1dbbdd11;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-padding: 0.0em;
+}

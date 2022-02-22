@@ -1,0 +1,73 @@
+package View;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class BooksPanel {
+	public static VBox vbBooksPanel(boolean isClick)
+	{
+		
+		VBox vbBooksPanel = new VBox();
+
+		Image imgBooks = new Image("booklists.png");
+
+		Button btnBooks = new Button("Books",new ImageView(imgBooks));
+		btnBooks.setStyle("-fx-background-color:#00BFFF;");
+		btnBooks.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnBooks.setMinWidth(290);	
+		btnBooks.setTextFill(Color.BLACK);
+		btnBooks.setAlignment(Pos.CENTER_LEFT);
+		btnBooks.setPadding(new Insets(7,0,7,20));
+			
+		Image imgAddBooks = new Image("add.png");
+		Button btnAddNewBook = new Button("Add New Books",new ImageView(imgAddBooks));
+		btnAddNewBook.setStyle("-fx-background-color:#87CEFA;");
+		btnAddNewBook.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddNewBook.setMaxWidth(290);	
+		btnAddNewBook.setTextFill(Color.BLACK);
+		btnAddNewBook.setAlignment(Pos.CENTER_LEFT);
+		btnAddNewBook.setPadding(new Insets(7,0,7,50));
+		
+		Image imgBookList = new Image("list.png");
+		Button btnBookList = new Button("Books List",new ImageView(imgBookList));
+		btnBookList.setStyle("-fx-background-color:#87CEFA;");
+		btnBookList.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnBookList.setMinWidth(290);	
+		btnBookList.setTextFill(Color.BLACK);
+		btnBookList.setAlignment(Pos.CENTER_LEFT);
+		btnBookList.setPadding(new Insets(7,0,7,50));
+		
+		Image imgCategoryBookList = new Image("list.png");
+		Button btnCategoryBookList = new Button("Category Wise Books",new ImageView(imgCategoryBookList));
+		btnCategoryBookList.setStyle("-fx-background-color:#87CEFA;");
+		btnCategoryBookList.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnCategoryBookList.setMinWidth(290);	
+		btnCategoryBookList.setTextFill(Color.BLACK);
+		btnCategoryBookList.setAlignment(Pos.CENTER_LEFT);
+		btnCategoryBookList.setPadding(new Insets(7,0,7,50));	
+		
+		vbBooksPanel.getChildren().add(btnBooks);
+		if(isClick == true)
+			{
+			    vbBooksPanel.getChildren().clear();
+			    vbBooksPanel.getChildren().addAll(btnBooks,btnAddNewBook,btnBookList,btnCategoryBookList);
+			}
+		return vbBooksPanel;		
+	}
+	public static VBox vbBooksView()
+	{
+		VBox vbBooksView = new VBox();
+		
+		VBox vbTitle = IndexTitleView.vbWelcomeText("WELCOME TO BOOK PANEL")
+		return vbBooksView;
+	}
+}

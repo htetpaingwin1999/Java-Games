@@ -1,0 +1,57 @@
+package Handler;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+
+import List.ExpenseLists;
+import List.ExpenseReportLists;
+import List.StudentPaymentLists;
+
+
+public class ExpenseReportHandler {	
+	
+	public static ArrayList<ExpenseReportLists> GetExpense(String day,String month,String year)
+	{
+		int i = 0;
+		ArrayList<ExpenseReportLists> ExpenseReportLists = new ArrayList<ExpenseReportLists>();	
+		try {
+			Connection con = DBConnection.openConnection();
+			String q = "";
+		
+				if(day.equals("") && month.equals("") && !year.equals(""))
+				{
+					q = "select e.eid,e.addDate,ec.name,e.amount,e.note from expense as e join expensecategory as ec on e.ecid=ec.ecid where year(e.addDate)='"+year+"'";
+					System.out.print("Date:"+day+month+year);
+				}
+				if(day.equals("") && !month.equals("") && !year.equals(""))
+				{
+					q = "select e.eid,e.addDate,ec.name,e.amount,e.note from expense as e join expensecategory as ec on e.ecid=ec.ecid where year(e.addDate)='"+year+"' and month(e.addDate)='"+month+"'";
+					System.out.print("Date:"+day+month+year);
+				}
+				if(!day.equals("") && !month.equals("") && !year.equals(""))
+				{
+					q = " select e.eid,e.addDate,ec.name,e.amount,e.note from expense as e join expensecategory as ec on e.ecid=ec.ecid where date(e.addDate)="+year+"-"+month+"-"+day;
+					System.out.print("Date:"+day+month+year);
+				}
+				PreparedStatement ps = con.prepareStatement(q);
+				ResultSet rs = ps.executeQuery();
+				while (rs.next()) {
+				
+					ExpenseReportLists e = new ExpenseReportLists(rs.getInt(1),rs.getDate(2)+"",rs.getString(3),rs.getInt(4),rs.getString(5));
+					ExpenseReportLists.add(e);
+				}
+
+		}catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return ExpenseReportLists;
+	}	
+}

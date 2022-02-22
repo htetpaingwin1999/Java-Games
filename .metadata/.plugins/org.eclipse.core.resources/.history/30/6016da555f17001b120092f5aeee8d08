@@ -1,0 +1,12 @@
+package View;
+
+import javafx.scene.layout.VBox;
+
+public class WorkSpace {
+	private static VBox vbWorkSpace()
+	{
+		VBox vbWorkSpace = new VBox();
+		vbWorkSpace.setMinWidth(600);
+		return vbworkSpace;
+	}
+}

@@ -1,0 +1,58 @@
+package View;
+
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontPosture;
+import javafx.scene.text.FontWeight;
+
+public class SystemManagersPanel {
+	public static VBox vbSystemManagersPanel(boolean isClick)
+	{
+		
+		VBox vbSystemManagersPanel = new VBox();
+
+		Image imgSystemManagers = new Image("lock.png");
+
+		Button btnSystemManagers = new Button("System Managers",new ImageView(imgSystemManagers));
+		btnSystemManagers.setStyle("-fx-background-color:#00BFFF;");
+		btnSystemManagers.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnSystemManagers.setMinWidth(320);	
+		btnSystemManagers.setTextFill(Color.BLACK);
+		btnTermsAndContidionsLists.setAlignment(Pos.CENTER_LEFT);
+		btnTermsAndContidionsLists.setPadding(new Insets(5,0,5,40));
+		
+		Image imgAddUsers = new Image("add.png");
+		Button btnAddUsers = new Button("Add New Runners",new ImageView(imgAddUsers));
+		btnAddUsers.setStyle("-fx-background-color:#87CEFA;");
+		btnAddUsers.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnAddUsers.setMaxWidth(320);	
+		btnAddUsers.setTextFill(Color.BLACK);
+		btnTermsAndContidionsLists.setAlignment(Pos.CENTER_LEFT);
+		btnTermsAndContidionsLists.setPadding(new Insets(5,0,5,70));
+		
+		Image imgRunnerLists = new Image("list.png");
+		Button btnRunenrLists = new Button("Runner Lists",new ImageView(imgRunnerLists));
+		btnRunenrLists.setStyle("-fx-background-color:#87CEFA;");
+		btnRunenrLists.setFont(Font.font("Century Gothic",FontWeight.MEDIUM,FontPosture.REGULAR,15));
+		btnRunenrLists.setMinWidth(320);	
+		btnRunenrLists.setTextFill(Color.BLACK);
+		btnTermsAndContidionsLists.setAlignment(Pos.CENTER_LEFT);
+		btnTermsAndContidionsLists.setPadding(new Insets(5,0,5,70));
+		
+		vbSystemManagersPanel.getChildren().add(btnSystemManagers);
+		
+			if(isClick == true)
+			{
+				vbSystemManagersPanel.getChildren().clear();
+			    vbSystemManagersPanel.getChildren().addAll(btnSystemManagers,btnAddUsers,btnRunenrLists);
+			}
+		return vbSystemManagersPanel;		
+	}
+}

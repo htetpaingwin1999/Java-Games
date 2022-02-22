@@ -1,0 +1,222 @@
+package View;
+
+import java.awt.Desktop;
+import java.util.Date;
+
+import Handler.AdminHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
+
+public class AdminDataView {
+	private static VBox vbAddAdminView;
+	private static Label lTitle;
+	private static HBox hbTitleCon;
+	private static Label lSubTitle;
+	private static Label lAdminID;
+	public static Label llAdminID;
+	private static Label lAdminName;
+	public static Label llAdminName;
+	private static Label lPassword;
+	private static Label llPassword;
+	private static Label lGender;
+	private static Label llGender;
+	private static Label lDoB;
+	public static Label llDoB;
+	private static Label lPhoto;
+	private Desktop desktop;
+	private static FileChooser fcImage;
+	private static Button btnOpenImage;
+	public static Label lChooseImagePath;
+	private static HBox hbImageCon;
+	private static Label lPhoneNo;
+	public static Label llPhoneNo;
+	private static Label lPresentAddress;
+	public static Label llPresentAddress;
+	private static Label lJoinDate;
+	public static Label llJoinDate;
+	public static GridPane gp;
+	private static HBox hbUserDetailCon;
+	private static ImageView imgUser;
+	private static BorderPane bpAboutMeNBtnCon;
+	private static Button btnEdit;
+	private static Button btnPrint;
+	private static Button btnDownload;
+	private static HBox hbBtnCon;
+	public static VBox vbAdminDataView(String id,String name,String joinDate,String gender,String doB,String phoneNo,String presentAddress,String password)
+	{
+		vbAddAdminView = new VBox();
+				
+		lTitle = new Label(name+" Detail");
+		lTitle.setFont(Font.font("Times New Roman",FontWeight.BOLD,20));
+		
+		hbTitleCon = new HBox();
+		hbTitleCon.setPadding(new Insets(20,50,20,50));
+		hbTitleCon.setPrefSize(1080,50);
+		hbTitleCon.setStyle("-fx-background-color:white");
+		hbTitleCon.getChildren().add(lTitle);
+		
+		
+		lAdminID = new Label("Admin ID:");
+		lAdminID.setFont(Font.font("Times New Roman", 15));
+		lAdminID.setTextFill(Color.BLACK);
+
+		llAdminID = new Label();
+		lAdminID.setFont(Font.font("Times New Roman", 15));
+		llAdminID.setTextFill(Color.GREY);
+		llAdminID.setText(id);
+		
+		lAdminName = new Label("Admin Name:");
+		lAdminName.setFont(Font.font("Times New Roman", 15));
+		lAdminName.setTextFill(Color.BLACK);
+		
+		llAdminName = new Label();
+		llAdminName.setFont(Font.font("Times New Roman", 15));
+		llAdminName.setTextFill(Color.GREY);
+		llAdminName.setText(name);
+		
+		lPassword = new Label("Password:");
+		lPassword.setFont(Font.font("Times New Roman", 15));
+		lPassword.setTextFill(Color.BLACK);
+		
+		llPassword = new Label();
+		llPassword.setText(password);
+		lPassword.setFont(Font.font("Times New Roman", 15));
+		llPassword.setTextFill(Color.GREY);
+
+		lGender = new Label("Gender:");
+		lGender.setFont(Font.font("Times New Roman", 15));
+		lGender.setTextFill(Color.BLACK);
+	
+		llGender = new Label();
+		llGender.setFont(Font.font("Times New Roman", 15));
+		llGender.setTextFill(Color.GREY);
+		llGender.setText(gender);
+		
+		lDoB = new Label("Date of Birth:");
+		lDoB.setFont(Font.font("Times New Roman", 15));
+		lDoB.setTextFill(Color.BLACK);
+
+		llDoB = new Label();
+		llDoB.setFont(Font.font("Times New Roman", 15));
+		llDoB.setTextFill(Color.GREY);
+		llDoB.setText(doB);
+
+		lPhoto = new Label("Upload Photo:");
+		lPhoto.setFont(Font.font("Times New Roman", 15));
+		lPhoto.setTextFill(Color.BLACK);
+
+		btnOpenImage = new Button("Open Image");
+		btnOpenImage.setPrefWidth(100);
+		
+		lChooseImagePath = new Label("No File Choosen");
+		lChooseImagePath.setFont(Font.font("Times New Roman", 15));
+		lChooseImagePath.setTextFill(Color.GREY);
+
+		hbImageCon = new HBox();
+		hbImageCon.getChildren().addAll(btnOpenImage,lChooseImagePath);
+		hbImageCon.setSpacing(5);
+		hbImageCon.setPrefWidth(470);
+		
+		lPhoneNo = new Label("Phone No:");
+		lPhoneNo.setFont(Font.font("Times New Roman", 15));
+		lPhoneNo.setTextFill(Color.BLACK);
+
+		llPhoneNo = new Label();
+		llPhoneNo.setText(phoneNo);
+		llPhoneNo.setFont(Font.font("Times New Roman", 15));
+		llPhoneNo.setTextFill(Color.GREY);
+		 
+		lPresentAddress = new Label("Present Address:");
+		lPresentAddress.setFont(Font.font("Times New Roman", 15));
+		lPresentAddress.setTextFill(Color.BLACK);
+
+		llPresentAddress = new Label();
+		llPresentAddress.setPrefWidth(470);
+		llPresentAddress.setText(presentAddress);
+		llPresentAddress.setFont(Font.font("Times New Roman", 15));
+		llPresentAddress.setTextFill(Color.GREY);
+				
+		lJoinDate = new Label("Join Date:");
+		lJoinDate.setFont(Font.font("Times New Roman", 15));
+		lJoinDate.setTextFill(Color.BLACK);
+
+		llJoinDate = new Label();
+		llJoinDate.setFont(Font.font("Times New Roman", 15));
+		llJoinDate.setTextFill(Color.GREY);
+		llJoinDate.setText(joinDate);
+		
+		btnEdit = new Button("",new ImageView(new Image("Icon/Edit2.png")));
+		btnEdit.setStyle("-fx-background-color:#f2f2f2");
+		btnEdit.setPadding(new Insets(10,10,10,10));
+		
+		btnPrint = new Button("",new ImageView(new Image("Icon/Print2.png")));
+		btnPrint.setStyle("-fx-background-color:#f2f2f2");
+		btnPrint.setPadding(new Insets(10,10,10,10));
+		
+		btnDownload = new Button("",new ImageView(new Image("Icon/Download2.png")));
+		btnDownload.setStyle("-fx-background-color:#f2f2f2");
+		btnDownload.setPadding(new Insets(10,10,10,10));
+		
+		hbBtnCon = new HBox();
+		hbBtnCon.getChildren().addAll(btnEdit,btnPrint,btnDownload);
+		hbBtnCon.setSpacing(10);
+		hbBtnCon.setPadding(new Insets(10,10,10,10));
+		
+		gp = new GridPane();
+		gp.setStyle("-fx-background-color:white");
+		gp.setPadding(new Insets(10,10,10,10));
+		gp.add(lAdminID, 0, 0);
+		gp.add(llAdminID, 1, 0);
+		gp.add(lAdminName, 0, 1);
+		gp.add(llAdminName, 1, 1);
+		gp.add(lJoinDate, 0, 2);
+		gp.add(llJoinDate, 1, 2);
+		gp.add(lGender, 0, 3);
+		gp.add(llGender, 1, 3);
+		gp.add(lDoB, 0, 4);
+		gp.add(llDoB, 1, 4);
+		gp.add(lPhoneNo, 0, 5);
+		gp.add(llPhoneNo, 1, 5);
+		gp.add(lPassword, 0, 6);
+		gp.add(llPassword, 1, 6);
+		gp.add(lPresentAddress, 0,7);
+		gp.add(llPresentAddress,1,7);
+		gp.setHgap(20);
+		gp.setVgap(20);
+		
+		bpAboutMeNBtnCon = new BorderPane();
+		bpAboutMeNBtnCon.setRight(hbBtnCon);
+		bpAboutMeNBtnCon.setLeft(gp);
+		
+		imgUser = new ImageView(new Image("Icon/HPW.jpg"));
+		hbUserDetailCon = new HBox();
+		hbUserDetailCon.setSpacing(20);
+		hbUserDetailCon.getChildren().addAll(imgUser,bpAboutMeNBtnCon);
+		hbUserDetailCon.setPadding(new Insets(10,10,10,10));
+
+		vbAddAdminView.getChildren().addAll(hbTitleCon,hbUserDetailCon);
+		vbAddAdminView.setStyle("-fx-background-color:white");
+		vbAddAdminView.setSpacing(5);
+		vbAddAdminView.setPadding(new Insets(10,0,10,0));
+		vbAddAdminView.setPrefHeight(700);
+		return vbAddAdminView;
+		}
+}
+

@@ -1,0 +1,6 @@
+.root {
+  -fx-background-color: midnightblue;
+  -fx-padding: 30px;
+  -fx-font-size: 20px;
+  -fx-font-family: "Comic Sans MS";
+}
